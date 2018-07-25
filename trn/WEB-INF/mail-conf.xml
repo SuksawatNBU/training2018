@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<parameter>
+	<property>
+	    <protocal>mail.smtp.port</protocal>
+		<host>mail.host</host>
+		<smtp-transport>mail.transport.protocol</smtp-transport>
+		<smtp-auth>mail.smtp.auth</smtp-auth>
+		<smtp-tls-enable>mail.smtp.starttls.enable</smtp-tls-enable>
+		<smtp-ssl-trust>mail.smtp.ssl.trust</smtp-ssl-trust>
+		<mail-smtp-socketFactory>mail.smtp.socketFactory.class</mail-smtp-socketFactory>
+	</property>
+	<config>
+		<smtp-transport>smtp</smtp-transport>
+		<smtp-auth>true</smtp-auth>
+		<smtp-tls-enable>true</smtp-tls-enable>
+		<smtp-ssl-trust>true</smtp-ssl-trust>
+		<debug>true</debug>
+		<encoding>UTF-8</encoding>
+		<content-type>text/html;charset=UTF-8</content-type>
+		<multi-part>related</multi-part>
+		<mail-smtp-socketFactory></mail-smtp-socketFactory>
+	</config>
+
+	<mailServer>
+		<attach_no_limit>0</attach_no_limit>
+		<attach_size_limit>0</attach_size_limit>
+		<attach_path>/opt</attach_path>
+	</mailServer>
+
+</parameter>

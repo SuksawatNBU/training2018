@@ -1,0 +1,233 @@
+@charset "UTF-8";
+
+/**
+ * LWIS Celebrity CSS Drop-Down Menu Theme
+ *
+ * @file		default.css
+ * @name		Default
+ * @version		0.1
+ * @type		transitional
+ * @browsers	Windows: IE7+, Opera9+, Firefox3+
+ *				Mac OS: Safari2+, Firefox3+
+ *
+ * @link		http://www.lwis.net/free-css-drop-down-menu
+ * @copyright	2009-2012 Live Web Initiatives, http://www.lwis.net
+ *
+ */
+
+
+/* -- Base drop-down styling -- */
+
+ul.menuFull { /* หัวเมนู  Menu System-- */
+
+ font-size: 18px;
+ font-weight: bold;
+ letter-spacing: -2px;    /*-- ความห่างแต่ละตัวอักษร -- */
+
+ /*color: #608253;
+ color: rgba(46,139,87,1);*/
+}
+
+	ul.menuFull li {
+	 padding: 0 10px;
+	 background-color: transparent;
+	}
+
+	ul.menuFull li.hover,
+	ul.menuFull li:hover {
+	 /*background-color: #c3f0c2;  Color background menu hover Active*/
+	 /*color: #608253; สีตัวอักษร เมนูแม่ ไม่มี link*/
+
+	 vertical-align:bottom;
+
+	 border-radius: 5px; /* IE9 */
+	-moz-border-radius: 5px; /* firefox */
+	-webkit-border-radius: 5px; /* Safari/Chrome */
+	-o-border-radius: 5px; /* Opera */
+	}
+
+/*
+	ul.menuFull a:link,
+	ul.menuFull a:visited	{ color: #452b2c; text-decoration: none; }
+	ul.menuFull a:hover		{ color: #452b2c; } /*สีตัวอักษร link เมนู*/
+/*	ul.menuFull a:active	{ color: #ffa500; } */
+
+	/* -- level mark -- */
+
+	ul.menuFull ul {
+	 /* background-color: red; Color background Submenu */
+	 font-size: 12px;
+
+
+	 letter-spacing: normal;
+	 width: 900px; /* Width Backgroud All LMenu*/
+
+	 border-radius: 8px; /* IE9 */
+	-moz-border-radius: 8px; /* firefox */
+	-webkit-border-radius: 8px; /* Safari/Chrome */
+	-o-border-radius: 8px; /* Opera */
+	}
+
+	ul.bgTemp ul{
+
+
+	}
+
+		ul.menuFull ul li .dir { /*ส่วนของ Sub Menu ที่เป็น เมนู*/
+		 font-weight: bold;
+		 font-size: 12px;
+		}
+
+		ul.menuFull ul li { /*ส่วนของ Sub Menu บนสุด เมนู*/
+		 font-weight: normal;
+		 font-family: "Trebuchet MS", sans-serif;
+  		 font-size: 1.1em;
+		}
+
+		ul.menuFull li.last ul li {
+		 float: right;
+		}
+
+		/* -- level mark -- */
+
+		ul.menuFull ul ul {
+		 margin-top: 5px;
+		 text-transform: none;
+		}
+
+			ul.menuFull ul ul li {
+			 font-weight: normal;
+			}
+
+
+/* -- Supporting class `dir` -- */
+
+ul.menuFull *.dir {
+ padding-right: 30px;
+ background-image: url(../../images/menufull/nav-arrow-down.png);
+ background-position: 100% 50%;
+ background-repeat: no-repeat;
+}
+
+ul.menuFull ul *.dir {
+ /*background-image: none;*/
+}
+
+/*** =========== CSS for tooltip =========== ***/
+[data-tooltip] {
+    display: inline-block;
+    position: relative;
+    cursor: help;
+    padding: 4px;
+}
+/* Tooltip styling */
+[data-tooltip]:before {
+    content: attr(data-tooltip);
+    display: none;
+    position: absolute;
+    background: #444444;
+    color: #FFFFFF;
+    padding: 4px 8px;
+    /*font-size: 14px;*/
+    line-height: 1.4;
+    min-width: 200px;
+    text-align: left;
+    border-radius: 4px;
+}
+/* Dynamic horizontal centering */
+[data-tooltip-position="top"]:before,
+[data-tooltip-position="bottom"]:before {
+    left: 50%;
+    -ms-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+/* Dynamic vertical centering */
+[data-tooltip-position="right"]:before,
+[data-tooltip-position="left"]:before {
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+[data-tooltip-position="top"]:before {
+    bottom: 100%;
+    margin-bottom: 6px;
+}
+[data-tooltip-position="right"]:before {
+    left: 100%;
+    margin-left: 6px;
+}
+[data-tooltip-position="bottom"]:before {
+    top: 100%;
+    margin-top: 6px;
+}
+[data-tooltip-position="left"]:before {
+    right: 100%;
+    margin-right: 6px;
+}
+
+/* Tooltip arrow styling/placement */
+[data-tooltip]:after {
+    content: '';
+    display: none;
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+}
+/* Dynamic horizontal centering for the tooltip */
+[data-tooltip-position="top"]:after,
+[data-tooltip-position="bottom"]:after {
+    left: 50%;
+    margin-left: -6px;
+}
+/* Dynamic vertical centering for the tooltip */
+[data-tooltip-position="right"]:after,
+[data-tooltip-position="left"]:after {
+    top: 50%;
+    margin-top: -6px;
+}
+[data-tooltip-position="top"]:after {
+    bottom: 100%;
+    border-width: 6px 6px 0;
+    border-top-color: #000;
+}
+[data-tooltip-position="right"]:after {
+    left: 100%;
+    border-width: 6px 6px 6px 0;
+    border-right-color: #000;
+}
+[data-tooltip-position="bottom"]:after {
+    top: 100%;
+    border-width: 0 6px 6px;
+    border-bottom-color: #000;
+}
+[data-tooltip-position="left"]:after {
+    right: 100%;
+    border-width: 6px 0 6px 6px;
+    border-left-color: #000;
+}
+/* Show the tooltip when hovering */
+[data-tooltip]:hover:before,
+[data-tooltip]:hover:after {
+    display: block;
+    z-index: 50;
+}
+/*** =========== End CSS for tooltip =========== ***/
+
+.lpp-style{
+	width: 80px;
+}
+
+.border_select {
+	border: 1px solid red !important;
+}
+
+.readonly {
+	border: none;
+	background: transparent;
+}

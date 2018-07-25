@@ -1,0 +1,90 @@
+@charset "UTF-8";
+
+/**
+ * Default Advanced CSS Drop-Down Menu Theme
+ *
+ * @file		default.advanced.css
+ * @name		Default
+ * @version		0.1
+ * @type		transitional
+ * @browsers	Windows: IE7+, Opera9+, Firefox3+
+ *				Mac OS: Safari2+, Firefox3+
+ *
+ * @link		http://www.lwis.net/free-css-drop-down-menu
+ * @copyright	2009-2012 Live Web Initiatives, http://www.lwis.net
+ *
+ */
+
+@import "default.css";
+
+
+/* -- Base style extension -- */
+
+ul.menuFull li a {
+ display: block;
+ padding: 0 10px;
+}
+
+
+/* -- Base style override -- */
+
+ul.menuFull li {
+ padding: 0;
+}
+
+
+/* -- Base style reinitiate: post-override activities -- */
+
+ul.menuFull li.dir {
+ padding: 0 40px 0 20px; /*ขนาดของพื้น head menu*/
+}
+
+	ul.menuFull ul li.dir {
+	 padding: 5px; /*เยื้องเมนู link*/
+	}
+
+
+/* -- Custom styles -- */
+
+ul.menuFull ul {
+ padding: 0 10px; /*เมนูตัวแรกห่างจากซ้าย*/
+/* color: #452b2c; สีตัวอักษร เมนูที่เป็นแม่*/
+}
+
+	ul.menuFull ul a { /*ส่วนความกว้างของ  column เมนู ทั้งหมด*/
+	 width: 150px;
+	 padding: 3px 5px;
+	 /*background: url(../../images/menufull/pattern2.png) 0 0 repeat-x; เส้นคั่น ระหว่าง เมนู ที่เป็นแม่ลูก*/
+	}
+
+	ul.menuFull ul a:hover {
+	 /*background-color: #0066cc;   Color of mouse hover */
+	/* color: #fcfcfc; สีตัวอักษรเมนูที่เป็น link เมื่อ over */
+	 width: 80%;  /* size highlight submenu*/
+	 padding-right:10px;
+
+	  border-radius: 10px; /* IE9 */
+	-moz-border-radius: 10px; /* firefox */
+	-webkit-border-radius: 10px; /* Safari/Chrome */
+	-o-border-radius: 10px; /* Opera */
+	}
+
+		ul.menuFull ul ul {
+		 padding: 0;
+		 margin-left: 10px;  /* เยื้อง submenu ที่ link */
+		}
+
+ul.menuFull li.dir ul *.menuMain{ /*เส้นคั่น ขวาง*/
+ 	/*border-bottom:1px dotted #c0c1c2 ;
+	border-left:1px solid #c0c1c2 ;
+	 line-height:25px;*/
+
+	padding-top: 15px;
+	background: url("../../images/menufull/grad1.png") no-repeat rgba(10, 0, 0, 0);
+
+	/*border-left:1px solid #c0c1c2 ;*/
+}
+
+ul.menuFull li.dir ul{
+	background-image: url("../../images/menufull/grad.png") no-repeat rgba(10, 0, 0, 0);
+}

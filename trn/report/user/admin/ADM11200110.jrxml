@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ADM11200110" language="groovy" pageWidth="842" pageHeight="555" orientation="Landscape" columnWidth="828" leftMargin="7" rightMargin="7" topMargin="19" bottomMargin="0" uuid="63b5335c-5d56-4723-a63e-bb53462e52eb">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="UserId" class="java.lang.String"/>
+	<parameter name="GivenName" class="java.lang.String"/>
+	<parameter name="EmailAddress" class="java.lang.String"/>
+	<parameter name="UserStatus" class="java.lang.String"/>
+	<parameter name="FamilyName" class="java.lang.String"/>
+	<parameter name="TelephoneContact" class="java.lang.String"/>
+	<parameter name="UserReportLb" class="java.lang.String"/>
+	<parameter name="UserIdLb" class="java.lang.String"/>
+	<parameter name="GivenNameLb" class="java.lang.String"/>
+	<parameter name="EmailAddressLb" class="java.lang.String"/>
+	<parameter name="UserStatusLb" class="java.lang.String"/>
+	<parameter name="FamilyNameLb" class="java.lang.String"/>
+	<parameter name="TelephoneContactLb" class="java.lang.String"/>
+	<parameter name="No" class="java.lang.String"/>
+	<parameter name="FullName" class="java.lang.String"/>
+	<field name="USER_ID" class="java.lang.String"/>
+	<field name="EMAIL_ADDRESS" class="java.lang.String"/>
+	<field name="USER_UCP_ID" class="java.lang.String"/>
+	<field name="TELEPHONE_CONTACT" class="java.lang.String"/>
+	<field name="USER_STATUS" class="java.lang.String"/>
+	<field name="USER_STATUS_V" class="java.lang.String"/>
+	<field name="FULLNAME" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band height="138" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="118" width="776" height="20" uuid="1a42a32f-1332-4048-9333-65be1a41cf23"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Cordia New" size="14" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Print date/time : "+ new SimpleDateFormat("dd/MM/yyyy",new Locale("en","EN")).format(new java.util.Date()) + " " + new SimpleDateFormat("HH:mm").format(new java.util.Date() )]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="212" y="20" width="210" height="20" uuid="b2c628c3-7479-4d43-9bbe-88fb15ef20c6"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Cordia New" size="14"/>
+					<paragraph lineSpacing="Double"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{UserId}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="212" y="40" width="210" height="20" uuid="68ba7c1c-738f-4973-8cff-2e574de68745"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Cordia New" size="14"/>
+					<paragraph lineSpacing="Double"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{GivenName}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="212" y="80" width="210" height="20" uuid="a771e33b-8c02-4ed3-80de-78bb5a31e154"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Cordia New" size="14"/>
+					<paragraph lineSpacing="Double"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{UserStatus}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="212" y="60" width="210" height="20" uuid="6a571e3d-645f-4ed7-883b-48307c96858b"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Cordia New" size="14"/>
+					<paragraph lineSpacing="Double"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{EmailAddress}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="557" y="40" width="219" height="20" uuid="f49e0022-c2aa-4846-ad6f-197998f8849e"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Cordia New" size="14"/>
+					<paragraph lineSpacing="Double"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{FamilyName}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="557" y="60" width="219" height="20" uuid="d02d4021-b955-4e79-a070-cd8d9e5da5f5"/>
+				<textElement verticalAlignment="Bottom">
+					<font fontName="Cordia New" size="14"/>
+					<paragraph lineSpacing="Double"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{TelephoneContact}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="40" width="212" height="20" uuid="0f5b3a76-c2bf-4d0e-91e6-550697424ada"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Cordia New" size="14" isBold="true"/>
+					<paragraph lineSpacing="Double"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{GivenNameLb}+" : "]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="422" y="60" width="135" height="20" uuid="37184f14-9b08-45a6-97b4-b8a381c48d69"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Cordia New" size="14" isBold="true"/>
+					<paragraph lineSpacing="Double"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{TelephoneContactLb}+" : "]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="60" width="212" height="20" uuid="3dfc96ce-0838-4b61-a8dc-c8e7992cc2ab"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Cordia New" size="14" isBold="true"/>
+					<paragraph lineSpacing="Double"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{EmailAddressLb}+" : "]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="80" width="212" height="20" uuid="2adc6292-db27-465b-a9ba-b9e06cf976d6"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Cordia New" size="14" isBold="true"/>
+					<paragraph lineSpacing="Double"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{UserStatusLb}+" : "]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="20" width="212" height="20" uuid="465fd68c-c294-4231-9ccf-81cb2e8c316b"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Cordia New" size="14" isBold="true"/>
+					<paragraph lineSpacing="Double"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{UserIdLb}+" : "]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="422" y="40" width="135" height="20" uuid="6917c27f-b4c6-4dca-a186-0dbc108ff286"/>
+				<textElement textAlignment="Right" verticalAlignment="Bottom">
+					<font fontName="Cordia New" size="14" isBold="true"/>
+					<paragraph lineSpacing="Double"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{FamilyNameLb}+" : "]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="776" height="20" uuid="cd0d563d-4e9e-4d7b-a0e9-c066edae1acb"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font fontName="Cordia New" size="16" isBold="true"/>
+					<paragraph lineSpacing="Double"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{UserReportLb}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="54" height="20" uuid="b06f12f0-c1f4-4b9e-af87-8d01409cb29d"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Cordia New" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{No}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="54" y="0" width="90" height="20" uuid="d741a6f8-7bf1-41ca-bda7-c0400569e45a"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Cordia New" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{UserIdLb}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="144" y="0" width="220" height="20" uuid="9cb4a4ed-6585-4fab-ade1-93e7b13d7b70"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Cordia New" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{FullName}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="364" y="0" width="200" height="20" uuid="ba3cb3a9-e12c-43cf-ae0c-58c098e2588b"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Cordia New" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{EmailAddressLb}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="564" y="0" width="142" height="20" uuid="0b029d44-d2ef-4015-aee6-c9cb4cc373c2"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Cordia New" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{TelephoneContactLb}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="706" y="0" width="70" height="20" uuid="8aad6e2f-323d-42a3-9f50-85acc6cc9713"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font fontName="Cordia New" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{UserStatusLb}]]></textFieldExpression>
+			</textField>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="0" y="0" width="54" height="20" uuid="d8f203d1-f978-4e2e-b729-1b308fc7e72a"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font fontName="Cordia New" size="14"/>
+					<paragraph lineSpacing="Double"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{REPORT_COUNT}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="54" y="0" width="90" height="20" uuid="70d2d9d3-62c0-4140-bd51-a765bf602d7a"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Top">
+					<font fontName="Cordia New" size="14"/>
+					<paragraph lineSpacing="Double"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{USER_ID}== null ? "" :$F{USER_ID}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="364" y="0" width="200" height="20" uuid="045fc488-5595-42f5-8400-74ac3a67c0ca"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Top">
+					<font fontName="Cordia New" size="14"/>
+					<paragraph lineSpacing="Double"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{EMAIL_ADDRESS}== null ? "" :$F{EMAIL_ADDRESS}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="564" y="0" width="142" height="20" uuid="d4bda307-6fd7-48ba-96a0-64b56ba96830"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Top">
+					<font fontName="Cordia New" size="14"/>
+					<paragraph lineSpacing="Double"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TELEPHONE_CONTACT}== null ? "" :$F{TELEPHONE_CONTACT}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="706" y="0" width="70" height="20" uuid="a39e4286-b224-428c-a6be-d53a824d9ff1"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Top">
+					<font fontName="Cordia New" size="14"/>
+					<paragraph lineSpacing="Double"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{USER_STATUS_V}== null ? "" :$F{USER_STATUS_V}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement stretchType="RelativeToTallestObject" x="144" y="0" width="220" height="20" uuid="e59f19e2-a073-4fc2-a8de-55a0cd7f6297"/>
+				<box>
+					<topPen lineWidth="0.5"/>
+					<leftPen lineWidth="0.5"/>
+					<bottomPen lineWidth="0.5"/>
+					<rightPen lineWidth="0.5"/>
+				</box>
+				<textElement verticalAlignment="Top">
+					<font fontName="Cordia New" size="14"/>
+					<paragraph lineSpacing="Double"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{FULLNAME}== null ? "" : $F{FULLNAME}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="21" splitType="Stretch"/>
+	</pageFooter>
+</jasperReport>

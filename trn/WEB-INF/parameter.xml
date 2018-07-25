@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<parameter>
+    <application>
+        <applicationLocaleString>en</applicationLocaleString>
+        <databaseLocaleString>en</databaseLocaleString>
+        <datetimeLocaleString>en</datetimeLocaleString>
+        <lppString>10,20,30,40,50,60,70,80,90,100</lppString>
+        <lppPopup>50</lppPopup>
+        <maxExceed>1000</maxExceed> <!-- 1000 -->
+        <maxExceedReport>1000</maxExceedReport>
+        <maxExceedPopup>600</maxExceedPopup>
+        <maxSearchLogHistory>2000</maxSearchLogHistory>
+        <supportLocaleString>en</supportLocaleString>
+        <theme>overcast</theme>
+        <title>Training 2018</title>
+
+        <fillAtLeast>3</fillAtLeast> <!-- กำหนดค่าการกรอกข้อมูลอย่างน้อย ก่อนค้นหาของ autocomplete -->
+
+        <sqlPath></sqlPath>
+        <mailConfigPath>D:\My Projects\12-[EXAM]-Training-2018\02-SourceCode\WorkSpace\training2018\trn\WEB-INF\</mailConfigPath>
+    </application>
+
+    <attachFile>
+        <!-- ที่เก็บของ default image icon ของประเภทเอกสารของแต่ละประเภท -->
+        <imageDefault>/opt/training2018/web/trn/image/</imageDefault>
+		<!-- ที่เก็บไฟล์ที่ถูกบันทึกลงฐานข้อมูลแล้ว  -->
+        <serverPath>/opt/training2018/trn/dev/</serverPath>
+		<!-- ที่เก็บไฟล์ที่ยังไม่ถูกบันทึกลงฐาน -->
+        <tmpPath>/opt/training2018/web/trn/temp/dev/</tmpPath>
+    </attachFile>
+
+    <database>
+    	<index>0</index>
+        <databaseType>mysql</databaseType>
+        <jndi>true</jndi>
+        <lookup>jdbc/mysql_training</lookup>
+        <schemas>[SCHEMAS]:training</schemas>
+    </database>
+
+    <dateFormat>
+    	<!-- รูปแบบวันที่ ที่นำไป insert update ลงฐานข้อมูล  -->
+        <forDatabaseInsert>DD/MM/YYYY</forDatabaseInsert>
+        <forDatabaseInsertHHMM>DD/MM/YYYY HH:mm</forDatabaseInsertHHMM>
+        <forDatabaseInsertHHMMSS>DD/MM/YYYY HH:mm:ss</forDatabaseInsertHHMMSS>
+
+        <!-- รูปแบบวันที่ ที่ได้จากการ select จากฐานข้อมูล  โดยกำหนดตามมาตรฐาน SD -->
+        <forDatabaseSelect>DD/MM/YYYY</forDatabaseSelect>
+        <forDatabaseSelectHHMM>DD/MM/YYYY HH:mm</forDatabaseSelectHHMM>
+        <forDatabaseSelectHHMMSS>DD/MM/YYYY HH:mm:ss</forDatabaseSelectHHMMSS>
+
+        <!-- รูปแบบวันที่ ที่นำไปแสดงบนหน้าจอ  -->
+        <forDisplay>DD/MM/YYYY</forDisplay>
+        <forDisplayHHMM>DD/MM/YYYY HH:mm</forDisplayHHMM>
+        <forDisplayHHMMSS>DD/MM/YYYY HH:mm:ss</forDisplayHHMMSS>
+    </dateFormat>
+
+    <report>
+        <font>TH SarabunPSK</font>
+        <pathfile>D:\My Projects\12-[EXAM]-Training-2018\02-SourceCode\WorkSpace\training2018\trn\report\</pathfile>
+        <passwordReport>1234567890</passwordReport>
+    	<pathLicense></pathLicense>
+    </report>
+
+</parameter>

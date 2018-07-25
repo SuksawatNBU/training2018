@@ -1,0 +1,33 @@
+TABLE.RESULT_HEADER_SORT {
+	width:99%;
+	border: none;
+	border-collapse: collapse;
+}
+
+TABLE.RESULT_HEADER_SORT TD.VALUE {
+	width: 94%;
+	border: none;
+	vertical-align: bottom;
+}
+
+TABLE.RESULT_HEADER_SORT TD.LABEL {
+	width: 5%;
+	border: none;
+	vertical-align: bottom;
+}
+TH.sorting {
+	color: #599fcf;
+}
+
+TH.sorting_asc, TH.sorting_desc {
+	color: #3383bb;
+}
+
+FONT.ORDER_ACTIVE {
+	color: #0000ff;
+}
+
+FONT.ORDER_INACTIVE {
+	/*color: #00a6e3;*/
+	color: #3383bb;
+}

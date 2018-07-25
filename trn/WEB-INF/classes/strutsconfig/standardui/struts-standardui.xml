@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<package name="standardui" namespace="/jsp/standardui" extends="common">
+		<action name="*Miscellaneous" class="com.cct.trn.web.standardui.miscellaneous.action.MiscellaneousAction" method="{1}">
+			<result name="init">/jsp/standardui/miscellaneous/initMiscellaneous.jsp</result>
+			<result name="initDate">/jsp/standardui/miscellaneous/initDate.jsp</result>
+			<result name="initTime">/jsp/standardui/miscellaneous/initTime.jsp</result>
+			<result name="initIpAddress">/jsp/standardui/miscellaneous/initIpAddress.jsp</result>
+			<result name="initSuggestion">/jsp/standardui/miscellaneous/initSuggestion.jsp</result>
+			<result name="initTooltip">/jsp/standardui/miscellaneous/initTooltip.jsp</result>
+			<result name="initUpload">/jsp/standardui/miscellaneous/initUpload.jsp</result>
+			<result name="initAccordion">/jsp/standardui/miscellaneous/initAccordion.jsp</result>
+			<result name="initTab">/jsp/standardui/miscellaneous/initTab.jsp</result>
+			<result name="initTreeview">/jsp/standardui/miscellaneous/initTreeview.jsp</result>
+			<result name="initProgressbar">/jsp/standardui/miscellaneous/initProgressbar.jsp</result>
+			<result name="searchListTree" type="json">
+				<param name="root">model.tree.treeData</param>
+			</result>
+			<result name="search">/jsp/standardui/miscellaneous/initTreeview.jsp</result>
+			<result name="ajaxModel" type="json">
+				<param name="ignoreHierarchy">true</param>
+				<param name="root">model</param>
+			</result>
+		</action>
+		
+		<action name="*Dropdownlist" class="com.cct.trn.web.standardui.dropdownlist.action.DropdownlistAction" method="{1}">
+			<result name="init">/jsp/standardui/dropdownlist/initDropdownlist.jsp</result>
+		</action>
+		
+		<action name="*Autocomplete" class="com.cct.trn.web.standardui.autocomplete.action.AutocompleteAction" method="{1}">
+			<result name="init">/jsp/standardui/autocomplete/initAutocomplete.jsp</result>
+		</action>
+		
+		<action name="*Button" class="com.cct.trn.web.standardui.button.action.ButtonAction" method="{1}">
+			<result name="init">/jsp/standardui/button/initButton.jsp</result>
+		</action>
+		
+		<action name="*DataTable" class="com.cct.trn.web.standardui.datatable.action.DataTableAction" method="{1}">
+			<result name="init">/jsp/standardui/datatable/initDataTable.jsp</result>
+		</action>
+		
+		<action name="*Dialog" class="com.cct.trn.web.standardui.dialog.action.DialogAction" method="{1}">
+			<result name="init">/jsp/standardui/dialog/initDialog.jsp</result>
+		</action>
+		
+		<action name="*Table" class="com.cct.trn.web.standardui.table.action.TableAction" method="{1}">
+			<result name="init">/jsp/standardui/table/initTable.jsp</result>
+		</action>
+	</package>
+</struts>

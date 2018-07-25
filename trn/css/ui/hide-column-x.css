@@ -1,0 +1,9 @@
+.icon-hide-column-x {
+   display:none;
+   height:16px;
+   width:16px;
+   padding:0px;
+   box-shadow: none;
+   border: none;
+   opacity: 0.5;
+}

@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<package name="common" namespace="/" extends="json-default">
+		<interceptors>
+			<interceptor name="LoginInterceptor" class="com.cct.trn.web.interceptor.LoginInterceptor" />
+			<interceptor name="TokenInterceptor" class="com.cct.trn.web.interceptor.TokenInterceptor" />
+			<interceptor-stack name="DefaultInterceptor">
+				<interceptor-ref name="defaultStack"/>
+				<interceptor-ref name="LoginInterceptor"/>
+				<interceptor-ref name="TokenInterceptor">
+               		<param name="excludeMethods">*</param> <!-- เมธอดที่ไม่ทำการตรวจสอบ token ถ้าไม่ใส่ ทุกเมธอดจะถูกตรวจสอบทั้งหมด  -->
+               		<param name="includeMethods">add*,edit*,delete*,update*</param> <!-- เมธอดที่ทำการตรวจสอบ token  -->
+    			</interceptor-ref>
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="DefaultInterceptor"></default-interceptor-ref>
+
+		<global-results>
+			<result name="mainpage" type="redirectAction">
+            	<param name="actionName">initMainpage</param>
+        	</result>
+			<result name="home" type="redirectAction">
+            	<param name="actionName">initLogin</param>
+            	<param name="namespace">/jsp/security</param>
+        	</result>
+        	<result name="filemeta" type="json">
+				<param name="root">model.fileMeta</param>
+			</result>
+			<result name="searchResultAjax" type="json">
+				<param name="root">model</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="checkChangePasswordForced" type="redirectAction">
+            	<param name="actionName">initChangePassword</param>
+            	<param name="namespace">/jsp/security</param>
+        	</result>
+		</global-results>
+
+		<global-exception-mappings>
+			<exception-mapping exception="com.cct.exception.AuthorizationException" result="home" />
+			<exception-mapping exception="java.lang.NullPointerException" result="home" />
+		</global-exception-mappings>
+
+		<action name="initLogin" class="com.cct.trn.web.security.login.action.LoginAction" method="init">
+<!-- 			<result name="init">/jsp/security/login/login.jsp</result> -->
+			<result name="init">/jsp/mainpage.jsp</result>
+		</action>
+
+		<action name="*Mainpage" class="com.cct.trn.web.security.mainpage.action.MainpageAction" method="{1}">
+            <result name="init">/jsp/mainpage.jsp</result>
+        </action>
+
+<!--         <action name="*Component" class="test.component.ComponentAction" method="{1}"> -->
+<!--             <result name="init">/jsp/component/mainpageComponent.jsp</result> -->
+<!--             <result name="autocomplete">/jsp/component/autocompleteComponent.jsp</result> -->
+<!--             <result name="dropdownlist">/jsp/component/dropdownlistComponent.jsp</result> -->
+<!--             <result name="uiExample">/jsp/component/UIExampleComponent.jsp</result> -->
+<!--             <result name="buttonComp">/jsp/component/buttonComponent.jsp</result> -->
+<!--             <result name="validation">/jsp/component/validationTemplate.jsp</result> -->
+<!--             <result name="standardComp">/jsp/component/standardComponent.jsp</result> -->
+<!--             <result name="function">/jsp/component/testFuntionComponent.jsp</result> -->
+<!--             <result name="requirement">/jsp/component/requirementTemplate.jsp</result> -->
+<!--             <result name="suggestion">/jsp/component/suggestionComponent.jsp</result> -->
+<!--             <result name="requirementPG">/jsp/component/requirementPgTemplate.jsp</result> -->
+<!--             <result name="tableTemplate">/jsp/component/tableTemplate.jsp</result> -->
+<!--             <result name="demoSearch">/jsp/component/demoSearch.jsp</result> -->
+<!--             <result name="passwordFormat">/jsp/component/passwordFormat.jsp</result> -->
+<!--         </action> -->
+
+<!-- 		<action name="*ProgressBar" class="com.cct.trn.web.security.mainpage.action.ProgressBarAction" method="{1}"> -->
+<!--             <result name="progress" type="json"> -->
+<!-- 			    <param name="root">model</param> -->
+<!-- 			    <param name="ignoreHierarchy">false</param> -->
+<!-- 			</result> -->
+<!--         </action> -->
+
+	</package>
+</struts>

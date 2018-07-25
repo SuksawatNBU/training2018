@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	id="WebApp_ID" version="3.0">
+	<display-name>training2018</display-name>
+	<filter>
+		<filter-name>struts2</filter-name>
+		<filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>struts2</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<filter>
+		<filter-name>sitemesh</filter-name>
+		<filter-class>com.opensymphony.sitemesh.webapp.SiteMeshFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>sitemesh</filter-name>
+		<url-pattern>/*</url-pattern>
+		<dispatcher>FORWARD</dispatcher>
+		<dispatcher>INCLUDE</dispatcher>
+		<dispatcher>REQUEST</dispatcher>
+	</filter-mapping>
+	
+	<servlet>
+		<servlet-name>parameter</servlet-name>
+		<servlet-class>com.cct.trn.web.config.parameter.servlet.ParameterServlet</servlet-class>
+		<init-param>
+			<param-name>parameterfile</param-name>
+			<param-value>/WEB-INF/parameter.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>parameter</servlet-name>
+		<url-pattern>/parameter</url-pattern>
+	</servlet-mapping>
+	
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+
+	<servlet>
+		<servlet-name>suggestDataSelectItemServlet</servlet-name>
+		<servlet-class>com.cct.trn.web.selectitem.servlet.SuggestDataSelectItemServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>suggestDataSelectItemServlet</servlet-name>
+		<url-pattern>/suggestDataSelectItemServlet</url-pattern>
+	</servlet-mapping>
+
+	<!-- ผู้ใช้งานระบบ QA -->
+	<servlet>
+		<servlet-name>/qaUserAutoSelectItemServlet</servlet-name>
+		<servlet-class>com.cct.trn.web.selectitem.servlet.QaUserAutoSelectItemServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>/qaUserAutoSelectItemServlet</servlet-name>
+		<url-pattern>/qaUserAutoSelectItemServlet</url-pattern>
+	</servlet-mapping>
+
+	<!-- โครงการ (project) -->
+	<servlet>
+		<servlet-name>/projectSelectItemServlet</servlet-name>
+		<servlet-class>com.cct.trn.web.selectitem.servlet.ProjectSelectItemServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>/projectSelectItemServlet</servlet-name>
+		<url-pattern>/projectSelectItemServlet</url-pattern>
+	</servlet-mapping>
+
+	<!-- System -->
+	<servlet>
+		<servlet-name>/systemSelectItemServlet</servlet-name>
+		<servlet-class>com.cct.trn.web.selectitem.servlet.SystemSelectItemServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>/systemSelectItemServlet</servlet-name>
+		<url-pattern>/systemSelectItemServlet</url-pattern>
+	</servlet-mapping>
+
+	<!-- SubSystem -->
+	<servlet>
+		<servlet-name>/subSystemSelectItemServlet</servlet-name>
+		<servlet-class>com.cct.trn.web.selectitem.servlet.SubSystemSelectItemServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>/subSystemSelectItemServlet</servlet-name>
+		<url-pattern>/subSystemSelectItemServlet</url-pattern>
+	</servlet-mapping>
+
+	<!-- Department -->
+	<servlet>
+		<servlet-name>/departmentAutoSelectItemServlet</servlet-name>
+		<servlet-class>com.cct.trn.web.selectitem.servlet.DepartmentAutoSelectItemServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>/departmentAutoSelectItemServlet</servlet-name>
+		<url-pattern>/departmentAutoSelectItemServlet</url-pattern>
+	</servlet-mapping>
+
+	<!-- User -->
+	<servlet>
+		<servlet-name>/userAutoSelectItemServlet</servlet-name>
+		<servlet-class>com.cct.trn.web.selectitem.servlet.UserAutoSelectItemServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>/userAutoSelectItemServlet</servlet-name>
+		<url-pattern>/userAutoSelectItemServlet</url-pattern>
+	</servlet-mapping>
+</web-app>

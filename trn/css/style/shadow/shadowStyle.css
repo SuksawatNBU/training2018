@@ -1,0 +1,205 @@
+/**------------------------------------------
+*	TEXT
+--------------------------------------------*/
+input[type="text"].shadowStyle ,input[type="password"].shadowStyle{
+	border-radius: 3px;
+	-webkit-transition: all 0.30s ease-in-out;
+	-moz-transition: all 0.30s ease-in-out;
+	-ms-transition: all 0.30s ease-in-out;
+	-o-transition: all 0.30s ease-in-out;
+	outline: none;
+	border: 1px solid #DDDDDD;
+
+}
+
+input[type="text"].shadowStyle:HOVER ,input[type="password"].shadowStyle:HOVER{
+	border-radius: 0px;
+  	border: 1px solid #cccccc;
+  	box-shadow: 0 1px 5px rgba(0,0,0,0.05), inset 0px 2px 3px rgba(0,0,0,0.05);
+
+}
+
+
+input[type="text"].shadowStyle:FOCUS ,input[type="password"].shadowStyle:FOCUS{
+	border-radius: 0px;
+  	border: 1px solid #cccccc;
+  	box-shadow: 0 1px 5px rgba(0,0,0,0.05), inset 0px 2px 3px rgba(0,0,0,0.05);
+}
+
+/**------------------------------------------
+*	RADIO
+--------------------------------------------*/
+input[type="radio"].shadowStyle {
+	display: none;
+}
+
+input[type="radio"].shadowStyle + label {
+	-webkit-appearance: none;
+	background-color: #fafafa;
+	border: 1px solid #cacece;
+	box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05);
+	padding: 9px;
+	border-radius: 50px;
+	display: inline-block;
+	position: relative;
+}
+
+input[type="radio"].shadowStyle:checked + label:after {
+	content: '\2022';
+	border-radius: 50px;
+	position: absolute;
+	top: -11px;
+	left: 3px;
+	font-size: 30px;
+	height: 0px;
+	width: 0px;
+}
+
+input[type="radio"].shadowStyle:checked + label {
+	/*background-color: #e9ecee;*/
+	/*color: #FF0000;*/
+	border: 1px solid #adb8c0;
+	box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05), inset 15px 10px -12px rgba(255,255,255,0.1), inset 0px 0px 10px rgba(0,0,0,0.1);
+}
+
+input[type="radio"].shadowStyle:disabled + label {
+	/*background-color: #ddd;*/
+	color: #ccc;
+	border: 1px solid #adb8c0;
+	box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05), inset 15px 10px -12px rgba(255,255,255,0.1), inset 0px 0px 10px rgba(0,0,0,0.1);
+}
+
+input[type="radio"].shadowStyle + label:active, input[type="radio"].shadowStyle:checked + label:active {
+	box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);
+}
+
+
+
+/**------------------------------------------
+*	CHECKBOX
+--------------------------------------------*/
+
+input[type="checkbox"].shadowStyle {
+	display: none;
+}
+
+input[type="checkbox"].shadowStyle + label {
+	/*background-color: #fafafa;
+	border: 1px solid #cacece;*/
+	box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05);
+	padding: 9px;
+	border-radius: 3px;
+	display: inline-block;
+	position: relative;
+}
+
+input[type="checkbox"].shadowStyle + label:active, input[type="checkbox"].shadowStyle:checked + label:active {
+	box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);
+}
+
+input[type="checkbox"].shadowStyle:checked + label {
+	/*background-color: #e9ecee;*/
+	/*border: 1px solid #adb8c0;*/
+	box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05), inset 15px 10px -12px rgba(255,255,255,0.1);
+	/*color: #99a1a7;*/
+}
+
+input[type="checkbox"].shadowStyle:disabled + label {
+	/*background-color: #ddd;*/
+	color: #ccc;
+	border: 1px solid #adb8c0;
+}
+
+input[type="checkbox"].shadowStyle:checked + label:after {
+	content: '\2714';
+	font-size: 14px;
+	position: absolute;
+	top: 0px;
+	left: 3px;
+}
+
+
+/**------------------------------------------
+*	BUTTON , SUBMIT
+--------------------------------------------*/
+/*
+input[type="button"].shadowStyle , input[type="submit"].shadowStyle , button.shadowStyle{
+	border-radius : 4px;
+	border: 1px solid #ccc;
+	padding: 2px 2px 2px 2px;
+	background: #e9ecee;
+	color: #777;
+	box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);
+}
+
+input[type="button"].shadowStyle:HOVER , input[type="submit"].shadowStyle:HOVER , button.shadowStyle:HOVER{
+	border-radius : 4px;
+	border: 1px solid #ccc;
+	padding: 2px 2px 2px 2px;
+	background: #FFFFFF;
+	color: #777;
+	cursor: pointer;
+}*/
+
+
+button.shadowStyle ,input[type="button"].shadowStyle {
+	  min-width:100px;
+	  height:40px;
+	  display:inline-block;
+	  font-family:Arial, "Helvetica", sans-serif;
+	  font.shadowStyle6px;
+	  font-weight:bold;
+	  color:#fff;
+	  text-decoration:none;
+	  text-transform:uppercase;
+	  text-align:center;
+	  /*text-shadow:1px 1px 0px #07526e;*/
+	  padding-top:0px;
+	  margin-left:auto;
+	  margin-right:auto;
+	  left:30px;
+	  position:relative;
+	  cursor:pointer;
+	  border: none;
+	 /*background: #109bce;*/
+	  /*background-image: linear-gradient(bottom, rgb(14,137,182) 0%, rgb(22,179,236) 100%);*/
+	  /*border-radius: 5px;*/
+	  /*box-shadow: inset 0px 0px 0px #2ab7ec, 0px 5px 0px 0px #07526e, 0px 10px 5px #999;*/
+}
+
+button.shadowStyle:active ,input[type="button"].shadowStyle:active {
+  top:3px;
+  /*box-shadow: inset 0px 1px 0px #2ab7ec, 0px 2px 0px 0px #07526e, 0px 5px 3px #999;*/
+  box-shadow: inset 0px 1px 0px #777, 0px 2px 0px 0px #777, 0px 5px 3px #999;
+}
+
+button.shadowStyle:before ,input[type="button"].shadowStyle:before{
+  font-family: 'socialfont';
+  font-size: 50px;
+  line-height: 1em;
+  font-weight: normal;
+  color: #fff;
+  content:" ";
+  width:85px;
+  height:20px;
+  display:block;
+  position:absolute;
+  padding-top:10px;
+  top:10px;
+  text-shadow: 1px 1px 2px #07526e;
+
+}
+
+button.shadowStyle:active:before ,input[type="button"].shadow:active:before {
+  top: 7px;
+  font-size: 50px;
+  text-shadow: 0px 3px 0px #07526e, 0px 5px 1px #07526e/*, 3px 0px 1px #07526e, 3px 3px 1px #07526e,
+     -2px 0px 1px #68cff2*/;
+}
+
+/**------------------------------------------
+*	AUTOCOMPLETE
+--------------------------------------------*/
+
+
+

@@ -1,0 +1,5 @@
+eclipse.preferences.version=1
+encoding//src/com/cct/trn/core/tutorial/employee/domain/EmployeeModel.java=UTF-8
+encoding//src/com/cct/trn/core/tutorial/employee/service/EmployeeDao.java=UTF-8
+encoding//src/com/cct/trn/core/tutorial/employee/service/EmployeeManager.java=UTF-8
+encoding//src/com/cct/trn/web/tutorial/employee/action/EmployeeAction.java=UTF-8

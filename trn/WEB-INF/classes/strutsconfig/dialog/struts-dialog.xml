@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<package name="dialog" namespace="/jsp/dialog" extends="common">
+	    <!-- Dialog ผู้ใช้ -->
+		<action name="*UserDialog" class="com.cct.trn.web.dialog.security.user.action.UserDialogAction" method="{1}">
+		    <result name="initialDialog" type="json">
+				<param name="root">model</param>
+			</result>
+			<result name="searchList" type="json">
+				<param name="root">model</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="searchListById" type="json">
+				<param name="root">model.lstResult</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+		
+		<!-- Dialog สิทธิ์โปรแกรม -->
+		<action name="*ProgramDialog" class="com.cct.trn.web.dialog.security.operator.action.ProgramDialogAction" method="{1}">
+			<result name="searchListTree" type="json">
+				<param name="root">model.treeData</param>
+			</result>
+		</action>
+		
+		<!-- Dialog สิทธิ์รายงาน -->
+		<action name="*ReportDialog" class="com.cct.trn.web.dialog.security.operator.action.ReportDialogAction" method="{1}">
+		    <result name="searchListTree" type="json">
+				<param name="root">model.treeData</param>
+			</result>
+		</action>
+		
+	</package>
+</struts>
