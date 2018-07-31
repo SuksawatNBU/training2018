@@ -270,7 +270,7 @@ public class EmployeeDao extends AbstractDAO<EmployeeSearchCriteria, EmployeeSea
 		int paramIndex = 0;
 	    int id = 0;
 
-	    Object[] params = new Object[9];
+	    Object[] params = new Object[10];
 	    params[paramIndex++] = StringUtil.replaceSpecialString(obj.getName(), conn.getDbType(), ResultType.NULL);
         params[paramIndex++] = StringUtil.replaceSpecialString(obj.getSurname(), conn.getDbType(), ResultType.NULL);
         params[paramIndex++] = StringUtil.replaceSpecialString(obj.getNickName(), conn.getDbType(), ResultType.NULL);

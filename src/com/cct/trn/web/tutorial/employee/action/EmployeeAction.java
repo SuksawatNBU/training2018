@@ -156,7 +156,9 @@ public class EmployeeAction extends CommonAction  implements ModelDriven<Employe
 	        conn = new CCTConnectionProvider().getConnection(conn, DBLookup.MYSQL_TRAINING.getLookup());
 	 
 	        //2.ตรวจสอบสิทธิ์ หน้าเพิ่ม
-	        result = manageAdd(conn, model);
+	        result = ReturnType.ADD_EDIT.getResult();
+	        setMessage(CommonAction.MessageType.SUCCESS, getText("30003"), ResultType.BASIC);
+	        model.setPage(CommonModel.PageType.ADD);
 	 
 	        EmployeeManager manager = new EmployeeManager(conn, getUser(), getLocale());
 	 
@@ -194,7 +196,7 @@ public class EmployeeAction extends CommonAction  implements ModelDriven<Employe
 	        conn = new CCTConnectionProvider().getConnection(conn, DBLookup.MYSQL_TRAINING.getLookup());
 	 
 	        //2.ตรวจสอบสิทธิ์ หน้าแก้ไข
-	        result = "addEdit"; //manageGotoEdit(conn, model);
+	        result = ReturnType.ADD_EDIT.getResult(); //manageGotoEdit(conn, model);
 	        model.setPage(CommonModel.PageType.EDIT);
 	 
 	        //3.ค้นหาข้อมูลผู้ใช้ ตาม id ที่เลือกมาจากหน้าจอ
@@ -234,7 +236,9 @@ public class EmployeeAction extends CommonAction  implements ModelDriven<Employe
 	        conn = new CCTConnectionProvider().getConnection(conn, DBLookup.MYSQL_TRAINING.getLookup());
 	 
 	        //2.ตรวจสอบสิทธิ์ หน้าแก้ไข
-	        result = manageEdit(conn, model);
+	        result = ReturnType.SEARCH_DO.getResult();
+	        setMessage(CommonAction.MessageType.SUCCESS, getText("30004"), ResultType.CHAIN);
+			model.setPage(CommonModel.PageType.EDIT);
 	 
 	        //3.บันทึกแก้ไขข้อมูล
 	        EmployeeManager manager = new EmployeeManager(conn, getUser(), getLocale());
@@ -243,7 +247,7 @@ public class EmployeeAction extends CommonAction  implements ModelDriven<Employe
 	    } catch (Exception e) {
 	        //4.จัดการ exception กรณีที่มี exception เกิดขึ้นในระบบ
 	        manageException(conn, PF_CODE.getEditFunction(), this, e, model);
-	         
+	        
 	        //5.กรณีที่เกิด exception ขึ้นในระบบ จะต้องแสดง message error และคงข้อมูลที่กรอกไว้ในหน้าแก้ไขเช่นเดิม
 	        result = ReturnType.ADD_EDIT.getResult();
 	        getComboForAddEdit(conn);
@@ -268,7 +272,7 @@ public class EmployeeAction extends CommonAction  implements ModelDriven<Employe
 	        conn = new CCTConnectionProvider().getConnection(conn, DBLookup.MYSQL_TRAINING.getLookup());
 	 
 	        //2.ตรวจสอบสิทธิ์ หน้าแสดง
-	        result = "addEdit"; //manageGotoView(conn, model);
+	        result = ReturnType.ADD_EDIT.getResult();
 	        model.setPage(CommonModel.PageType.VIEW);
 	 
 	        //3.ค้นหาข้อมูลผู้ใช้โดยใช้ ตาม id ที่เลือกมาจากหน้าจอ
@@ -301,8 +305,29 @@ public class EmployeeAction extends CommonAction  implements ModelDriven<Employe
 
 	@Override
 	public String delete() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		String result = null;
+	    CCTConnection conn = null;
+		try {
+			//1.สร้าง connection โดยจะต้องระบุ lookup ที่ใช้ด้วย
+	        conn = new CCTConnectionProvider().getConnection(conn, DBLookup.MYSQL_TRAINING.getLookup());
+	        
+	        //2.ตรวจสอบสิทธิ์ หน้าแสดง
+	        result = "init";
+	        
+	        //3.
+	        EmployeeManager manager = new EmployeeManager(conn, getUser(), getLocale());
+	        manager.delete(model.getEmployee().getId());
+	        
+		} catch (Exception e) {
+			// TODO: handle exception
+		}finally {
+	        //6.Load combo ทั้งหมดที่ใช้ในหน้าแสดง
+	        getComboForAddEdit(conn);
+	         
+	        //7.Close connection หลังเลิกใช้งาน
+	        CCTConnectionUtil.close(conn);
+	    }
+		return result;
 	}
 
 	@Override

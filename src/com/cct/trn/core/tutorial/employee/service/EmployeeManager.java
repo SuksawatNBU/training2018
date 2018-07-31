@@ -74,19 +74,20 @@ public class EmployeeManager extends AbstractManager<EmployeeSearchCriteria, Emp
 
 	@Override
 	public int add(Employee obj) throws Exception {
-		int userId = 0 ;
+		int employeeId = 0 ;
 		try {
 	        //1.ตรวจสอบบันทึกข้อมูลผู้ใช้ซ้ำ
 	        service.checkDup(conn, obj, user, locale);
+	        System.out.println("checkDup --> ผ่าน");
 	 
 	        //2.Begin transaction
 	        conn.setAutoCommit(false);
 	 
 	        //3.เพิ่มข้อมูลผู้ใช้งาน
-	        userId = service.add(conn, obj, user, locale);
+	        employeeId = service.add(conn, obj, user, locale);
 	 
 	        //4.เพิ่มข้อมูลสิทธิ์ผู้ใช้
-//	        service.addOperation(obj, userId);
+	        service.addOperation(obj, employeeId);
 	 
 	        //5. Commit transaction
 	        conn.commit();
@@ -99,7 +100,7 @@ public class EmployeeManager extends AbstractManager<EmployeeSearchCriteria, Emp
 	        //7. Set AutoCommit กลับคืนเป็น True
 	        conn.setAutoCommit(true);
 	    }
-	    return userId;
+	    return employeeId;
 	}
 
 	/**
@@ -118,7 +119,7 @@ public class EmployeeManager extends AbstractManager<EmployeeSearchCriteria, Emp
 	        service.edit(conn, obj, user, locale);
 	 
 	        //4.แก้ไขข้อมูลสิทธิ์ผู้ใช้
-//	        service.editOperation(obj, Integer.parseInt(obj.getId());
+	        service.editOperation(obj, Integer.parseInt(obj.getId()));
 	 
 	        conn.commit();
 	 
@@ -133,7 +134,11 @@ public class EmployeeManager extends AbstractManager<EmployeeSearchCriteria, Emp
 
 	@Override
 	public int delete(String ids) throws Exception {
-		return 0;
+		try {
+			return service.delete(conn, ids, user, locale);
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 	@Override
