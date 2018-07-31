@@ -1,0 +1,64 @@
+TABLE.navigate {
+	float: right;
+	border-collapse: collapse;
+	font-family: "Trebuchet MS", sans-serif;
+	font-size: 13px;
+	font-weight: normal;
+}
+
+TABLE.navigateColor {
+	float: right;
+}
+
+TABLE.navigateColor TD {
+	padding: 0px;
+	text-align: center;
+	padding-left: 5px;
+	padding-right: 5px;
+	background-color: f0efea;
+}
+
+TABLE.navigateColor TD {
+	padding: 0px;
+	text-align: center;
+	padding-left: 5px;
+	padding-right: 5px;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+}
+
+TABLE.navigateColor TD.select {
+	font-family: "Trebuchet MS", sans-serif;
+	font-size: 13px;
+	font-weight: bold;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+}
+
+TABLE.navigateColor TD.unselect {
+	font-family: "Trebuchet MS", sans-serif;
+	font-size: 13px;
+	font-weight: normal;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+}
+
+TABLE.navigateColor TD.first-dis,TABLE.navigateColor TD.last-dis,TABLE.navigateColor TD.next-dis,TABLE.navigateColor TD.prev-dis {
+	font-family: "Trebuchet MS", sans-serif;
+	font-size: 13px;
+	font-weight: normal;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+}
+
+TABLE.navigateColor TD:HOVER {
+	text-align: center;
+	cursor: pointer;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+}

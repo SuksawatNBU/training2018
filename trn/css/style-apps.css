@@ -1,0 +1,9 @@
+FIELDSET.fieldsetStyle{
+	margin-top:20px;
+	/* margin: 0px; */
+	padding-left: 15px;
+	background-color: #F4F4F4;
+	border: 1px thin #555555;
+	border-radius: 15px 15px 15px 15px;
+	width: auto;
+}

@@ -1,0 +1,14 @@
+<decorators defaultdir="/WEB-INF/decorators">
+	<excludes>
+		<pattern>*ajax*</pattern>
+		<pattern>*Ajax*</pattern>
+		<pattern>/jsp/template/viewer.jsp</pattern>
+	</excludes>
+
+	<decorator name="login" page="login.jsp">
+		<pattern>*login.jsp*</pattern>
+	</decorator>
+	<decorator name="main" page="main.jsp">
+		<pattern>/jsp/*.jsp</pattern>
+	</decorator>
+</decorators>

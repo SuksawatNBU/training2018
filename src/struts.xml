@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<constant name="struts.devMode" value="false" />
+	<constant name="struts.action.extension" value="action" />
+	<constant name="struts.ui.theme" value="simple" />
+	<constant name="struts.i18n.reload" value="false" />
+	<constant name="struts.configuration.xml.reload" value="false" />
+	<constant name="struts.ognl.allowStaticMethodAccess" value="true" />
+	<constant name="struts.multipart.maxSize" value="100000000" />
+	<constant name="struts.multipart.saveDir" value="/tmp/" />
+	<constant name="struts.messages.error.file.too.large" value="File exceeded size limit"/>
+	<constant name="struts.messages.error.content.type.not.allowed" value="File does not match the expected content types specified"/>
+	<constant name="struts.messages.error.uploading" value="File could not be uploaded" />
+	<constant name="struts.action.excludePattern" value="/servlet/.*"/>
+
+	<!-- Resource bundle -->
+	<constant name="struts.custom.i18n.resources" value="
+		  resources.bundle.common.Message
+		, resources.bundle.common.MessageAlert
+		, resources.bundle.security.MessageSecurity
+		, resources.bundle.template.MessageTemplate
+		, resources.bundle.standardui.MessageStandardUi
+		, resources.bundle.tutorial.MessageProject
+	"/>
+
+	<include file="strutsconfig/common/struts-common.xml" />
+	<include file="strutsconfig/security/struts-security.xml" />
+	<include file="strutsconfig/template/struts-template.xml" />
+	<include file="strutsconfig/standardui/struts-standardui.xml" />
+	<include file="strutsconfig/cssclass/struts-cssclass.xml" />
+<!-- 	<include file="strutsconfig/javascript/struts-javascript.xml" /> -->
+	<include file="strutsconfig/tutorial/struts-tutorial.xml" />
+	
+</struts>

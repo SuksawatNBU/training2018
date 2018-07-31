@@ -1,0 +1,1216 @@
+html {
+	min-height: 101%;
+}
+
+BODY {
+	width: 100%;
+	margin: 0px;
+	background-color: white; /*#F8F8F8;*/
+	font-family: "Trebuchet MS", sans-serif;
+	font-size: 13px;
+	font-weight: normal;
+}
+
+.taskcomplete{
+	background-color: green;
+	color:white;
+}
+
+TABLE.banner {
+	width: 100%;
+	border: none;
+	height: 60px;
+	border-collapse: collapse;
+	background-image: url("../images/header_bg.gif");
+	background-repeat: repeat-x;
+}
+
+TABLE.banner TD {
+	height: 60px;
+	border: none;
+	padding: 0px;
+}
+
+TABLE.banner TD.left {
+	width: 509px;
+	background-image: url("../images/header1.gif");
+	background-repeat: no-repeat;
+}
+
+TABLE.banner TD.center {
+	background-image: url("../images/header2.gif");
+}
+
+TABLE.banner TD.right {
+	width: 474px;
+	background-image: url("../images/header3.gif");
+}
+
+TABLE.header {
+	width: 100%;
+	border-collapse: collapse;
+	line-height: 21px;
+	height: 42px;
+}
+
+TABLE.header TD {
+	/* background-color: #f0efea; */
+	padding: 0px;
+}
+
+TABLE.header TD.left {
+	text-align: left;
+}
+
+TABLE.header TD.right {
+	text-align: right;
+	padding-right: 5px;
+}
+
+TABLE.footer {
+	width: 100%;
+	border-collapse: collapse;
+	line-height: 21px;
+	height: 30px;
+}
+
+TABLE.footer TD {
+	padding: 0px;
+}
+
+TABLE.footer TD.left {
+	text-align: left;
+}
+
+TABLE.footer TD.center {
+	text-align: center;
+}
+
+TABLE.footer TD.right {
+	text-align: right;
+	padding-right: 5px;
+}
+
+TABLE.body {
+	padding: 0px;
+	margin: 0px;
+	border: 0px;
+	border-collapse: collapse;
+}
+
+TABLE.body_1024 {
+	width: 969px;
+}
+
+TABLE.body TD.content {
+	padding: 0px;
+	border: 1px solid silver;
+}
+
+TABLE.body TD.contentForm {
+	padding: 0px;
+	border: 0px  silver;
+	vertical-align: top;
+	background-color:#F9F9F7;
+	box-shadow: 5px 5px 15px 5px rgba(50, 50, 50, .5);
+}
+
+TABLE.FORM {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+TABLE.FORM TD {
+	height: 35px;
+	/**height: 30px;*/
+	line-height: 150%;
+	vertical-align: middle;
+
+	font-size: 13px;
+}
+
+TABLE.FORM TD.MESSAGE {
+	font-weight: bold;
+	text-align: center;
+	color: red;
+	height: 15px;
+
+	border-bottom: 1px solid #F9F9F7;;
+	border-top: 1px solid #F9F9F7;;
+}
+
+TABLE.FORM TD.ERROR {
+	height: 15px;
+	text-align: center;
+	border-bottom: 1px solid #FF7777;
+	border-top: 1px solid #FF7777; /*border-left: 1px solid black;border-right: 1px solid black;*/
+	background-color: #FFEAEA;
+
+	color: red;
+}
+
+TABLE.FORM TD.WARING {
+	height: 15px;
+	text-align: center;
+	border-bottom: 1px solid #FF8000;
+	border-top: 1px solid #FF8000; /*border-left: 1px solid black;border-right: 1px solid black;*/
+	background-color: #FFDCB9;
+
+	color: #CC6600;
+}
+
+TABLE.FORM TD.SUCCESS {
+	height: 15px;
+	text-align: center;
+	border-bottom: 1px solid #00A800;
+	border-top: 1px solid #00A800; /*border-left: 1px solid black;border-right: 1px solid black;*/
+	background-color: #F2FFF2;
+
+	color: #00B900;
+}
+
+IMG.MESSAGE {
+	width: 29px;
+	position:absolute;
+	/*margin-left: 355px;*/
+	margin-left: -35px;
+	margin-top: -14px;
+	vertical-align: middle;
+}
+
+TABLE.FORM TD.BORDER {
+	width: 10%;
+}
+
+TABLE.FORM TD.LABEL {
+	font-weight: normal;
+	text-align: right;
+	color: black;/*#777;*/
+	word-break: hyphenate;
+	word-wrap: break-word;
+	width: 175px;
+	/**border: 1px solid red;**/
+	padding-right: 10px;
+	/**padding-right: 8px;**/
+}
+
+TABLE.FORM TD.VALUE {
+	font-weight: normal;
+	text-align: left;
+	width: 250px;
+	/**border: 1px solid blue;**/
+}
+
+TABLE.FORM.BUTTON {
+	background-color:#F9F9F7;
+	border-bottom: 1px solid silver;
+	border-top-left-radius: 0px;
+	border-top-right-radius: 0px;
+	border-bottom-right-radius: 0px;
+	border-bottom-left-radius: 0px;
+}
+
+TABLE.TOTAL_RECORD {
+	width: 100%;
+	border-collapse: collapse;
+	border: none;
+	font-weight: bold;
+}
+
+TABLE.TOTAL_RECORD TD.LEFT {
+	width: 60%;
+	height: 30px;
+	padding: 3px;
+	text-align: left;
+	padding-left: 10px;
+}
+
+TABLE.TOTAL_RECORD TD.RIGHT {
+	width: 40%;
+	height: 30px;
+	padding: 3px;
+	text-align: right;
+	padding-right: 10px;
+}
+
+INPUT[type="text"], INPUT[type="password"] {
+	padding: 5px;
+	/**padding: 2px;*/
+	height: 18px;
+	/**height: 17px;*/
+	line-height: 150%;
+	border: 1px solid #c7c7c7;
+	color: black;/*#777;*/
+}
+
+TEXTAREA {
+	padding: 5px;
+	/**padding: 2px;*/
+	line-height: 150%;
+	border: 1px solid #c7c7c7
+	color: black;/*#777;*/
+}
+
+SELECT {
+	padding: 5px;
+	height: 30px;
+	/**height: 23px;*/
+	line-height: 150%;
+	border: 1px solid #c7c7c7;
+	color: black;/*#777;*/
+}
+
+A.LINK {
+	color: blue;
+	font-weight: normal;
+	text-decoration: underline;
+}
+
+DIV.BUTTON {
+	width:50px;
+	color: black;/*#777;*/
+	text-align: center;
+	padding-left: 5px;
+	padding-right: 5px;
+	cursor: pointer;
+}
+
+DIV.BUTTON IMG {
+	/*height: 20px;*/
+}
+
+DIV.BUTTON.FLOAT_RIGHT {
+	float: right;
+}
+
+DIV.BUTTON.FLOAT_LEFT {
+	float: left;
+}
+
+DIV.BUTTON.BORDER_LEFT_RIGHT {
+	border-left: 1px solid silver;
+	border-right: 1px solid silver;
+}
+
+DIV.BUTTON.BORDER_LEFT {
+	border-left: 1px solid silver;
+}
+
+DIV.BUTTON.BORDER_RIGHT {
+	border-right: 1px solid silver;
+}
+
+FORM {
+	background-color:#F9F9F7;
+}
+
+TABLE.RESULT_HEADER {
+	width: 100%;
+	border-collapse: collapse;
+	font-family: "Trebuchet MS", sans-serif;
+	font-size: 13px;
+	font-weight: bold;
+}
+
+TABLE.RESULT_HEADER TH {
+	padding-left: 3px;
+	padding-right: 3px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	vertical-align: bottom;
+}
+
+TABLE.RESULT_HEADER TH.checkbox, TABLE.RESULT_CONTENT TD.checkbox, TABLE.RESULT_CONTENT TH.checkbox  {
+	width: 25px;
+	text-align: center;
+}
+
+TABLE.RESULT_HEADER TH.order, TABLE.RESULT_CONTENT TD.order, TABLE.RESULT_CONTENT TH.order {
+	width: 50px;
+	text-align: center;
+}
+
+TABLE.RESULT_HEADER TH.edit, TABLE.RESULT_CONTENT TD.edit, TABLE.RESULT_CONTENT TH.edit {
+	width: 60px;
+	text-align: center;
+}
+
+TABLE.RESULT_HEADER TH.view, TABLE.RESULT_CONTENT TD.view, TABLE.RESULT_CONTENT TH.view {
+	width: 60px;
+	text-align: center;
+}
+
+TABLE.RESULT_HEADER TH.status, TABLE.RESULT_CONTENT TD.status, TABLE.RESULT_CONTENT TH.status {
+	text-align: center;
+}
+
+TABLE.RESULT_HEADER TH.date, TABLE.RESULT_CONTENT TD.date, TABLE.RESULT_CONTENT TH.date {
+	text-align: center;
+}
+
+TABLE.RESULT_HEADER TH {
+	text-align: center;
+	word-break: hyphenate;
+	word-wrap: break-word;
+}
+
+TABLE.RESULT_CONTENT TD {
+	text-align: left;
+	word-break: break-all;
+	word-wrap: break-word;
+	height: 19px;
+}
+
+TABLE.RESULT_CONTENT {
+	width: 100%;
+	border-collapse: collapse;
+	font-family: "Trebuchet MS", sans-serif;
+	font-size: 13px;
+	font-weight: normal;
+}
+
+TABLE.RESULT_CONTENT TH {
+	padding-left: 3px;
+	padding-right: 3px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	vertical-align: bottom;
+
+	text-align: center;
+	word-break: hyphenate;
+	word-wrap: break-word;
+
+	font-family: "Trebuchet MS", sans-serif;
+	font-size: 13px;
+	font-weight: bold;
+}
+
+TABLE.RESULT_CONTENT TD {
+	padding-left: 3px;
+	padding-right: 3px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	vertical-align: top;
+
+	border-left: 1px solid #C1BDA8;/*#950295;*/
+	border-right: 1px solid #C1BDA8;/*#950295;*/
+	border-bottom: 1px solid #E9E8E2;/*#950295;*/
+	border-top: 1px solid #E9E8E2;/*#950295;*/
+}
+
+TABLE.RESULT_CONTENT TD.NO_BORDER_LEFT {
+	border-left: none;
+}
+
+TABLE.RESULT_CONTENT TR.LINE_ODD {
+	background-color: #f0efea;
+}
+
+TABLE.RESULT_CONTENT TR.LINE_EVEN {
+	background-color: #F9F9F7;
+}
+
+TABLE.RESULT_CONTENT TR.LINE_RED {
+	background-color: #FF8A8A;
+	background: -moz-linear-gradient(top, #FF8A8A 0%, #FF6262 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#FF8A8A), color-stop(100%,#FF6262)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, #FF8A8A 0%, #FF6262 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, #FF8A8A 0%, #FF6262 100%); /* Opera11.10+ */
+	background: -ms-linear-gradient(top, #FF8A8A 0%, #FF6262 100%); /* IE10+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#FF8A8A', endColorstr='#FF6262',GradientType=0 ); /* IE6-9 */
+	background: linear-gradient(top, #FF8A8A 0%,#FF6262 100%); /* W3C */
+	color: white;
+	font-weight: bold;
+}
+
+DIV.RESULT_FOOTER {
+	height: 30px;
+}
+
+TABLE.RESULT_FOOTER {
+	width: 100%;
+	border-collapse: collapse;
+	font-family: "Trebuchet MS", sans-serif;
+	font-size: 13px;
+	font-weight: bold;
+	background: silver;
+}
+
+TABLE.RESULT_FOOTER TD {
+	padding-left: 3px;
+	padding-right: 3px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+
+	border: 1px solid #C1BDA8;
+	vertical-align: top;
+	height: 19px;
+}
+
+TABLE.USER_TRANSACTION {
+	background-color: #F9F9F7;
+	border-collapse: collapse;
+	font-family: "Trebuchet MS", sans-serif;
+	font-size: 13px;
+	font-weight: normal;
+	color: red;
+	width: 100%;
+}
+
+TABLE.USER_TRANSACTION TD {
+	padding: 3px;
+}
+
+TABLE.USER_TRANSACTION TD.left {
+	text-align: left;
+	width: 300px;
+}
+
+TABLE.USER_TRANSACTION TD.right {
+	text-align: right;
+	width: 200px;
+}
+
+EM {
+	color: red;
+}
+
+TABLE.read-only {
+	background-color: #FFFFC1 !important;
+	color: blue !important;
+	border: 1px solid #c7c7c7 !important;
+}
+
+INPUT[type='text'].input_idcard
+,INPUT[type='text'].requireIDCardSelect {
+	text-align: left !important;
+}
+
+INPUT[type='text'].requireSelect
+, INPUT[type='text'].requireEmailSelect, INPUT[type='text'].requireIDCardSelect, INPUT[type='text'].requirePasswordFormatSelect
+, INPUT[type='text'].requireDateYYYYMMDDSelect
+, INPUT[type='text'].requireDateYYYYMMXXSelect
+, INPUT[type='text'].requireDateYYYYXXXXSelect
+, INPUT[type='text'].requireDateXX_MM_YYYYSelect
+, INPUT[type='text'].requireDateDD_MM_YYYYSelect
+, INPUT[type='text'].requireDateformat_dd_sl_mm_sl_yyyy_select
+, INPUT[type='text'].requireDateformat_mm_sl_yyyy_select
+, INPUT[type='text'].requireDateformat_yyyy_select
+, INPUT[type='text'].requireDateformat_yyyy_sl_mm_select
+, INPUT[type='text'].requireDateformat_yyyy_sl_mm_sl_dd_select
+, INPUT[type='text'].requireDateformat_mm_sl_dd_sl_yyyy_select
+, INPUT[type='text'].requireDateformat_yyyy_sl_dd_sl_mm_select
+, INPUT[type='text'].requireTimeformat_hh_cl_mm_select
+, INPUT[type='text'].requireTimeSelect {
+	/*background-color: white;*/
+	border: 1px solid red !important;
+}
+
+INPUT[type='password'].requireSelect
+, INPUT[type='password'].requirePasswordFormatSelect {
+	border: 1px solid red !important;
+}
+
+TEXTAREA.requireSelect {
+	border: 1px solid red !important;
+}
+
+SELECT.requireSelect {
+	border: 1px solid red !important;
+}
+
+SPAN.requireSpanRadio {
+	padding-left: 1px;
+	padding-top: 3px;
+	padding-right: 3px;
+	margin-left: -1px;
+}
+
+SPAN.requireSelect {
+	border: 1px solid red !important;
+	padding-top: 3px;
+	padding-right: 2px;
+	margin-left: -1px;
+}
+
+DIV.requireSelect {
+	border: 1px solid red !important;
+	padding-top: 3px;
+	padding-right: 2px;
+	margin-left: -1px;
+}
+
+IMG {
+	border: none;
+	vertical-align: middle;
+}
+
+A {
+	text-decoration: none;
+	color: black;
+}
+
+A.action-print-link {
+	color: blue;
+}
+
+.margin-zero {
+	margin-bottom: 0px;
+	margin-left: 0px;
+	margin-right: 0px;
+	margin-top: 0px;
+}
+
+.col-width-500px {
+	width: 500px;
+}
+
+.col-width-400px {
+	width: 400px;
+}
+
+.col-width-300px {
+	width: 300px;
+}
+
+.col-width-225px {
+	width: 225px;
+}
+
+.col-width-200px {
+	width: 200px;
+}
+
+.col-width-175px {
+	width: 175px;
+}
+
+.col-width-150px {
+	width: 150px;
+}
+
+.col-width-125px {
+	width: 125px;
+}
+
+.col-width-100px {
+	width: 100px;
+}
+
+.col-width-80px {
+	width: 80px;
+}
+
+.col-width-75px {
+	width: 75px;
+}
+
+.col-width-50px {
+	width: 50px;
+}
+
+.order {
+	width: 60px;
+	text-align: center;
+}
+
+.checkbox {
+	width: 25px;
+	text-align: center;
+}
+
+.status {
+	width: 60px;
+	text-align: center;
+}
+
+.col-width-auto {
+	width: %;
+}
+
+/* REQUIRED BUTTON STYLES: */
+button {
+	position: relative;
+	border: 0;
+	padding: 0;
+	cursor: pointer;
+	overflow: visible; /* removes extra side padding in IE */
+}
+
+button::-moz-focus-inner {
+	border: none;  /* overrides extra padding in Firefox */
+}
+
+button span {
+	position: relative;
+	display: block;
+	white-space: nowrap;
+}
+
+/* Safari and Google Chrome only - fix margins */
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+	button span {
+		margin-top: -1px;
+	}
+}
+
+/* OPTIONAL BUTTON STYLES for applying custom look and feel: */
+button.submitBtn {
+	padding: 0 15px 0 0;
+	/*padding-top: 5px;
+	padding-bottom: 8px;
+	padding-left: 15px;
+	padding-right: 15px;*/
+
+	margin-right:5px;
+	text-align: center;
+	background: transparent url(../images/btn_brown_sprite.gif) no-repeat right -140px;
+}
+
+button.submitBtn span {
+	padding: 13px 0 0 15px;
+	/*padding-left: 5px;
+	padding-right: 5px;
+	padding-bottom: 5px;
+	padding-top: 10px;*/
+	padding-top: 8px;
+	padding-bottom: 5px;
+	height:37px;
+	background: transparent url(../images/btn_brown_sprite.gif) no-repeat left top;
+	font-weight: bold;
+	color: DimGrey;
+}
+
+button.submitBtn:focus {
+	padding: 0 15px 0 0;
+	/*padding-top: 5px;
+	padding-bottom: 8px;
+	padding-left: 15px;
+	padding-right: 15px;*/
+
+	margin-right:5px;
+	text-align: center;
+	background: transparent url(../images/btn_brown_sprite_focus.gif) no-repeat right -140px;
+}
+
+button.submitBtn:focus span {
+	padding: 13px 0 0 15px;
+	/*padding-left: 5px;
+	padding-right: 5px;
+	padding-bottom: 5px;
+	padding-top: 10px;*/
+	padding-top: 8px;
+	padding-bottom: 5px;
+	height:37px;
+	background: transparent url(../images/btn_brown_sprite_focus.gif) no-repeat left top;
+	font-weight: bold;
+	color: DimGrey;
+}
+
+button.submitBtn_disable {
+	cursor: default;
+	padding: 0 15px 0 0;
+	/*padding-top: 5px;
+	padding-bottom: 8px;
+	padding-left: 15px;
+	padding-right: 15px;*/
+
+	margin-right:5px;
+	text-align: center;
+	background: transparent url(../images/btn_gray_sprite.gif) no-repeat right -140px;
+}
+
+button.submitBtn_disable span {
+	padding: 13px 0 0 15px;
+	/*padding-left: 5px;
+	padding-right: 5px;
+	padding-bottom: 5px;
+	padding-top: 10px;*/
+	padding-top: 8px;
+	padding-bottom: 5px;
+	height:37px;
+	background: transparent url(../images/btn_gray_sprite.gif) no-repeat left top;
+	color:silver;
+}
+
+button.submitBtn:hover, button.submitBtnHover { /* the redundant class is used to apply the hover state with a script */
+	background-position: right -210px;
+}
+
+button.submitBtn:hover span, button.submitBtnHover span {
+	background-position: 0 -70px;
+}
+
+.cursor {
+	cursor: pointer;
+}
+
+.DDDISPLAY {
+	width: 20px;
+	text-align: center;
+}
+
+.MMDISPLAY {
+	width: 20px;
+	text-align: center;
+}
+
+.YYYYDISPLAY {
+	width: 35px;
+	text-align: center;
+}
+
+DIV.RESULT {
+	overflow: hidden;
+	margin: auto;
+	padding: none;
+	padding-top: 2px;
+	padding-right: 2px;
+	padding-bottom: 2px;
+	border: none;
+}
+
+DIV.RESULT_1024 {
+	width: 950px;
+}
+
+DIV.RESULT_BOX.BORDER_COLOR {
+	border-radius: 5px;
+	border:  1px solid silver;
+}
+
+DIV.RESULT_BOX {
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+}
+
+DIV.RESULT_BOX_TITAL {
+	/*height: 35px;*/
+	width: 100%;
+}
+
+TABLE.RESULT_BOX {
+	width: 100%;
+	border: none;
+	border-collapse: collapse;
+
+}
+
+DIV.RESULT_BOX_HEADER {
+	overflow: hidden;
+	width: 100%;
+}
+
+DIV.RESULT_BOX_DETAIL {
+	overflow-y: scroll;
+	width: 100%;
+	border: none;
+	border-bottom: 1px solid #E9E8E2;
+}
+
+DIV.RESULT_BOX_DETAIL.BORDER_GRAY {
+	border: none;
+	border-left: 1px solid #C1BDA8;/*#950295;*/
+	border-bottom: 1px solid #E9E8E2;/*#950295;*/
+}
+
+FONT.comment {
+    color: red;
+    font-family: "Trebuchet MS", sans-serif;
+    font-size: 11px;
+    font-weight: normal;
+    padding: 0;
+}
+
+/** Popup */
+TABLE.headerPopup {
+	width: 100%;
+	border-collapse: collapse;
+	line-height: 21px;
+}
+
+TABLE.headerPopup TD {
+	background-color: #f0efea;
+	padding: 0px;
+}
+
+TABLE.headerPopup TD.left {
+	text-align: left;
+}
+
+TABLE.headerPopup TD.right {
+	text-align: right;
+	padding-right: 5px;
+}
+
+TABLE.bodyPopup {
+	width: 850px;
+	padding: 0px;
+	margin: 0px;
+	border: 0px;
+	border-collapse: collapse;
+}
+
+TABLE.bodyPopup TD.content {
+	padding: 0px;
+	border: 1px solid silver;
+}
+
+TABLE.FORMPOPUP {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+TABLE.FORMPOPUP TD {
+	height: 35px;
+	/**height: 30px;*/
+	line-height: 150%;
+	vertical-align: middle;
+
+	font-size: 13px;
+}
+
+TABLE.FORMPOPUP TD.MESSAGE {
+	font-weight: bold;
+	text-align: center;
+	color: red;
+	height: 15px;
+
+	border-bottom: 1px solid #F9F9F7;;
+	border-top: 1px solid #F9F9F7;;
+}
+
+TABLE.FORMPOPUP TD.ERROR {
+	height: 15px;
+	text-align: center;
+	border-bottom: 1px solid #FF7777;
+	border-top: 1px solid #FF7777; /*border-left: 1px solid black;border-right: 1px solid black;*/
+	background-color: #FFEAEA;
+
+	color: red;
+}
+
+TABLE.FORMPOPUP TD.WARING {
+	height: 15px;
+	text-align: center;
+	border-bottom: 1px solid #FF8000;
+	border-top: 1px solid #FF8000; /*border-left: 1px solid black;border-right: 1px solid black;*/
+	background-color: #FFDCB9;
+
+	color: #CC6600;
+}
+
+TABLE.FORMPOPUP TD.SUCCESS {
+	height: 15px;
+	text-align: center;
+	border-bottom: 1px solid #00A800;
+	border-top: 1px solid #00A800; /*border-left: 1px solid black;border-right: 1px solid black;*/
+	background-color: #F2FFF2;
+
+	color: #00B900;
+}
+
+/* Set style to fieldset: rads, margin , fontweight , bgCol*/
+FIELDSET.fieldsetStyle{
+	/*margin-top:20px;*/
+	margin-bottom:20px;
+	margin-right:20px;
+	margin-left:20px;
+	background-color: #F4F4F4;
+	border-radius: 15px 15px 15px 15px;
+}
+
+FIELDSET.fieldsetStyle LEGEND{
+	font-weight: bold;
+}
+
+.ajax_loader {
+	background: url("../images/loading.gif") no-repeat center center transparent;
+	width:100%;
+	height:100vh;
+}
+/*** =========== CSS for tooltip =========== ***/
+[data-tooltip] {
+    display: inline-block;
+    position: relative;
+    cursor: help;
+    padding: 4px;
+}
+/* Tooltip styling */
+[data-tooltip]:before {
+    content: attr(data-tooltip);
+    display: none;
+    position: absolute;
+    background: #444444;
+    color: #FFFFFF;
+    padding: 4px 8px;
+    line-height: 1.4;
+    min-width: 200px;
+    text-align: left;
+    border-radius: 4px;
+    
+}
+/* Dynamic horizontal centering */
+[data-tooltip-position="top"]:before,
+[data-tooltip-position="bottom"]:before {
+    left: 50%;
+    -ms-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -webkit-transform: translateX(-50%);
+    transform: translateX(-50%);
+}
+/* Dynamic vertical centering */
+[data-tooltip-position="right"]:before,
+[data-tooltip-position="left"]:before {
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+[data-tooltip-position="top"]:before {
+    bottom: 100%;
+    margin-bottom: 6px;
+}
+[data-tooltip-position="right"]:before {
+    left: 100%;
+    margin-left: 6px;
+}
+[data-tooltip-position="bottom"]:before {
+    top: 100%;
+    margin-top: 6px;
+}
+[data-tooltip-position="left"]:before {
+    right: 100%;
+    margin-right: 6px;
+}
+
+/* Tooltip arrow styling/placement */
+[data-tooltip]:after {
+    content: '';
+    display: none;
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-color: transparent;
+    border-style: solid;
+}
+/* Dynamic horizontal centering for the tooltip */
+[data-tooltip-position="top"]:after,
+[data-tooltip-position="bottom"]:after {
+    left: 50%;
+    margin-left: -6px;
+}
+/* Dynamic vertical centering for the tooltip */
+[data-tooltip-position="right"]:after,
+[data-tooltip-position="left"]:after {
+    top: 50%;
+    margin-top: -6px;
+}
+[data-tooltip-position="top"]:after {
+    bottom: 100%;
+    border-width: 6px 6px 0;
+    border-top-color: #000;
+}
+[data-tooltip-position="right"]:after {
+    left: 100%;
+    border-width: 6px 6px 6px 0;
+    border-right-color: #000;
+}
+[data-tooltip-position="bottom"]:after {
+    top: 100%;
+    border-width: 0 6px 6px;
+    border-bottom-color: #000;
+}
+[data-tooltip-position="left"]:after {
+    right: 100%;
+    border-width: 6px 0 6px 6px;
+    border-left-color: #000;
+}
+/* Show the tooltip when hovering */
+[data-tooltip]:hover:before,
+[data-tooltip]:hover:after {
+    display: block;
+    z-index: 50;
+}
+/*** =========== End CSS for tooltip =========== ***/
+
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+   color:    gray;
+   opacity:  2;
+   font-family: "Trebuchet MS", sans-serif;
+	font-size: 10px;
+}
+
+/*** =========== Nanthaporn.p 20150514 =========== ***/
+THEAD.RESULT_HEADER {
+	width: 100%;
+	/* border-collapse: collapse; */
+	font-family: "Trebuchet MS", sans-serif;
+	font-size: 13px;
+	font-weight: bold;
+}
+
+THEAD.RESULT_HEADER TH {
+	padding-left: 3px;
+	padding-right: 3px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	vertical-align: bottom;
+}
+
+THEAD.RESULT_HEADER TH.checkbox, TABLE.RESULT_CONTENT TD.checkbox, TABLE.RESULT_CONTENT TH.checkbox  {
+	width: 25px;
+	text-align: center;
+}
+
+THEAD.RESULT_HEADER TH.order, TABLE.RESULT_CONTENT TD.order, TABLE.RESULT_CONTENT TH.order {
+	width: 50px;
+	text-align: center;
+}
+
+THEAD.RESULT_HEADER TH.edit, TABLE.RESULT_CONTENT TD.edit, TABLE.RESULT_CONTENT TH.edit {
+	width: 60px;
+	text-align: center;
+}
+
+THEAD.RESULT_HEADER TH.view, TABLE.RESULT_CONTENT TD.view, TABLE.RESULT_CONTENT TH.view {
+	width: 60px;
+	text-align: center;
+}
+
+THEAD.RESULT_HEADER TH.status, TABLE.RESULT_CONTENT TD.status, TABLE.RESULT_CONTENT TH.status {
+	text-align: center;
+}
+
+THEAD.RESULT_HEADER TH.date, TABLE.RESULT_CONTENT TD.date, TABLE.RESULT_CONTENT TH.date {
+	text-align: center;
+}
+
+THEAD.RESULT_HEADER TH.number_right, TABLE.RESULT_CONTENT TD.number_right, TABLE.RESULT_CONTENT TH.number_right {
+	text-align: right;
+}
+
+THEAD.RESULT_HEADER TH {
+	text-align: center;
+	word-break: hyphenate;
+	word-wrap: break-word;
+}
+
+TBODY TR.LINE_ODD {
+	background-color: #f0efea;
+}
+
+TBODY TR.LINE_EVEN {
+	background-color: #F9F9F7;
+}
+
+TBODY.RESULT_CONTENT TD {
+	text-align: left;
+	word-break: break-all;
+	word-wrap: break-word;
+	height: 19px;
+}
+
+TBODY.RESULT_CONTENT {
+	width: 100%;
+	border-collapse: collapse;
+	font-family: "Trebuchet MS", sans-serif;
+	font-size: 13px;
+	font-weight: normal;
+}
+
+TBODY.RESULT_CONTENT TH {
+	padding-left: 3px;
+	padding-right: 3px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	vertical-align: bottom;
+
+	text-align: center;
+	word-break: hyphenate;
+	word-wrap: break-word;
+
+	font-family: "Trebuchet MS", sans-serif;
+	font-size: 13px;
+	font-weight: bold;
+}
+
+TBODY.RESULT_CONTENT TD {
+	padding-left: 3px;
+	padding-right: 3px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	vertical-align: top;
+
+	border-left: 1px solid #C1BDA8;/*#950295;*/
+	border-right: 1px solid #C1BDA8;/*#950295;*/
+	border-bottom: 1px solid #E9E8E2;/*#950295;*/
+	border-top: 1px solid #E9E8E2;/*#950295;*/
+}
+
+TBODY.RESULT_CONTENT TD.NO_BORDER_LEFT {
+	border-left: none;
+}
+
+TBODY.RESULT_CONTENT TR.LINE_ODD {
+	background-color: #f0efea;
+}
+
+TBODY.RESULT_CONTENT TR.LINE_EVEN {
+	background-color: #F9F9F7;
+}
+
+TBODY.RESULT_CONTENT TR.LINE_RED {
+	background-color: #FF8A8A;
+	background: -moz-linear-gradient(top, #FF8A8A 0%, #FF6262 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#FF8A8A), color-stop(100%,#FF6262)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, #FF8A8A 0%, #FF6262 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, #FF8A8A 0%, #FF6262 100%); /* Opera11.10+ */
+	background: -ms-linear-gradient(top, #FF8A8A 0%, #FF6262 100%); /* IE10+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#FF8A8A', endColorstr='#FF6262',GradientType=0 ); /* IE6-9 */
+	background: linear-gradient(top, #FF8A8A 0%,#FF6262 100%); /* W3C */
+	color: white;
+	font-weight: bold;
+}
+/*** =========== end Nanthaporn.p 20150514 =========== ***/
+/*** =========== CSS for dataTable Child Row =========== ***/
+td.details-control {
+    background: url('../css/datatable/images/details_open.png') no-repeat center center;
+    cursor: pointer;
+}
+
+tr.shown td.details-control {
+    background: url('../css/datatable/images/details_close.png') no-repeat center center;
+}
+
+div.slider {
+    display: none;
+}
+ 
+table.dataTable tbody td.no-padding {
+    padding: 0;
+}
+/*** =========== end CSS for dataTable Child Row =========== ***/
+
+.lpp-style{
+	width: 80px;
+}
+
+.border_select {
+	border: 1px solid red !important;
+}
+
+.readonly {
+	border: none;
+	background: transparent;
+}
+
+TABLE .combox {
+	width: 200px;
+}
+
+TABLE .autocomplete {
+	width: 180px;
+}

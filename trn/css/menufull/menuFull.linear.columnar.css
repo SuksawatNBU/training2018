@@ -1,0 +1,45 @@
+@charset "UTF-8";
+
+/**
+ * Columnar CSS Drop-Down Menu Component
+ *
+ * @file		menuFull.columnar.css
+ * @package		menuFull
+ * @version		0.1.1
+ * @type		Transitional
+ * @requires	menuFull.columnar.css
+ * @browsers	Windows: IE7+, Opera7+, Firefox3+
+ *				Mac OS: Safari2+, Firefox3+
+ *
+ * @link		http://www.lwis.net/free-css-drop-down-menu
+ * @copyright	2008-2012 Live Web Initiatives, http://www.lwis.net, http://www.lwis.net
+ *
+ */
+
+@import "menuFull.linear.css";
+
+
+ul.menuFull-columnar ul li {
+ position: static;
+ width: 210px; /*ความกว้าง ของแต่ละ column*/
+}
+
+ul.menuFull-columnar ul ul {
+ display: block !important;
+ position: static;
+ width: auto !important;
+
+}
+
+ul.menuFull-columnar ul ul li {
+ float: none;
+}
+
+ul.menuFull-columnar ul ul ul {
+ display: none;
+}
+
+ul.menuFull-columnar li.hover ul,
+ul.menuFull-columnar li:hover ul {
+ visibility: visible !important;
+}

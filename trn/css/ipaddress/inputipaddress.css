@@ -1,0 +1,66 @@
+INPUT.read-only-ipaddress {
+	/* background-color: #FFFFC1 !important;
+	color: blue; */
+}
+
+INPUT.ipaddress_dot {
+	width: 3px; 
+	border-left: none; 
+	border-right: none; 
+	text-align: center; 
+	padding-left: 1px; 
+	padding-right: 1px;
+	border-top-right-radius: 0px;
+	border-bottom-right-radius: 0px;
+	border-top-left-radius: 0px;
+	border-bottom-left-radius: 0px;
+}
+
+INPUT.ipaddress_block_left {
+	width: 27px; 
+	border-right: none; 
+	text-align: center;
+	border-top-right-radius: 0px;
+	border-bottom-right-radius: 0px;
+}
+
+INPUT.ipaddress_block_center {
+	width: 27px; 
+	border-left: none; 
+	border-right: none; 
+	text-align: center;
+	border-top-right-radius: 0px;
+	border-bottom-right-radius: 0px;
+	border-top-left-radius: 0px;
+	border-bottom-left-radius: 0px;
+}
+
+INPUT.ipaddress_block_right {
+	width: 27px;
+	border-left: none; 
+	text-align: center;
+	border-top-left-radius: 0px;
+	border-bottom-left-radius: 0px;
+}
+
+INPUT.requireIpaddress_block_left_select, INPUT.requireIpaddressFormat_block_left_select {
+	border: 1px solid red;
+	border-right: none;
+}
+
+INPUT.requireIpaddress_block_center_select, INPUT.requireIpaddressFormat_block_center_select {
+	border: 1px solid red;
+	border-left: none; 
+	border-right: none; 
+}
+
+INPUT.requireIpaddress_block_right_select, INPUT.requireIpaddressFormat_block_right_select {
+	border: 1px solid red;
+	border-left: none; 
+}
+
+INPUT.requireIpaddress_dot_select, INPUT.requireIpaddressFormat_dot_select {
+	border: 1px solid red;
+	border-left: none; 
+	border-right: none;
+}

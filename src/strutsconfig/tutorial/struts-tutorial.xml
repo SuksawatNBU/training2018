@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<package name="tutorial" namespace="/jsp/tutorial" extends="common">
+		<action name="*Project" class="com.cct.trn.web.tutorial.project.action.ProjectAction" method="{1}">
+			<result name="init">/jsp/tutorial/project/projectSearch.jsp</result>
+			<result name="search">/jsp/tutorial/project/projectSearch.jsp</result>
+			<result name="addEdit">/jsp/tutorial/project/projectAddEditView.jsp</result>
+		</action>
+		
+		<action name="*SystemDialog" class="com.cct.trn.web.tutorial.dialog.project.action.SystemListDialogAction" method="{1}">
+			<result name="initialDialog" type="json">
+			    <param name="root">model</param>
+        		<param name="ignoreHierarchy">false</param>
+			</result>
+			<result name="searchListById" type="json">
+		        <param name="root">model</param>
+		        <param name="ignoreHierarchy">false</param>
+		    </result>
+		</action>
+		
+		<action name="*Employee" class="com.cct.trn.web.tutorial.employee.action.EmployeeAction" method="{1}">
+			<result name="init">/jsp/tutorial/employee/employeeSearch.jsp</result>
+			<result name="addEdit">/jsp/tutorial/employee/employeeAddEditView.jsp</result>
+		</action>
+	</package>
+</struts>

@@ -1,0 +1,55 @@
+.working {
+	background:url('../images/loading.gif') no-repeat right center;
+}
+
+.custom-combobox {
+	position: relative;
+	display: inline-block;
+	*display: inline; /* support: IE7 */
+}
+
+.custom-combobox-toggle {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	margin-left: -1px;
+	padding: 0;
+	/* support: IE7 */
+	*height: 1.6em;
+	*top: 0.1em;
+	width: 18px;
+}
+
+INPUT[type='text'].custom-combobox-input {
+	/* comment support: IE7 */
+	/*padding: 5px;*/
+	/*padding: 2px;*/
+	/**height: 18px;*/
+	/*height: 17px;*/
+	line-height: 18px;
+
+	/*
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	border-radius: 6px;
+	*/
+
+	border-bottom-right-radius: 0px;
+	border-top-right-radius: 0px;
+}
+
+.ui-autocomplete {
+	height: 118px;
+	overflow-y: scroll;
+	max-width: 900px;
+	overflow-x: hidden; /* prevent horizontal scrollbar */
+
+	z-index:99999999999 !important;
+}
+
+/* IE 6 doesn't support max-height
+* we use height instead, but this forces the menu to always be this tall
+*/
+html .ui-autocomplete {
+	height: 100px;
+}

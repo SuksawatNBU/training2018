@@ -1,0 +1,205 @@
+@media screen and (max-width: 1300) {
+    body {
+        background-color: lightblue;
+    }
+    
+	DIV.CRITERIA_1280 {
+		margin: auto;
+		width: 90%;
+	}
+}
+.TEXT_ALIGN {
+	text-align: right;
+	padding-right: 5px;
+	padding-top: 5px !important;
+} 
+
+
+div.accordion-fake {
+	width: 89%;
+	padding: 0px;
+	margin: auto;
+}
+
+DIV.accordion-ext {
+	width: 100%;
+	padding: 0%;
+	float: left;
+	border: none;
+	margin: auto;
+}
+	
+DIV.icon-show {
+	padding-top: 10px; 
+	float: left; 
+	position: absolute;
+}
+	
+DIV.CRITERIA {
+	padding-left: 25px;
+	padding-right: 25px;
+	margin: auto;
+}
+
+DIV.CRITERIA_1280 {
+	width: 1178px;
+}
+
+DIV.CRITERIA_1600 {
+	width: 1499px;
+}
+
+DIV.CRITERIA_400 {
+	float: left;
+	width: 350px;
+	padding-top: 33px;
+}
+
+DIV.CRITERIA_LABEL {
+	float: left;
+	width: 100%
+}
+
+DIV.CRITERIA_LABEL_AUTO {
+	width: auto;
+}
+
+DIV.CRITERIA_LABEL {
+	float: left;
+	padding-top: 10px;
+	padding-left: 0px;
+}
+
+DIV.CRITERIA_LABEL_100PX, DIV.CRITERIA_VALUE_100PX {
+	width: 100px;
+}
+
+DIV.CRITERIA_LABEL_200PX, DIV.CRITERIA_VALUE_200PX {
+	width: 200px;
+}
+
+DIV.CRITERIA_LABEL_300PX, DIV.CRITERIA_VALUE_300PX {
+	width: 300px;
+}
+
+DIV.CRITERIA_LABEL_400PX, DIV.CRITERIA_VALUE_400PX {
+	width: 400px;
+}
+
+DIV.CRITERIA_VALUE {
+	float: left;
+	padding-top: 0px;
+	padding-left: 0px;
+}
+
+DIV.CRITERIA_GROUP {
+	float: left;
+	padding-top: 10px;
+	padding-left: 10px;
+}
+
+DIV.CRITERIA_GROUP_100PX {
+	width: 100px;
+}
+
+DIV.CRITERIA_GROUP_200PX {
+	width: 200px;
+}
+
+DIV.CRITERIA_GROUP_300PX {
+	width: 300px;
+}
+
+DIV.RESULT {
+	padding-top: 0%;
+}
+
+DIV.RESULT_1150 {
+	width: 1150px;
+}
+
+TABLE.CRITERIA_VERTICAL {
+	width: 95%;
+	table-layout: fixed;
+}
+
+TABLE.CRITERIA_VERTICAL TD.LABEL {
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-top: 3px;
+	padding-bottom: 0px;
+	text-align: left;
+	vertical-align: bottom;
+	height: 20px;
+	width: 50%;
+	font-family: "Trebuchet MS", sans-serif;
+	font-size: 13px;
+	font-weight: normal;
+}
+
+TABLE.CRITERIA_VERTICAL TD.VALUE {
+	padding-left: 5px;
+	padding-right: 5px;
+	padding-top: 3px;
+	padding-bottom: 3px;
+	text-align: left;
+	width: 50%;
+	font-family: "Trebuchet MS", sans-serif;
+	font-size: 13px;
+	font-weight: normal;
+}
+
+TABLE.BUTTON {
+	width: 100%;
+}
+
+TABLE.BUTTON TD.RIGHT {
+	text-align: left;
+}
+
+TABLE.BUTTON TD.LEFT_80 {
+	width: 70%;
+}
+
+TABLE.BUTTON TD.RIGHT_70 {
+	width: 70%;
+	text-align: right;
+}
+
+TABLE.BUTTON TD.LEFT_30 {
+	width: 30%;
+}
+
+TABLE.BUTTON TD.RIGHT_20 {
+	width: 30%;
+	text-align: right;
+	padding-right: 40px;
+}
+
+TABLE.BUTTON TD.LEFT_0 {
+	width: 0%;
+}
+
+TABLE.BUTTON TD.RIGHT_100 {
+	width: 100%;
+	text-align: center;
+}
+
+span.icon-expand {
+	border: 1px solid;
+	padding-right: 0.5px;
+	padding-bottom: 0.5px;
+	cursor: pointer;
+}
+
+.WIDTH_1150 {
+	width: 1150px;
+	margin-left: auto;
+	margin-right: auto;
+}
+	
+.WIDTH_1600 {
+	width: 1504px;
+	margin-left: auto;
+	margin-right: auto;
+}

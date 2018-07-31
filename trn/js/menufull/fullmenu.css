@@ -1,0 +1,153 @@
+.menuFullTest {
+	width: 1050px;
+	margin-top: 42px;
+	position: absolute;
+	z-index: 99;
+}
+
+.table-td {
+	vertical-align: top;
+	background-color: transparent !important;
+	width: 25%;
+}
+
+li.ui-state-focus {
+	font-weight: normal !important;
+}
+
+.table-td>ul {
+	/*width: 700px;*/
+	list-style-type: none;
+	display: inline-block;
+	width: 90%;
+}
+
+.table-td>ul>li>label, .table-td>ul>li.menuMain {
+	border-bottom: 2px solid #BEBEBE !important;
+	width: 100%;
+}
+
+.monMenu {
+	font-weight: bold !important;
+	display: inline-block;
+	padding: 0 0 5px;
+}
+
+.menuMain>a>label {
+	cursor: hand;
+	cursor: pointer;
+}
+
+.table-td>div>ul>li {
+	float: left;
+	display: inherit;
+	width: 100%;
+	list-style: none !important;
+	/*display: inline-block;*/
+	/*padding-right: 10px;*/
+}
+
+.fgButton>li {
+	margin-top: 3px !important;
+	margin-left: -30px;
+	list-style: none !important;
+	border: 1px solid transparent;
+
+	/*	border: 0px!important; */
+}
+
+.menuMain {
+	border: 1px solid transparent;
+	display: inline-block;
+	width: 100%;
+}
+
+.fgButton>li>a, .menuMain>a {
+	word-wrap: break-word;
+	text-overflow: ellipsis;
+	display: inline-block;
+	width: 100%;
+}
+
+li.ui-state-hover>a {
+	font-weight: normal !important;
+}
+
+.menuMain>a {
+	font-weight: bold !important;
+	display: inline-block;
+	width: 100%;
+}
+
+.div-style {
+	width: 90%;
+	float: left;
+}
+
+.ui-state-hover a:hover {
+	border: none !important;
+}
+
+.ui-icon {
+	display: inline-block !important;
+}
+
+.fg-button {
+	clear: left;
+	margin: 0 0px 0px 0px;
+	padding: 9px 0px 10px 10px;
+	text-decoration: none !important;
+	cursor: pointer;
+	position: relative;
+	text-align: center;
+	zoom: 1;
+}
+
+.fg-button .ui-icon {
+	position: absolute;
+	top: 50%;
+	margin-top: -8px;
+	left: 50%;
+	margin-left: -8px;
+}
+
+a.fg-button {
+	float: left;
+	text-align: left;
+}
+
+span.fg-button {
+	float: left;
+	text-align: left;
+}
+
+button.fg-button {
+	width: auto;
+	overflow: visible;
+} /* removes extra button width in IE */
+.fg-button-icon-left {
+	padding-left: 2.1em;
+}
+
+.fg-button-icon-right {
+	padding-right: 2.1em;
+}
+
+.fg-button-icon-left .ui-icon {
+	right: auto;
+	left: .2em;
+	margin-left: 0;
+}
+
+.fg-button-icon-right .ui-icon {
+	left: auto;
+	right: .2em;
+	margin-left: 0;
+}
+
+.fg-button-icon-solo {
+	display: block;
+	width: 8px;
+	text-indent: -9999px;
+}
+	/* solo icon buttons must have block properties for the text-indent to work */
