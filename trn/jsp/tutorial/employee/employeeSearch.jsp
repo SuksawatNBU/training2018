@@ -3,7 +3,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-	<title>Struts</title>
+	<title>Employee</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<s:include value="/jsp/template/jquery-inputdatetimeformat.jsp"/>
 	<s:include value="/jsp/tutorial/employee/include/employeeSearch-ja-css.jsp"/>
 </head>
 <body>
@@ -13,7 +15,7 @@
 		<button type="button" onclick="addPage()">Add</button>
 	</div>
 
-	<s:form id="searchForm" name="searchForm" method="post" namespace="/jsp/tutorial" cssClass="margin-zero">
+	<s:form id="searchForm" name="searchForm" method="post" namespace="/jsp/tutorial" action="initAction" cssClass="margin-zero" onsubmit="return false;">
 		
 	    <!------------------------------------- Criteria ------------------------------------->
 	    <div id="divSerachForm" class="CRITERIA CRITERIA_1280">
@@ -125,22 +127,22 @@
 	    	<table class="display" id="tableResult">
 	    		<thead>
 	    			<tr>
-	    				<th>ลำดับที่</th>
+	    				<th><s:text name="emp.no" /></th>
 	    				<th></th>
 	    				<th></th>
 	    				<th></th>
-	    				<th>ชื่อ-สกุล</th>
-	    				<th>เพศ</th>
-	    				<th>สังกัด</th>
-	    				<th>แผนก</th>
-	    				<th>วันที่เริ่มงาน</th>
-	    				<th>วันที่สิ้นสุดงาน</th>
-	    				<th>สถานะพนักงาน</th>
-	    				<th>Create User</th>
-	    				<th>Create Date</th>
-	    				<th>Update User</th>
-	    				<th>Update Date</th>
-	    				<th>หมายเหตุ</th>
+	    				<th><s:text name="emp.fullname" /></th>
+	    				<th><s:text name="emp.sex" /></th>
+	    				<th><s:text name="emp.department" /></th>
+	    				<th><s:text name="emp.position" /></th>
+	    				<th><s:text name="emp.startDate" /></th>
+	    				<th><s:text name="emp.endDate" /></th>
+	    				<th><s:text name="emp.workStatus" /></th>
+	    				<th><s:text name="emp.createUser" /></th>
+	    				<th><s:text name="emp.createDate" /></th>
+	    				<th><s:text name="emp.updateUser" /></th>
+	    				<th><s:text name="emp.updateDate" /></th>
+	    				<th><s:text name="emp.createRemark" /></th>
 	    			</tr>
 	    		</thead>
 	    		<tbody>

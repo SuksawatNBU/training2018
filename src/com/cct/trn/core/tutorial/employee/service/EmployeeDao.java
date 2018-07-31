@@ -150,7 +150,7 @@ public class EmployeeDao extends AbstractDAO<EmployeeSearchCriteria, EmployeeSea
         try {
             stmt = conn.createStatement();
             rst = stmt.executeQuery(sql);
-            
+            while (rst.next()) {
             result.setId(StringUtil.nullToString(rst.getString("EMPLOYEE_ID")));
             result.setPrefixId(StringUtil.nullToString(rst.getString("PREFIX_ID")));
             result.setPrefixName(StringUtil.nullToString(rst.getString("PREFIX_NAME")));
@@ -173,7 +173,7 @@ public class EmployeeDao extends AbstractDAO<EmployeeSearchCriteria, EmployeeSea
             transaction.setUpdateDate(StringUtil.nullToString(rst.getString("UPDATE_DATE")));
             transaction.setCreateRemark(StringUtil.nullToString(rst.getString("REMARK")));
             result.setTransaction(transaction);
-          
+            }
         } catch (Exception e) {
             throw e;
         } finally {
@@ -297,6 +297,20 @@ public class EmployeeDao extends AbstractDAO<EmployeeSearchCriteria, EmployeeSea
         }
         return id ;
 	}
+	
+	/**
+	* @Description สำหรับเพิ่มสิทธิ์ผู้ใช้งาน
+	* @throws Exception
+	*/
+	protected void addOperator(CCTConnection conn,int userId ,String operatorId ,String languageId) throws Exception {
+	    try {
+	        
+	    } catch (Exception e) {
+	        throw e;
+	    } finally {
+	    	
+	    }
+	}
 
 	/**
 	* @Description สำหรับแก้ไขข้อมูลผู้ใช้งาน โดยมีการตรวจสอบ รหัสผู้ใช้งานซ้ำก่อน หากซ้ำจะไม่ทำการ แก้ไขข้อมูล
@@ -338,19 +352,6 @@ public class EmployeeDao extends AbstractDAO<EmployeeSearchCriteria, EmployeeSea
         	CCTConnectionUtil.closeAll(null, stmt);
         }
         return id ;
-	}
-	
-	/**
-	* @Description สำหรับเพิ่มสิทธิ์ผู้ใช้งาน
-	* @throws Exception
-	*/
-	protected void addOperator(CCTConnection conn,int userId ,String operatorId ,String languageId) throws Exception {
-	    try {
-	        
-	    } catch (Exception e) {
-	        throw e;
-	    } finally {
-	    }
 	}
 	
 	/**

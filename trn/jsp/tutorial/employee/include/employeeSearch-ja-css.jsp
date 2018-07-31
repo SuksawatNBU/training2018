@@ -3,10 +3,9 @@
 
 <script type="text/javascript">
 
-	function sf() {
-		
-	}
+	function sf() {}
 
+	/* Auto Complete */
 	jQuery(document).ready(function(){
 		// เรียกใช้งาน Autocomplete widget สำหรับสร้าง Autocomplete
 	    jQuery("#criteria_departmentId").autocompletezAjax([{  // UI มาตรฐาน   
@@ -21,6 +20,22 @@
 	        defaultValue: ""
 	    }]);
 	});
+	
+	/* Input Date */
+	$(function(){
+		jQuery("#criteria_startWorkDate").input_dateformat({
+			dateformat : "dd_sl_mm_sl_yyyy" ,
+			selectDateRange: { 
+	            dateTo: "criteria_endWorkDate" // ??????????????????
+	        }
+	    });
+		jQuery("#criteria_endWorkDate").input_dateformat({
+			dateformat : "dd_sl_mm_sl_yyyy" ,
+			selectDateRange: {
+				dateFrom: "criteria_startWorkDate" 	// ????????????????	
+			} 
+		});
+	});
 
 	function searchPage() {
         document.getElementsByName('criteria.criteriaKey')[0].value = '';
@@ -31,6 +46,7 @@
 		var aOption = {
 			divResultId: "div_datatable",
 			tableId: "tableResult",
+			checkbox:"Y",
 			urlSearch: "<s:url value='/jsp/tutorial/searchEmployee.action' />",
 			urlEdit: {
                 url: "<s:url value='/jsp/tutorial/gotoEditEmployee.action' />",
@@ -41,8 +57,7 @@
                 authen: "<s:property value='ATH.view' />"
             },
 			pk: "employee.id",
-			fixedCoumnsLeft : 5,	//Fixed column ทางซ้ายเริ่มตั้งแต่ 0-5
-			fixedCoumnsRight : 0,   //Fixed column ทางขวาเริ่มตั้งแต่ 0-0
+			fixedCoumnsLeft : 6,	//Fixed column ทางซ้ายเริ่มตั้งแต่ 0-5
 			createdRowFunc: "manageRow"
 		};
 		
@@ -50,22 +65,23 @@
 			{ data: null,                       class: "order",             orderable: false, "width":"50px"},
 			{ data: null,                       class: "d_checkbox center", orderable: false, "width":"30px", defaultContent: ""},
 			{ data: null,                       class: "d_edit center",     orderable: false, "width":"30px", defaultContent: ""},
-			{ data: null,                       class: "d_view center",     orderable: false, "width":"30px", defaultContent: ""},
+			{ data: null,                       class: "d_view center col_view",     orderable: false, "width":"30px", defaultContent: ""},
 			{ data: "fullname",                 class: "left",   orderable: false, "width":"100px"},
-			{ data: "sex",                      class: "left",   orderable: false, "width":"50px"},
-			{ data: "departmentDesc",           class: "left",   orderable: false},
-			{ data: "positionDesc",             class: "left",   orderable: false},
-			{ data: "startWorkDate",            class: "center", orderable: false},
-			{ data: "endWorkDate",              class: "center", orderable: false},
-			{ data: "workStatus",               class: "left",   orderable: false},
-			{ data: "transaction.createUser",   class: "left",   orderable: false},
-			{ data: "transaction.createDate",   class: "center", orderable: false},
-			{ data: "transaction.updateUser",   class: "left",   orderable: false},
-			{ data: "transaction.updateDate",   class: "center", orderable: false},
-			{ data: "transaction.updateRemark", class: "left",   orderable: false},
+			{ data: "sex",                      class: "col-width-auto",    orderable: false, "width":"50px"},
+			{ data: "departmentDesc",           class: "left",   orderable: false, "width":"200px"},
+			{ data: "positionDesc",             class: "left",   orderable: false, "width":"150px"},
+			{ data: "startWorkDate",            class: "center", orderable: false, "width":"80px"},
+			{ data: "endWorkDate",              class: "center", orderable: false, "width":"80px"},
+			{ data: "workStatus",               class: "left",   orderable: false, "width":"80px"},
+			{ data: "transaction.createUser",   class: "left",   orderable: false, "width":"80px"},
+			{ data: "transaction.createDate",   class: "center", orderable: false, "width":"80px"},
+			{ data: "transaction.updateUser",   class: "left",   orderable: false, "width":"80px"},
+			{ data: "transaction.updateDate",   class: "center", orderable: false, "width":"80px"},
+			{ data: "transaction.updateRemark", class: "left",   orderable: false, "width":"80px"},
 		];
 		
-		dataTable("<%=request.getContextPath()%>", colData, aOption);
+		fixedColumns("<%=request.getContextPath()%>", colData , aOption);
+		<%-- dataTable("<%=request.getContextPath()%>", colData, aOption); --%>
     }
 	
 	 function manageRow(row, data) {
@@ -77,17 +93,23 @@
     function clearPage() {
     	submitPage("<s:url value='/jsp/tutorial/initEmployee.action' />");
     }
+    
     function addPage(){
         submitPage("<s:url value='/jsp/tutorial/gotoAddEmployee.action' />");
     }
-    function editPage(id){
-        submitPage("<!--Action Class to submit'-->");
+    
+    /**
+     * ใช้สำหรับ submit กรณีเพิ่ม, แก้ไข, แสดง
+     * ต้องใช้ร่วมกับไฟล์ inputmethod.js
+     * @param action
+     * @param emName (hidden name ของ id ใน model)
+     * @param valId
+     */
+    function submitAction(action, elName, valId){
+        if(valId != null && valId != ""){
+            document.getElementsByName(elName)[0].value = valId;
+        }
+        submitPage(action);
     }
-    function viewPage(id){
-        submitPage("<!--Action Class to submit'-->");
-    }
-    
-    
-    
     
 </script>

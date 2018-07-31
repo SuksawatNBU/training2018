@@ -3,6 +3,7 @@ package com.cct.trn.web.tutorial.employee.action;
 import java.util.List;
 
 import com.cct.common.CommonAction;
+import com.cct.common.CommonModel;
 import com.cct.domain.GlobalType;
 import com.cct.domain.Transaction;
 import com.cct.interfaces.InterfaceAction;
@@ -27,6 +28,10 @@ public class EmployeeAction extends CommonAction  implements ModelDriven<Employe
 	//Constructor
 	public EmployeeAction() {
 	   this.ATH.setSearch(true);
+	   this.ATH.setEdit(true);
+	   this.ATH.setAdd(true);
+	   this.ATH.setDelete(true);
+	   this.ATH.setView(true);
 	}
 
 	@Override
@@ -114,14 +119,15 @@ public class EmployeeAction extends CommonAction  implements ModelDriven<Employe
 	 */
 	@Override
 	public String gotoAdd() throws Exception {
-		String result = "addEdit";
+		String result = null;
 	    CCTConnection conn = null;
 	    try {
 	        //1.สร้าง connection โดยจะต้องระบุ lookup ที่ใช้ด้วย
 	        conn = new CCTConnectionProvider().getConnection(conn, DBLookup.MYSQL_TRAINING.getLookup());
 	 
 	        //2.ตรวจสอบสิทธิ์ หน้าเพิ่ม
-//	        result = manageGotoAdd(conn, model);
+	        result = "addEdit"; //manageGotoAdd(conn, model);
+	        model.setPage(CommonModel.PageType.ADD);
 	 
 	    } catch (Exception e) {
 	        //3.จัดการ exception กรณีที่มี exception เกิดขึ้นในระบบ
@@ -136,6 +142,11 @@ public class EmployeeAction extends CommonAction  implements ModelDriven<Employe
 	    return result;	//6.return "addEdit"
 	}
 
+	/**
+	 * click ปุ่มบันทึกเพิ่ม จะบันทึกข้อมูลเพิ่ม, เคลียร์ค่าออก และ return addEdit เพื่อเข้าหน้าเพิ่มใหม่
+	 * ถ้ามี error จะ return addEdit เพื่อแสดง error ที่หน้าเพิ่ม
+	 * ยกเว้นตรวจสอบสิทธิ์ไม่ผ่าน ให้กลับไปที่หน้า login
+	 */
 	@Override
 	public String add() throws Exception {
 		String result = null;
@@ -165,7 +176,7 @@ public class EmployeeAction extends CommonAction  implements ModelDriven<Employe
 	        //7.Close connection หลังเลิกใช้งาน
 	        CCTConnectionUtil.close(conn);
 	    }
-	    return result;      //8.return "addEdit"
+	    return result;	//8.return "addEdit"
 	}
 
 	/**
@@ -183,7 +194,8 @@ public class EmployeeAction extends CommonAction  implements ModelDriven<Employe
 	        conn = new CCTConnectionProvider().getConnection(conn, DBLookup.MYSQL_TRAINING.getLookup());
 	 
 	        //2.ตรวจสอบสิทธิ์ หน้าแก้ไข
-	        result = manageGotoEdit(conn, model);
+	        result = "addEdit"; //manageGotoEdit(conn, model);
+	        model.setPage(CommonModel.PageType.EDIT);
 	 
 	        //3.ค้นหาข้อมูลผู้ใช้ ตาม id ที่เลือกมาจากหน้าจอ
 	        EmployeeManager manager = new EmployeeManager(conn, getUser(), getLocale());
@@ -256,7 +268,8 @@ public class EmployeeAction extends CommonAction  implements ModelDriven<Employe
 	        conn = new CCTConnectionProvider().getConnection(conn, DBLookup.MYSQL_TRAINING.getLookup());
 	 
 	        //2.ตรวจสอบสิทธิ์ หน้าแสดง
-	        result = manageGotoView(conn, model);
+	        result = "addEdit"; //manageGotoView(conn, model);
+	        model.setPage(CommonModel.PageType.VIEW);
 	 
 	        //3.ค้นหาข้อมูลผู้ใช้โดยใช้ ตาม id ที่เลือกมาจากหน้าจอ
 	        EmployeeManager manager = new EmployeeManager(conn, getUser(), getLocale());

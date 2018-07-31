@@ -34,7 +34,7 @@ public class EmployeeService extends AbstractService{
 	
 	// นับจำนวนข้อมูล
 	protected long countData(EmployeeSearchCriteria criteria) throws Exception {
-		long totalResult =0;
+		long totalResult = 0;
 	    try {
 	        totalResult = dao.countData(conn, criteria, user, locale);
 	    } catch (Exception e) {
@@ -44,7 +44,7 @@ public class EmployeeService extends AbstractService{
 		return totalResult;
 	}
 	
-	// ตรวจสอบบันทึกข้อมูลผู้ใช้ซ้ำ
+	//Service ตรวจสอบบันทึกข้อมูลผู้ใช้ซ้ำ
 	protected boolean checkDup(CCTConnection conn, Employee obj, CommonUser user, Locale locale) throws Exception {
 		boolean isDup = false;
 		try {
@@ -56,9 +56,9 @@ public class EmployeeService extends AbstractService{
 		return isDup;
     }
 	
+	//Service เพิ่มข้อมูลผู้ใช้
 	protected int add(CCTConnection conn, Employee obj, CommonUser user, Locale locale) throws Exception {
 		try {
-			//เพิ่มข้อมูลผู้ใช้งาน
 			return dao.add(conn, obj, user, locale);
 		}catch (Exception e) {
 			LogUtil.SEC.error("", e);
@@ -66,6 +66,24 @@ public class EmployeeService extends AbstractService{
 		}
 	}
 
+	//Service ของการบันทึกสิทธิ์การใช้งาน
+	protected void addOperation(Employee obj, int employeeId) throws Exception{
+	    /*try {
+	        //หาภาษาของผู้ใช้
+	        String languageId = searchLanguageId(conn, locale.getLanguage());
+	 
+	        if (obj.getLstOperator() != null) {
+	            Map<String, String> mapForInset = getOperatorIdFromListTreeviewOperator(obj.getLstOperator());
+	            for (String key : mapForInset.keySet()) {
+	                dao.addOperator(conn, userId, key, languageId);
+	            }
+	        }
+	    } catch (Exception e) {
+	        LogUtil.SEC.error("", e);
+	        throw e;
+	    }*/
+	}
+	
 	protected int edit(CCTConnection conn, Employee obj, CommonUser user, Locale locale) throws Exception {
 		try {
 			//เพิ่มข้อมูลผู้ใช้งานและสิทธิ์การใช้งาน

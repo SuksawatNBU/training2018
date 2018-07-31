@@ -24,6 +24,7 @@
 		, resources.bundle.template.MessageTemplate
 		, resources.bundle.standardui.MessageStandardUi
 		, resources.bundle.tutorial.MessageProject
+		, resources.bundle.tutorial.Employee
 	"/>
 
 	<include file="strutsconfig/common/struts-common.xml" />
