@@ -76,7 +76,7 @@
 			{ data: "positionDesc",             class: "left",   orderable: false, "width":"150px"},
 			{ data: "startWorkDate",            class: "center", orderable: false, "width":"80px"},
 			{ data: "endWorkDate",              class: "center", orderable: false, "width":"80px"},
-			{ data: "workStatus",               class: "left",   orderable: false, "width":"80px"},
+			{ data: "workStatus",               class: "left",   orderable: false, "width":"150px"},
 			{ data: "transaction.createUser",   class: "left",   orderable: false, "width":"80px"},
 			{ data: "transaction.createDate",   class: "center", orderable: false, "width":"80px"},
 			{ data: "transaction.updateUser",   class: "left",   orderable: false, "width":"80px"},

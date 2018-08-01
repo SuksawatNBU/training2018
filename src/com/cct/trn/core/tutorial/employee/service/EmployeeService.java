@@ -12,7 +12,6 @@ import java.util.Locale;
 import com.cct.abstracts.AbstractService;
 import com.cct.common.CommonSelectItem;
 import com.cct.common.CommonUser;
-import com.cct.domain.Operator;
 import com.cct.domain.Transaction;
 import com.cct.trn.core.config.parameter.domain.SQLPath;
 import com.cct.trn.core.tutorial.employee.domain.Employee;
@@ -65,38 +64,20 @@ public class EmployeeService extends AbstractService{
 			throw e;
 		}
 	}
-
-	//Service ของการบันทึกสิทธิ์การใช้งาน
-	protected void addOperation(Employee obj, int employeeId) throws Exception{
-	    /*try {
-	        //หาภาษาของผู้ใช้
-	        String languageId = searchLanguageId(conn, locale.getLanguage());
-	 
-	        if (obj.getLstOperator() != null) {
-	            Map<String, String> mapForInset = getOperatorIdFromListTreeviewOperator(obj.getLstOperator());
-	            for (String key : mapForInset.keySet()) {
-	                dao.addOperator(conn, userId, key, languageId);
-	            }
-	        }
-	    } catch (Exception e) {
-	        LogUtil.SEC.error("", e);
-	        throw e;
-	    }*/
-	}
 	
 	protected int edit(CCTConnection conn, Employee obj, CommonUser user, Locale locale) throws Exception {
 		try {
+			//แปลงวันที่
+			obj.setStartWorkDate(convertDate(obj.getStartWorkDate(), 5));
+			if(obj.getWorkStatus().equals("W")){
+				obj.setEndWorkDate(convertDate(obj.getEndWorkDate(), 5));
+		    }
 			//เพิ่มข้อมูลผู้ใช้งานและสิทธิ์การใช้งาน
 	        return dao.edit(conn, obj, user, locale);
 		}catch (Exception e) {
 			LogUtil.SEC.error("", e);
 			throw e;
 		}
-	}
-	
-	
-	protected void editOperation(Employee obj, int userId) throws Exception{
-		
 	}
 
 	protected int delete(CCTConnection conn, String ids, CommonUser user, Locale locale) throws Exception {
@@ -122,6 +103,34 @@ public class EmployeeService extends AbstractService{
 	    }
 		return listResult;
 	}
+	
+	//Service ค้นหาข้อมูลผู้ใช้ตาม id
+	protected Employee searchById(CCTConnection conn, String id, CommonUser user, Locale locale) throws Exception {
+		Employee result = new Employee();
+		try {
+		    result = dao.searchById(conn, id, user, locale);
+		    	
+		    // แปลงรูปแบบวันที่
+		    result.setStartWorkDate(convertDate(result.getStartWorkDate(), 3));
+		    if(result.getWorkStatus().equals("W")){
+		    	result.setEndWorkDate(convertDate(result.getEndWorkDate(), 3));
+		    }
+		} catch (Exception e) {
+			LogUtil.SEC.error("", e);
+		    throw e;
+		}
+		return result;
+	}
+		
+	protected List<CommonSelectItem> searchPrefixSelectItem(CCTConnection conn, Locale locale){
+			List<CommonSelectItem> listResult = new ArrayList<CommonSelectItem>();
+			try {
+				listResult = dao.searchPrefixSelectItem(conn,locale);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return listResult;
+		}	
 	
 	public List<EmployeeSearch> convertValue(List<EmployeeSearch> list) throws Exception{
 		List<EmployeeSearch> listResult = new ArrayList<EmployeeSearch>();
@@ -159,15 +168,17 @@ public class EmployeeService extends AbstractService{
 	}
 	
 	public String convertDate(String date, int func) throws ParseException{
-		String dateTH = "";
-		Format formatter = new SimpleDateFormat("dd/MM/yyyy", new Locale("th", "TH"));
+		String parseDate = "";
+		Format formatterTH = new SimpleDateFormat("dd/MM/yyyy", new Locale("th", "TH"));
+		Format formatterEN = new SimpleDateFormat("dd/MM/yyyy", new Locale("en", "EN"));
+		Format formatterEN2 = new SimpleDateFormat("yyyy/MM/dd", new Locale("en", "EN"));
 		
 		if(func == 1){
 			if(date.equals(null) || date.equals("")) return null;
 			try {
 				DateFormat df = new SimpleDateFormat("dd/MM/yy");
-				Date parseDate = df.parse(date);
-				dateTH = formatter.format(parseDate);
+				Date conDate = df.parse(date);
+				parseDate = formatterTH.format(conDate);
 			} catch (Exception e) {
 				throw e;
 			}
@@ -176,19 +187,54 @@ public class EmployeeService extends AbstractService{
 			if(date.equals(null) || date.equals("")) return null;
 			try {
 				DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:MM:SS");
-				Date parseDate = df.parse(date);
-				dateTH = formatter.format(parseDate);
+				Date conDate = df.parse(date);
+				parseDate = formatterTH.format(conDate);
 			} catch (Exception e) {
 				throw e;
 			}
 		}
-
-		// ถ้ามี 0 นำหน้าจะตัดออก
-		/*boolean check = dateTH.startsWith("0");
-		if (check) {
-			dateTH = dateTH.substring(1, dateTH.length());
-		}*/
-		return dateTH;
+		else if(func == 3){
+			if(date.equals(null) || date.equals("")) return null;
+			try {
+				DateFormat df = new SimpleDateFormat("dd/MM/yy");
+				Date conDate = df.parse(date);
+				parseDate = formatterEN.format(conDate);
+			} catch (Exception e) {
+				throw e;
+			}
+		}
+		// แปลงสำหรับหน้า input
+		else if(func == 4){
+			if(date.equals(null) || date.equals("")) return null;
+			try {
+				DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:MM:SS");
+				Date conDate = df.parse(date);
+				parseDate = formatterEN.format(conDate);
+			} catch (Exception e) {
+				throw e;
+			}
+		}
+		// รับจากหน้าจอ
+		else if(func == 5){
+			if(date.equals(null) || date.equals("")) return null;
+			try {
+				DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+				Date conDate = df.parse(date);
+				parseDate = formatterEN2.format(conDate);
+			} catch (Exception e) {
+				throw e;
+			}
+		}
+		//วันที่ปัจจุบัน
+		else if(func == 6){
+			try {
+				Date conDate = new Date();
+				parseDate = formatterEN.format(conDate);
+			} catch (Exception e) {
+				throw e;
+			}
+		}
+		return parseDate;
 	}
 	
 	public String convertDepartment(String department){
@@ -209,66 +255,10 @@ public class EmployeeService extends AbstractService{
 	}
 	
 	public String convertWorkStatus(String status){
-		if(status.equals("N")) return "N";
-		else if(status.equals("W")) return "พนักงานประจำ";
+		if(status.equals("T")) return "พนักงานทดลองงาน";
+		else if(status.equals("C")) return "พนักงานปัจจุบัน";
+		else if(status.equals("R")) return "อดีตพนักงาน";
+		else if(status.equals("W")) return "เลิกจ้าง";
 		else return null;
 	}
-	
-	//Service ค้นหาข้อมูลผู้ใช้ตาม id
-	protected Employee searchById(CCTConnection conn, String id, CommonUser user, Locale locale) throws Exception {
-		Employee result = new Employee();
-	    try {
-	    	result = dao.searchById(conn, id, user, locale);
-	    } catch (Exception e) {
-	        LogUtil.SEC.error("", e);
-	        throw e;
-	    }
-		return result;
-	}
-	
-	//Service ค้นหาสิทธิ์การใช้งานโปรแกรมของผู้ใช้
-	protected String searchOperatorByUserID(CCTConnection conn,String userId) throws Exception{
-	    try {
-	        return  dao.searchOperatorDataListById(conn, userId, locale);
-	    } catch (Exception e) {
-	        LogUtil.SEC.error("", e);
-	        throw e;
-	    }
-	}
-	
-	//3.Service ค้นหารายละเอียดเมนูและสิทธิ์ 
-	protected List<Operator> searchOperatorById(CCTConnection conn,String operatorById) throws Exception{
-	    List<Operator> lstOperater = new ArrayList<Operator>();
-	 
-	    try {
-	        /*Map<String, Tree> mapOperator = dao.searchOperatorByOperatorId(conn, operatorById, locale);
-	        for (String key : mapOperator.keySet()) {
-	            Operator operator = (Operator) mapOperator.get(key);
-	             
-	            if (operator.getOperatorType().equals(MenuUtil.OPERATOR_TYPE_FUNCTION)) {
-	                String groupId = getGroupOperatorId(mapOperator, operator.getCurrentId());
-	                operator.setFunctionName(getLableFunction(mapOperator, groupId));
-	                operator.setMenuName(getLableMenu(mapOperator, groupId));
-	                operator.setSystemName(getLableSystem(mapOperator, groupId));
-	                operator.setParentIds(groupId);
-	                lstOperater.add(operator);
-	            }
-	        }*/
-	    } catch (Exception e) {
-	        LogUtil.SEC.error("", e);
-	        throw e;
-	    }
-	    return lstOperater;
-	}
-	
-	protected List<CommonSelectItem> searchPrefixSelectItem(CCTConnection conn, Locale locale){
-		List<CommonSelectItem> listResult = new ArrayList<CommonSelectItem>();
-		try {
-			listResult = dao.searchPrefixSelectItem(conn,locale);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return listResult;
-	}
-
 }

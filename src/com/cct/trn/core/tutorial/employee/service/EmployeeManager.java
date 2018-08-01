@@ -68,13 +68,14 @@ public class EmployeeManager extends AbstractManager<EmployeeSearchCriteria, Emp
 	@Override
 	public int add(Employee obj) throws Exception {
 		int employeeId = 0 ;
+		
+		//1.ตรวจสอบบันทึกข้อมูลผู้ใช้ซ้ำ
+		boolean isDup = service.checkDup(conn, obj, user, locale);
+		if(isDup){
+			throw new DuplicateException();
+		}
+		
 		try {
-	        //1.ตรวจสอบบันทึกข้อมูลผู้ใช้ซ้ำ
-			boolean isDup = service.checkDup(conn, obj, user, locale);
-			if(isDup){
-				throw new DuplicateException();
-			}
-	 
 	        //2.Begin transaction
 	        conn.setAutoCommit(false);
 	 
@@ -100,19 +101,21 @@ public class EmployeeManager extends AbstractManager<EmployeeSearchCriteria, Emp
 	 */
 	@Override
 	public int edit(Employee obj) throws Exception {
+		int employeeId = 0 ;
+		
+		//1.ตรวจสอบบันทึกข้อมูลผู้ใช้ซ้ำ
+		boolean isDup = service.checkDup(conn, obj, user, locale);
+        if(isDup){
+			throw new DuplicateException();
+		}
+        
 		try {
-	        //1.ตรวจสอบบันทึกข้อมูลผู้ใช้ซ้ำ
-	        service.checkDup(conn, obj, user, locale);
-	 
 	        //2.Begin transaction
 	        conn.setAutoCommit(false);
 	 
 	        //3.แก้ไขข้อมูลผู้ใช้งาน
-	        service.edit(conn, obj, user, locale);
-	 
-	        //4.แก้ไขข้อมูลสิทธิ์ผู้ใช้
-	        service.editOperation(obj, Integer.parseInt(obj.getId()));
-	 
+	        employeeId = service.edit(conn, obj, user, locale);
+
 	        conn.commit();
 	 
 	    } catch (Exception e) {
@@ -121,7 +124,7 @@ public class EmployeeManager extends AbstractManager<EmployeeSearchCriteria, Emp
 	    } finally {
 	        conn.setAutoCommit(true);
 	    }
-	    return 0;
+	    return employeeId;
 	}
 
 	@Override
@@ -146,5 +149,17 @@ public class EmployeeManager extends AbstractManager<EmployeeSearchCriteria, Emp
 			e.printStackTrace();
 		}
 		return listResult;
+	}
+	
+	public Employee defaultValue(){
+		Employee emp = new Employee();
+		try {
+	        emp.setSex("M"); 
+	        emp.setStartWorkDate(service.convertDate(null, 6));
+	        emp.setWorkStatus("T");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return emp;
 	}
 }

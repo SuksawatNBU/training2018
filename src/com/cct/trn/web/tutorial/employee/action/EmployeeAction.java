@@ -3,9 +3,7 @@ package com.cct.trn.web.tutorial.employee.action;
 import java.util.List;
 
 import com.cct.common.CommonAction;
-import com.cct.common.CommonModel;
 import com.cct.common.CommonModel.PageType;
-import com.cct.common.CommonAction.ReturnType;
 import com.cct.domain.GlobalType;
 import com.cct.domain.Transaction;
 import com.cct.exception.AuthorizationException;
@@ -140,6 +138,10 @@ public class EmployeeAction extends CommonAction  implements ModelDriven<Employe
 	 
 	        //2.ตรวจสอบสิทธิ์ หน้าเพิ่ม
 	        result = manageGotoAdd(conn, model);
+	        
+	        // Default Value
+	        EmployeeManager manager = new EmployeeManager(conn, getUser(), getLocale());
+	        model.setEmployee(manager.defaultValue());
 	 
 	    } catch (Exception e) {
 	        //3.จัดการ exception กรณีที่มี exception เกิดขึ้นในระบบ
@@ -166,15 +168,15 @@ public class EmployeeAction extends CommonAction  implements ModelDriven<Employe
 	    try {
 	        //1.สร้าง connection โดยจะต้องระบุ lookup ที่ใช้ด้วย
 	        conn = new CCTConnectionProvider().getConnection(conn, DBLookup.MYSQL_TRAINING.getLookup());
-	 
+	        
 	        //2.ตรวจสอบสิทธิ์ หน้าเพิ่ม
 	        result = manageAdd(conn, model);
-	 
+	        
 	        EmployeeManager manager = new EmployeeManager(conn, getUser(), getLocale());
-	 
+	        
 	        //3.บันทึกเพิ่มข้อมูลผู้ใช้
 	        manager.add(model.getEmployee());
-	 
+	        
 	        //4.เคลียร์ค่าหน้าเพิ่มทั้งหมด
 	        model.setEmployee(new Employee());
 	 

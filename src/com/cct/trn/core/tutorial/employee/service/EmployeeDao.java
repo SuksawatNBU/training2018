@@ -6,13 +6,11 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
 import com.cct.abstracts.AbstractDAO;
 import com.cct.common.CommonSelectItem;
 import com.cct.common.CommonUser;
 import com.cct.domain.Transaction;
-import com.cct.domain.Tree;
 import com.cct.trn.core.config.parameter.domain.ParameterConfig;
 import com.cct.trn.core.tutorial.employee.domain.Employee;
 import com.cct.trn.core.tutorial.employee.domain.EmployeeSearch;
@@ -184,43 +182,6 @@ public class EmployeeDao extends AbstractDAO<EmployeeSearchCriteria, EmployeeSea
         }
 		return result;
 	}
-	
-	/**
-	* @Description สำหรับค้นหาสิทธิการใช้งานโปรแกรม ที่ระบบผุ้ใช้
-	* @return String
-	* @throws Exception
-	*/
-	protected String searchOperatorDataListById(CCTConnection conn, String userId,Locale locale) throws Exception{
-	    Statement stmt = null;
-	    ResultSet rst = null;
-	    try{
-	        
-	    } catch (Exception e) {
-	        throw e;
-	    } finally {
-	        CCTConnectionUtil.closeAll(rst, stmt);
-	    }
-		return null;
-	}
-	 
-	/**
-	 * @Description ค้นหารายละเอียดเมนูและสิทธิ์
-	 * @return Map
-	 * @throws Exception
-	 */
-	protected Map<String, Tree> searchOperatorByOperatorId(CCTConnection conn, String operatorId, Locale locale) throws Exception {
-	    Statement stmt = null;
-	    ResultSet rst = null;
-	     
-	    try{
-	        
-	    } catch (Exception e) {
-	        throw e;
-	    } finally {
-	        CCTConnectionUtil.closeAll(rst, stmt);
-	    }
-		return null;
-	}
 
 	/**
 	* @Description ตรวจสอบข้อมูล ผู้ใช้ซ้ำ  ทั้งเพิ่มและแก้ไขใช้ร่วมกัน  โดยตรวจสอบจาก  รหัสผ่านใช้งาน(login)
@@ -240,6 +201,7 @@ public class EmployeeDao extends AbstractDAO<EmployeeSearchCriteria, EmployeeSea
         params[paramIndex++] = StringUtil.replaceSpecialString(obj.getPositionId(), conn.getDbType(), ResultType.NULL);
         params[paramIndex++] = StringUtil.replaceSpecialString(obj.getId(), conn.getDbType(), ResultType.NULL);
 		
+        System.out.println("obj.getId() : " + obj.getId());
         String sql = SQLUtil.getSQLString(conn.getSchemas()
                 , getSqlPath().getClassName()
                 , getSqlPath().getPath()
@@ -282,8 +244,6 @@ public class EmployeeDao extends AbstractDAO<EmployeeSearchCriteria, EmployeeSea
         params[paramIndex++] = StringUtil.replaceSpecialString(obj.getPrefixId(), conn.getDbType(), ResultType.NULL);
         params[paramIndex++] = StringUtil.replaceSpecialString(obj.getSex(), conn.getDbType(), ResultType.NULL);
         params[paramIndex++] = StringUtil.replaceSpecialString(obj.getPositionId(), conn.getDbType(), ResultType.NULL);
-        
-        
         Calendar cWorkDate = CalendarUtil.getCalendarFromDateString(obj.getStartWorkDate(), ParameterConfig.getParameter().getDateFormat().getForDisplay(), ParameterConfig.getParameter().getApplication().getDatetimeLocale());
         String sWorkDate = CalendarUtil.getDateStringFromCalendar(cWorkDate, ParameterConfig.getParameter().getDateFormat().getForDatabaseInsert());
         params[paramIndex++] = StringUtil.replaceSpecialString(sWorkDate, conn.getDbType(), ResultType.NULL);
@@ -297,7 +257,7 @@ public class EmployeeDao extends AbstractDAO<EmployeeSearchCriteria, EmployeeSea
         		, "insertEmployee"
         		, params);
         LogUtil.SEC.debug(sql);
-     
+        
         try {
             id = conn.executeInsertStatement(sql);
         } catch (Exception e) {

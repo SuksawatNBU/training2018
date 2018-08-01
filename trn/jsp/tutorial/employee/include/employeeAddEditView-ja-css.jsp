@@ -31,7 +31,7 @@
 	function saveAdd(){
 	    //1.ขั้นตอนการตรวจสอบ validate
 	    if(!validateAll()){
-	    	alert('<s:text name="10019" />');
+	    	
 	        return false;
 	    }
 	    //2.Confirm dialog

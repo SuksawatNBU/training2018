@@ -141,6 +141,7 @@
 		<s:else>
 			<s:set var="projCodeReadOnly" value="" />
 		</s:else>
+		
 		<div class="">
 			<table class="FORM" style="float:left; margin:13px;">
 				<tbody>
