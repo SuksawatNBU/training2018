@@ -31,6 +31,7 @@
 	function saveAdd(){
 	    //1.ขั้นตอนการตรวจสอบ validate
 	    if(!validateAll()){
+	    	alert('<s:text name="10019" />');
 	        return false;
 	    }
 	    //2.Confirm dialog
@@ -75,5 +76,14 @@
         }
 		submitPageForm();
 	}
+	
+	function submitPageForm() {
+        if (document.getElementsByName('criteria.criteriaKey')[0].value == '') {
+            action = "<s:url value='/jsp/tutorial/initEmployee.action' />";
+        } else {
+            action = "<s:url value='/jsp/tutorial/cancelEmployee.action' />";
+        }
+        submitPage(action);
+    }
 	
 </script>

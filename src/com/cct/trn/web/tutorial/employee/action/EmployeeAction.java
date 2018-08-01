@@ -4,14 +4,20 @@ import java.util.List;
 
 import com.cct.common.CommonAction;
 import com.cct.common.CommonModel;
+import com.cct.common.CommonModel.PageType;
+import com.cct.common.CommonAction.ReturnType;
 import com.cct.domain.GlobalType;
 import com.cct.domain.Transaction;
+import com.cct.exception.AuthorizationException;
+import com.cct.exception.UCPValidateException;
 import com.cct.interfaces.InterfaceAction;
 import com.cct.trn.core.config.parameter.domain.DBLookup;
+import com.cct.trn.core.security.authorization.domain.PFCode;
 import com.cct.trn.core.selectitem.service.SelectItemManager;
 import com.cct.trn.core.tutorial.employee.domain.Employee;
 import com.cct.trn.core.tutorial.employee.domain.EmployeeModel;
 import com.cct.trn.core.tutorial.employee.domain.EmployeeSearch;
+import com.cct.trn.core.tutorial.employee.domain.EmployeeSearchCriteria;
 import com.cct.trn.core.tutorial.employee.service.EmployeeManager;
 import com.opensymphony.xwork2.ModelDriven;
 
@@ -27,11 +33,12 @@ public class EmployeeAction extends CommonAction  implements ModelDriven<Employe
 	
 	//Constructor
 	public EmployeeAction() {
-	   this.ATH.setSearch(true);
-	   this.ATH.setEdit(true);
-	   this.ATH.setAdd(true);
-	   this.ATH.setDelete(true);
-	   this.ATH.setView(true);
+		try {
+			getAuthorization(PFCode.TUR_EMAPLOYEE);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -41,21 +48,25 @@ public class EmployeeAction extends CommonAction  implements ModelDriven<Employe
 
 	@Override
 	public String init() throws Exception {
+		String result = null;
 		CCTConnection conn = null;
 		try {
-			//1.สร้าง connection โดยจะต้องระบุ lookup ที่ใช้ด้วย
-			conn = new CCTConnectionProvider().getConnection(conn, DBLookup.MYSQL_TRAINING.getLookup());
+			//1.
+			result = manageInitial(conn, model, new EmployeeSearchCriteria(), getPF_CODE().getSearchFunction(), PageType.SEARCH);
 			
-			//2. ค้นข้อมูลเริ่มต้น
-			getComboForSearch(conn);
+			//2.สร้าง connection โดยจะต้องระบุ lookup ที่ใช้ด้วย
+			conn = new CCTConnectionProvider().getConnection(conn, DBLookup.MYSQL_TRAINING.getLookup());
 			
 		} catch (Exception e) {
 			LogUtil.SEC.error("", e);
 		}finally {
-			//7.Close connection หลังเลิกใช้งาน
+			//3.Load combo ทั้งหมดที่ใช้ในหน้าค้นหา เพื่อเตรียม binding เข้ากับ criteria
+	        getComboForSearch(conn);
+	        
+			//4.Close connection หลังเลิกใช้งาน
 			CCTConnectionUtil.close(conn);
 		}
-		return "init";
+		return result;
 	}
 
 	@Override
@@ -91,7 +102,7 @@ public class EmployeeAction extends CommonAction  implements ModelDriven<Employe
 			conn = new CCTConnectionProvider().getConnection(conn, DBLookup.MYSQL_TRAINING.getLookup());
 			
 			//2.
-			result = ReturnType.SEARCH_AJAX.getResult();
+			result = manageSearchAjax(conn, model, model.getCriteria(), getPF_CODE().getSearchFunction());
 			
 			//3.การค้นหา(ของแต่ละระบบ) ตัวอย่าง.ค้นหาข้อมูลผู้ใช้
 			EmployeeManager manager = new EmployeeManager(conn, getUser(), getLocale());
@@ -102,6 +113,8 @@ public class EmployeeAction extends CommonAction  implements ModelDriven<Employe
 		} catch (Exception e) {
 			//5.จัดการ exception กรณีที่มี exception เกิดขึ้นในระบบ
 	        manageException(conn, getPF_CODE().getSearchFunction(), this, e, getModel());
+	        //
+	        getComboForAddEdit(conn);
 		} finally {
 			//6.Load combo ทั้งหมดที่ใช้ในหน้าค้นหา เพื่อเตรียม binding เข้ากับ criteria
 			getComboForSearch(conn);
@@ -126,8 +139,7 @@ public class EmployeeAction extends CommonAction  implements ModelDriven<Employe
 	        conn = new CCTConnectionProvider().getConnection(conn, DBLookup.MYSQL_TRAINING.getLookup());
 	 
 	        //2.ตรวจสอบสิทธิ์ หน้าเพิ่ม
-	        result = "addEdit"; //manageGotoAdd(conn, model);
-	        model.setPage(CommonModel.PageType.ADD);
+	        result = manageGotoAdd(conn, model);
 	 
 	    } catch (Exception e) {
 	        //3.จัดการ exception กรณีที่มี exception เกิดขึ้นในระบบ
@@ -156,9 +168,7 @@ public class EmployeeAction extends CommonAction  implements ModelDriven<Employe
 	        conn = new CCTConnectionProvider().getConnection(conn, DBLookup.MYSQL_TRAINING.getLookup());
 	 
 	        //2.ตรวจสอบสิทธิ์ หน้าเพิ่ม
-	        result = ReturnType.ADD_EDIT.getResult();
-	        setMessage(CommonAction.MessageType.SUCCESS, getText("30003"), ResultType.BASIC);
-	        model.setPage(CommonModel.PageType.ADD);
+	        result = manageAdd(conn, model);
 	 
 	        EmployeeManager manager = new EmployeeManager(conn, getUser(), getLocale());
 	 
@@ -174,7 +184,7 @@ public class EmployeeAction extends CommonAction  implements ModelDriven<Employe
 	    } finally {
 	        //6.Load combo ทั้งหมดที่ใช้ในหน้าเพิ่ม
 	        getComboForAddEdit(conn);
-	         
+	        
 	        //7.Close connection หลังเลิกใช้งาน
 	        CCTConnectionUtil.close(conn);
 	    }
@@ -196,12 +206,11 @@ public class EmployeeAction extends CommonAction  implements ModelDriven<Employe
 	        conn = new CCTConnectionProvider().getConnection(conn, DBLookup.MYSQL_TRAINING.getLookup());
 	 
 	        //2.ตรวจสอบสิทธิ์ หน้าแก้ไข
-	        result = ReturnType.ADD_EDIT.getResult(); //manageGotoEdit(conn, model);
-	        model.setPage(CommonModel.PageType.EDIT);
+	        result = manageGotoEdit(conn, model);
 	 
 	        //3.ค้นหาข้อมูลผู้ใช้ ตาม id ที่เลือกมาจากหน้าจอ
 	        EmployeeManager manager = new EmployeeManager(conn, getUser(), getLocale());
-	        LogUtil.SEC.debug("Edit id: " + model.getEmployee());
+	        LogUtil.SEC.debug("Edit id: " + model.getEmployee().getId());
 	        Employee employee = manager.searchById(model.getEmployee().getId());
 	        model.setEmployee(employee);
 	 
@@ -236,9 +245,7 @@ public class EmployeeAction extends CommonAction  implements ModelDriven<Employe
 	        conn = new CCTConnectionProvider().getConnection(conn, DBLookup.MYSQL_TRAINING.getLookup());
 	 
 	        //2.ตรวจสอบสิทธิ์ หน้าแก้ไข
-	        result = ReturnType.SEARCH_DO.getResult();
-	        setMessage(CommonAction.MessageType.SUCCESS, getText("30004"), ResultType.CHAIN);
-			model.setPage(CommonModel.PageType.EDIT);
+	        result = manageEdit(conn, model);
 	 
 	        //3.บันทึกแก้ไขข้อมูล
 	        EmployeeManager manager = new EmployeeManager(conn, getUser(), getLocale());
@@ -272,9 +279,8 @@ public class EmployeeAction extends CommonAction  implements ModelDriven<Employe
 	        conn = new CCTConnectionProvider().getConnection(conn, DBLookup.MYSQL_TRAINING.getLookup());
 	 
 	        //2.ตรวจสอบสิทธิ์ หน้าแสดง
-	        result = ReturnType.ADD_EDIT.getResult();
-	        model.setPage(CommonModel.PageType.VIEW);
-	 
+	        result = manageGotoView(conn, model);
+	        
 	        //3.ค้นหาข้อมูลผู้ใช้โดยใช้ ตาม id ที่เลือกมาจากหน้าจอ
 	        EmployeeManager manager = new EmployeeManager(conn, getUser(), getLocale());
 	        LogUtil.SEC.debug("Edit id: " + model.getEmployee().getId());
@@ -340,5 +346,30 @@ public class EmployeeAction extends CommonAction  implements ModelDriven<Employe
 	public void showTransaction(Transaction transaction) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public String cancel() throws AuthorizationException, UCPValidateException {
+		String result = null;
+		CCTConnection conn = null;
+		try {
+			//1.สร้าง connection โดยจะต้องระบุ lookup ที่ใช้ด้วย
+			conn = new CCTConnectionProvider().getConnection(conn, DBLookup.MYSQL_TRAINING.getLookup());
+
+			//2.
+			manageSearchAjax(conn, model, model.getCriteria(), getPF_CODE().getSearchFunction());
+			result = ReturnType.SEARCH.getResult();
+
+		} catch (Exception e) {
+			LogUtil.TRAINING.error("", e);
+			getComboForAddEdit(conn);
+			//3.
+			manageException(conn, PF_CODE.getEditFunction(), this, e, model);
+		} finally {
+			getComboForSearch(conn);
+			//4.
+			CCTConnectionUtil.close(conn);
+		}
+
+		return result;
 	}
 }

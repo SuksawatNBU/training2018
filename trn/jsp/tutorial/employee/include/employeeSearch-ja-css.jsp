@@ -3,7 +3,11 @@
 
 <script type="text/javascript">
 
-	function sf() {}
+	function sf() {
+		if(jQuery("[name='criteria.criteriaKey']").val() != ""){
+            searchAjax();
+        }
+	}
 
 	/* Auto Complete */
 	jQuery(document).ready(function(){

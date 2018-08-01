@@ -156,6 +156,7 @@
 	   	</div>
 	   	
 	   	<!------------------------------------- BUTTON ------------------------------------->
+	   	<div style="display: none;"><s:include value="/jsp/template/hiddenSearchForDatatable.jsp" /></div>
 	    <s:hidden name="employee.id" />
 	    <s:token/>
     

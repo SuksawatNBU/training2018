@@ -3,25 +3,28 @@ package com.cct.trn.core.tutorial.employee.service;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-
-import util.database.CCTConnection;
-import util.database.CCTConnectionUtil;
-import util.database.SQLUtil;
-import util.log.LogUtil;
-import util.string.StringUtil;
-import util.type.StringType.ResultType;
 
 import com.cct.abstracts.AbstractDAO;
 import com.cct.common.CommonSelectItem;
 import com.cct.common.CommonUser;
 import com.cct.domain.Transaction;
 import com.cct.domain.Tree;
+import com.cct.trn.core.config.parameter.domain.ParameterConfig;
 import com.cct.trn.core.tutorial.employee.domain.Employee;
 import com.cct.trn.core.tutorial.employee.domain.EmployeeSearch;
 import com.cct.trn.core.tutorial.employee.domain.EmployeeSearchCriteria;
+
+import util.calendar.CalendarUtil;
+import util.database.CCTConnection;
+import util.database.CCTConnectionUtil;
+import util.database.SQLUtil;
+import util.log.LogUtil;
+import util.string.StringUtil;
+import util.type.StringType.ResultType;
 
 public class EmployeeDao extends AbstractDAO<EmployeeSearchCriteria, EmployeeSearch, Employee, CommonUser, Locale> {
 
@@ -150,7 +153,7 @@ public class EmployeeDao extends AbstractDAO<EmployeeSearchCriteria, EmployeeSea
         try {
             stmt = conn.createStatement();
             rst = stmt.executeQuery(sql);
-            while (rst.next()) {
+            if (rst.next()) {
             result.setId(StringUtil.nullToString(rst.getString("EMPLOYEE_ID")));
             result.setPrefixId(StringUtil.nullToString(rst.getString("PREFIX_ID")));
             result.setPrefixName(StringUtil.nullToString(rst.getString("PREFIX_NAME")));
@@ -249,8 +252,10 @@ public class EmployeeDao extends AbstractDAO<EmployeeSearchCriteria, EmployeeSea
         try {
             stmt = conn.createStatement();
             rst = stmt.executeQuery(sql);
-            while (rst.next()) {
-            	checkDup = true;
+            if (rst.next()) {
+            	if(rst.getLong(1) != 0){
+            		checkDup = true;
+            	}
             }
         } catch (Exception e) {
             throw e;
@@ -277,7 +282,11 @@ public class EmployeeDao extends AbstractDAO<EmployeeSearchCriteria, EmployeeSea
         params[paramIndex++] = StringUtil.replaceSpecialString(obj.getPrefixId(), conn.getDbType(), ResultType.NULL);
         params[paramIndex++] = StringUtil.replaceSpecialString(obj.getSex(), conn.getDbType(), ResultType.NULL);
         params[paramIndex++] = StringUtil.replaceSpecialString(obj.getPositionId(), conn.getDbType(), ResultType.NULL);
-        params[paramIndex++] = StringUtil.replaceSpecialString(obj.getStartWorkDate(), conn.getDbType(), ResultType.NULL);
+        
+        
+        Calendar cWorkDate = CalendarUtil.getCalendarFromDateString(obj.getStartWorkDate(), ParameterConfig.getParameter().getDateFormat().getForDisplay(), ParameterConfig.getParameter().getApplication().getDatetimeLocale());
+        String sWorkDate = CalendarUtil.getDateStringFromCalendar(cWorkDate, ParameterConfig.getParameter().getDateFormat().getForDatabaseInsert());
+        params[paramIndex++] = StringUtil.replaceSpecialString(sWorkDate, conn.getDbType(), ResultType.NULL);
         params[paramIndex++] = StringUtil.replaceSpecialString(obj.getWorkStatus(), conn.getDbType(), ResultType.NULL);
         params[paramIndex++] = StringUtil.replaceSpecialString(obj.getTransaction().getCreateRemark(), conn.getDbType(), ResultType.NULL);
         params[paramIndex++] = StringUtil.replaceSpecialString(user.getUserId(), conn.getDbType(), ResultType.NULL);
@@ -285,7 +294,7 @@ public class EmployeeDao extends AbstractDAO<EmployeeSearchCriteria, EmployeeSea
         String sql = SQLUtil.getSQLString(conn.getSchemas()
         		, getSqlPath().getClassName()
         		, getSqlPath().getPath()
-        		, "addEmployee"
+        		, "insertEmployee"
         		, params);
         LogUtil.SEC.debug(sql);
      

@@ -39,7 +39,7 @@
 
     <dateFormat>
     	<!-- รูปแบบวันที่ ที่นำไป insert update ลงฐานข้อมูล  -->
-        <forDatabaseInsert>DD/MM/YYYY</forDatabaseInsert>
+        <forDatabaseInsert>YYYY-MM-DD</forDatabaseInsert>
         <forDatabaseInsertHHMM>DD/MM/YYYY HH:mm</forDatabaseInsertHHMM>
         <forDatabaseInsertHHMMSS>DD/MM/YYYY HH:mm:ss</forDatabaseInsertHHMMSS>
 

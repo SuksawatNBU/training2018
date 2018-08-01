@@ -14,7 +14,7 @@ searchPrefixSelectItem {
 SQL : เพิ่มข้อมูลพนักงาน_SQL
 Description : 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-addEmployee {
+insertEmployee {
 	INSERT INTO TRN_EMPLOYEE(
 	  NAME
 	  ,SURNAME
@@ -29,18 +29,19 @@ addEmployee {
 	  ,CREATE_DATE
 	  ,CREATE_USER
 	) VALUES (
-	  %s
+		%s
 	  , %s
 	  , %s
 	  , %s
 	  , %s
 	  , %s
-	  , %s
+	  , CONCAT(DATE_FORMAT(%s, '%Y-%m-%d'), ' ', '00:00:00')
 	  , %s
 	  , %s
 	  ,'Y'
 	  ,CURRENT_TIMESTAMP -- CREATE_DATE - IN DATETIME
 	  , %s
+	 )
 }
 
 /*-----------------------------------------------------------------------------------------------------------------------------------------------------------

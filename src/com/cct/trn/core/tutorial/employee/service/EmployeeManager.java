@@ -6,6 +6,7 @@ import java.util.Locale;
 
 import com.cct.common.CommonSelectItem;
 import com.cct.common.CommonUser;
+import com.cct.exception.DuplicateException;
 import com.cct.exception.MaxExceedException;
 import com.cct.abstracts.AbstractManager;
 import com.cct.trn.core.config.parameter.domain.ParameterConfig;
@@ -58,14 +59,6 @@ public class EmployeeManager extends AbstractManager<EmployeeSearchCriteria, Emp
 	        //1.ค้นหาข้อมูลผู้ใช้ตาม id ที่เลือก
 			result = service.searchById(conn, id, user, locale);
 	 
-	        //2.ค้นหาสิทธิ์ของผู้ใช้ จาก table sec_map_user_operator โดย where ที่ user id และ language id
-	        String operatorById = service.searchOperatorByUserID(conn, id);
-	 
-	        //3.ค้นหารายละเอียดเมนูและสิทธิ์ตาม operatorById
-	        if (operatorById != null && !operatorById.equals("")) {
-//	            List<Operator> lstOperater = service.searchOperatorById(conn, operatorById);
-	            
-	        }
 	    } catch (Exception e) {
 	        throw e;
 	    }
@@ -77,8 +70,10 @@ public class EmployeeManager extends AbstractManager<EmployeeSearchCriteria, Emp
 		int employeeId = 0 ;
 		try {
 	        //1.ตรวจสอบบันทึกข้อมูลผู้ใช้ซ้ำ
-	        service.checkDup(conn, obj, user, locale);
-	        System.out.println("checkDup --> ผ่าน");
+			boolean isDup = service.checkDup(conn, obj, user, locale);
+			if(isDup){
+				throw new DuplicateException();
+			}
 	 
 	        //2.Begin transaction
 	        conn.setAutoCommit(false);
@@ -86,18 +81,15 @@ public class EmployeeManager extends AbstractManager<EmployeeSearchCriteria, Emp
 	        //3.เพิ่มข้อมูลผู้ใช้งาน
 	        employeeId = service.add(conn, obj, user, locale);
 	 
-	        //4.เพิ่มข้อมูลสิทธิ์ผู้ใช้
-	        service.addOperation(obj, employeeId);
-	 
-	        //5. Commit transaction
+	        //4. Commit transaction
 	        conn.commit();
 	 
 	    } catch (Exception e) {
-	        //6. Rollback transaction เมื่อเกิด Error
+	        //5. Rollback transaction เมื่อเกิด Error
 	        conn.rollback();
 	        throw e;
 	    } finally {
-	        //7. Set AutoCommit กลับคืนเป็น True
+	        //6. Set AutoCommit กลับคืนเป็น True
 	        conn.setAutoCommit(true);
 	    }
 	    return employeeId;

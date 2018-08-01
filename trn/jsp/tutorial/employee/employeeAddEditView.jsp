@@ -153,6 +153,11 @@
 				</s:include>
 			</s:elseif>
 			
+			<s:hidden name="criteria.criteriaKey" />
+			<s:hidden name="P_CODE"/>
+		    <s:hidden name="F_CODE"/>
+		    <s:hidden name="page"/>
+			<div style="display: none;"><s:include value="/jsp/template/transaction.jsp" /></div>
 			<s:token />	
 		</div>
 	</s:form>
