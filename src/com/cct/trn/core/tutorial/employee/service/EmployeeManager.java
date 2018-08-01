@@ -154,7 +154,7 @@ public class EmployeeManager extends AbstractManager<EmployeeSearchCriteria, Emp
 	public Employee defaultValue(){
 		Employee emp = new Employee();
 		try {
-	        emp.setSex("M"); 
+	        emp.setSex("M");
 	        emp.setStartWorkDate(service.convertDate(null, 6));
 	        emp.setWorkStatus("T");
 		} catch (Exception e) {

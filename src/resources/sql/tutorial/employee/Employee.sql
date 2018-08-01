@@ -71,9 +71,9 @@ Description :
 ------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 deleteEmployee {
 	UPDATE TRN_EMPLOYEE SET
-		 ACTIVE = &ACTIVE
+		 ACTIVE = 'Y'
 		,UPDATE_DATE = CURRENT_TIMESTAMP
-		,UPDATE_USER = &USER_ID
+		,UPDATE_USER = %s
 	WHERE EMPLOYEE_ID IN (%s)
 }
 
@@ -181,9 +181,9 @@ searchEmployee {
 	, DATE_FORMAT(EMP.START_WORK_DATE ,'%d/%m/%y') AS START_WORK_DATE
 	, DATE_FORMAT(EMP.END_WORK_DATE ,'%d/%m/%y') AS END_WORK_DATE
 	, EMP.WORK_STATUS
-	, EMP.CREATE_DATE
-	, EMP.CREATE_USER
-	, EMP.UPDATE_DATE
+	, DATE_FORMAT(EMP.CREATE_DATE ,'%d/%m/%y') AS CREATE_DATE
+	, EMP.CREATE_USER 
+	, DATE_FORMAT(EMP.UPDATE_DATE ,'%d/%m/%y') AS UPDATE_DATE
 	, EMP.UPDATE_USER
 	, EMP.REMARK
 	FROM TRN_EMPLOYEE EMP
@@ -198,7 +198,7 @@ searchEmployee {
 	AND EMP.SEX = %s
 	AND DEP.DEPARTMENT_ID = %s
 	AND POS.POSITION_ID = %s
-	AND EMP.START_WORK_DATE >= %s		          	/* START_DATE '2017-01-20 00:00:00' */
-	AND EMP.START_WORK_DATE <= %s			        /* END_DATE '2017-02-25 00:00:00' */
+	AND EMP.START_WORK_DATE >= CONCAT(DATE_FORMAT(%s, '%Y-%m-%d'), ' ', '00:00:00')		          	/* START_DATE '2017-01-20 00:00:00' */
+	AND EMP.START_WORK_DATE <= CONCAT(DATE_FORMAT(%s, '%Y-%m-%d'), ' ', '00:00:00')			        /* END_DATE '2017-02-25 00:00:00' */
 	AND EMP.WORK_STATUS = %s
 }

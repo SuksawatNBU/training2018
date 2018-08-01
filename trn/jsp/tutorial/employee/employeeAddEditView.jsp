@@ -13,17 +13,17 @@
 		
 		<!-- set class ให้กับหน้า -->
 		<s:if test="page.getPage() == 'view'"> 
-		 	<s:set var="disableForm" value="true" />
+		 	<s:set var="viewDisable" value="true" />
 		</s:if>
 		<s:else> 
-			<s:set var="readOnly" value="" />
+			<s:set var="viewDisable" value="" />
 		</s:else>
 		
 		<s:if test="page.getPage() == 'edit'">
-			<s:set var="empReadOnly" value="true" />
+			<s:set var="editDisable" value="true" />
 		</s:if>
 		<s:else>
-			<s:set var="empReadOnly" value="" />
+			<s:set var="editDisable" value="" />
 		</s:else>
 		
 		<div>
@@ -45,13 +45,19 @@
 						<td class="VALUE">
 							<s:select id="employee_prefixId" name="employee.prefixId" 
 							list="listPrefix" headerKey="" headerValue="" listKey="key" listValue="value" 
-							cssClass ="combox requireInput" disabled="%{disableForm}" />
+							cssClass ="combox requireInput" disabled="%{viewDisable}" />
 						</td>
 						<td class="LABEL">
 							<s:text name="emp.sex" /><em>*</em>
 						</td>
 						<td class="VALUE">
-							<s:radio id="employee_sex" name="employee.sex" list="listSex" listKey="key" listValue="value" cssClass ="requireInput " disabled="%{disableForm} %{projCodeReadOnly}" />
+							<s:if test="page.getPage() == 'edit'">
+								<s:radio id="employee_sex" name="employee.sex" list="listSex" listKey="key" listValue="value" cssClass ="requireInput " disabled="%{editDisable}" />
+							</s:if>
+							<s:else>
+								<s:radio id="employee_sex" name="employee.sex" list="listSex" listKey="key" listValue="value" cssClass ="requireInput " disabled="%{viewDisable}" />
+							</s:else>
+							
 						</td>					
 						<td class="BORDER"></td>
 					</tr>
@@ -61,13 +67,13 @@
 							<s:text name="emp.name"/><em>*</em>
 						</td>
 						<td class="VALUE">
-							<s:textfield id="employee_name" name="employee.name" cssClass="requireInput" disabled="%{disableForm}"/>
+							<s:textfield id="employee_name" name="employee.name" cssClass="requireInput" disabled="%{viewDisable}"/>
 						</td>
 						<td class="LABEL">
 							<s:text name="emp.surname" /><em>*</em>
 						</td>
 						<td class="VALUE">
-							<s:textfield id="employee_surname" name="employee.surname" cssClass="requireInput" disabled="%{disableForm}"/>
+							<s:textfield id="employee_surname" name="employee.surname" cssClass="requireInput" disabled="%{viewDisable}"/>
 						</td>					
 						<td class="BORDER"></td>
 					</tr>
@@ -77,7 +83,7 @@
 							<s:text name="emp.nickName"/><em>*</em>
 						</td>
 						<td class="VALUE">
-							<s:textfield id="employee_nickName" name="employee.nickName" cssClass="requireInput" disabled="%{disableForm}"/>
+							<s:textfield id="employee_nickName" name="employee.nickName" cssClass="requireInput" disabled="%{viewDisable}"/>
 						</td>
 						<td class="LABEL"></td>
 						<td class="VALUE"></td>
@@ -89,14 +95,14 @@
 							<s:text name="emp.department"/><em>*</em>
 						</td>
 						<td class="VALUE">
-							<s:textfield id="employee_departmentId" name="employee.departmentId" code-of="autocomplet_department" cssClass="autocomplete requireInput" disabled="%{disableForm}"/>
+							<s:textfield id="employee_departmentId" name="employee.departmentId" code-of="autocomplet_department" cssClass="autocomplete requireInput" disabled="%{viewDisable}"/>
 							<s:textfield id="employee_departmentDesc" name="employee.departmentDesc" text-of="autocomplet_department" cssClass="autocomplete" />
 						</td>
 						<td class="LABEL">
 							<s:text name="emp.position"/><em>*</em>
 						</td>
 						<td class="VALUE">
-							<s:textfield id="employee_positionId" name="employee.positionId" code-of="autocomplet_position" cssClass="autocomplete requireInput" disabled="%{disableForm}"/>
+							<s:textfield id="employee_positionId" name="employee.positionId" code-of="autocomplet_position" cssClass="autocomplete requireInput" disabled="%{viewDisable}"/>
 							<s:textfield id="employee_positionDesc" name="employee.positionDesc" text-of="autocomplet_position" cssClass="autocomplete" />
 						</td>
 						<td class="BORDER"></td>
@@ -107,17 +113,18 @@
 							<s:text name="emp.startDate"/><em>*</em>
 						</td>
 						<td class="VALUE">
-							<s:textfield id="employee_startWorkDate" name="employee.startWorkDate" cssClass="requireInput" disabled="%{disableForm} %{projCodeReadOnly}"/>
+							<s:if test="page.getPage() == 'edit'">
+								<s:textfield id="employee_startWorkDate" name="employee.startWorkDate" cssClass="requireInput" disabled="%{editDisable}"/>
+							</s:if>
+							<s:else>
+								<s:textfield id="employee_startWorkDate" name="employee.startWorkDate" cssClass="requireInput" disabled="%{viewDisable}"/>
+							</s:else>
 						</td>
 						<td class="LABEL">
-							<s:if test='%{employee.workStatus eq "W"}'>
-								<s:text name="emp.endDate"/><em>*</em>
-							</s:if>
+							<s:text name="emp.endDate"/><em>*</em>
 						</td>
 						<td class="VALUE">
-							<s:if test='%{employee.workStatus eq "W"}'>
-								<s:textfield id="employee_endWorkDate" name="employee.endWorkDate" cssClass="requireInput" disabled="%{disableForm}"/>
-							</s:if>
+							<s:textfield id="employee_endWorkDate" name="employee.endWorkDate" cssClass="requireInput" disabled="%{viewDisable}"/>
 						</td>
 						<td class="BORDER"></td>
 					</tr>
@@ -127,7 +134,7 @@
 							<s:text name="emp.status"/><em>*</em>
 						</td>
 						<td class="VALUE" colspan="3">
-							<s:radio id="employee_workStatus" name="employee.workStatus" list="listWorkStatus" listKey="key" listValue="value" cssClass="requireInput" disabled="%{disableForm}" />
+							<s:radio id="employee_workStatus" name="employee.workStatus" list="listWorkStatus" listKey="key" listValue="value" cssClass="requireInput" disabled="%{viewDisable}"/>
 						</td>
 						<td class="BORDER"></td>
 					</tr>
@@ -137,7 +144,7 @@
 							<s:text name="emp.createRemark"/>
 						</td>
 						<td class="VALUE" colspan="3">
-							<s:textarea id="employee_transaction_createRemark" name="employee.transaction.createRemark" disabled="%{disableForm}"/>
+							<s:textarea id="employee_transaction_createRemark" name="employee.transaction.createRemark" disabled="%{viewDisable}"/>
 						</td>
 						<td class="BORDER"></td>
 					</tr>

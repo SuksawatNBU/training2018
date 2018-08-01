@@ -88,11 +88,11 @@
 		<%-- dataTable("<%=request.getContextPath()%>", colData, aOption); --%>
     }
 	
-	 function manageRow(row, data) {
+	function manageRow(row, data) {
          jQuery(".thaiName", row).html("<span title='"+data.fullThaiName+"'>"+data.thaiName+"</span>");
          jQuery(".documentType", row).html("<span title='"+data.fullDocumentType+"'>"+data.documentType+"</span>");
          jQuery(".engName", row).html("<span title='"+data.fullEngName+"'>"+data.engName+"</span>");
-     }
+    }
 	
     function clearPage() {
     	submitPage("<s:url value='/jsp/tutorial/initEmployee.action' />");

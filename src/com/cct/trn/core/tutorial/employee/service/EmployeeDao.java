@@ -346,9 +346,9 @@ public class EmployeeDao extends AbstractDAO<EmployeeSearchCriteria, EmployeeSea
 	@Override
 	protected int delete(CCTConnection conn, String ids, CommonUser user, Locale locale) throws Exception {
 		int paramIndex = 0;
-	    int id = 0;
 
-	    Object[] params = new Object[1];
+	    Object[] params = new Object[2];
+	    params[paramIndex++] = StringUtil.replaceSpecialString(user.getUserId(), conn.getDbType(), ResultType.NULL);
 	    params[paramIndex++] = StringUtil.replaceSpecialString(ids, conn.getDbType(), ResultType.NULL);
        
         String sql = SQLUtil.getSQLString(conn.getSchemas()
@@ -367,7 +367,7 @@ public class EmployeeDao extends AbstractDAO<EmployeeSearchCriteria, EmployeeSea
         } finally {
         	CCTConnectionUtil.closeAll(null, stmt);
         }
-        return id ;
+        return 0 ;
 	}
 
 	/**

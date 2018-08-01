@@ -9,11 +9,6 @@
 	<s:include value="/jsp/tutorial/employee/include/employeeSearch-ja-css.jsp"/>
 </head>
 <body>
-	
-	<!-- Menu -->
-	<div style="margin-left: 25px; margin-bottom: 15px;">
-		<button type="button" onclick="addPage()">Add</button>
-	</div>
 
 	<s:form id="searchForm" name="searchForm" method="post" namespace="/jsp/tutorial" action="initAction" cssClass="margin-zero" onsubmit="return false;">
 		
@@ -154,6 +149,8 @@
 	        </table>
 	   	</div>
 	   	</div>
+	   	
+	   	<button type="button" onclick="">Dalete</button>
 	   	
 	   	<!------------------------------------- BUTTON ------------------------------------->
 	   	<div style="display: none;"><s:include value="/jsp/template/hiddenSearchForDatatable.jsp" /></div>

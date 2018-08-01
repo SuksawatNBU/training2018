@@ -94,6 +94,8 @@ public class EmployeeService extends AbstractService{
 	protected List<EmployeeSearch> search(CCTConnection conn, EmployeeSearchCriteria criteria, CommonUser user, Locale locale) throws Exception {
 		List<EmployeeSearch> listResult = new ArrayList<EmployeeSearch>();
 	    try {
+	    	//แปลงวันที่
+	    	criteria.setStartWorkDate(convertDate(criteria.getStartWorkDate(), 7));
 	        listResult = dao.search(conn, criteria, user, locale);
 	        // แปลงข้อมูล
 	        listResult = convertValue(listResult);
@@ -147,9 +149,9 @@ public class EmployeeService extends AbstractService{
 	        	emp.setEndWorkDate(convertDate(employee.getEndWorkDate(), 1));	//แปลง
 	        	emp.setWorkStatus(convertWorkStatus(employee.getWorkStatus()));		//แปลง
 	        	transaction.setCreateUser(employee.getTransaction().getCreateUser());
-	        	transaction.setCreateDate(convertDate(employee.getTransaction().getCreateDate(), 2));	//แปลง
+	        	transaction.setCreateDate(convertDate(employee.getTransaction().getCreateDate(), 1));	//แปลง
 	        	transaction.setUpdateUser(employee.getTransaction().getUpdateUser());
-	        	transaction.setUpdateDate(convertDate(employee.getTransaction().getUpdateDate(), 2));	//แปลง
+	        	transaction.setUpdateDate(convertDate(employee.getTransaction().getUpdateDate(), 1));	//แปลง
 	        	transaction.setCreateRemark(employee.getTransaction().getCreateRemark());
 	        	emp.setTransaction(transaction);
 	        	listResult.add(emp);
@@ -172,21 +174,13 @@ public class EmployeeService extends AbstractService{
 		Format formatterTH = new SimpleDateFormat("dd/MM/yyyy", new Locale("th", "TH"));
 		Format formatterEN = new SimpleDateFormat("dd/MM/yyyy", new Locale("en", "EN"));
 		Format formatterEN2 = new SimpleDateFormat("yyyy/MM/dd", new Locale("en", "EN"));
+		Format formatterEN3 = new SimpleDateFormat("yyyy/MM/dd HH:MM:SS", new Locale("en", "EN"));
 		
+		// ฟังก์ชันค้นหา Sql --> JSP
 		if(func == 1){
 			if(date.equals(null) || date.equals("")) return null;
 			try {
 				DateFormat df = new SimpleDateFormat("dd/MM/yy");
-				Date conDate = df.parse(date);
-				parseDate = formatterTH.format(conDate);
-			} catch (Exception e) {
-				throw e;
-			}
-		}
-		else if(func == 2){
-			if(date.equals(null) || date.equals("")) return null;
-			try {
-				DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:MM:SS");
 				Date conDate = df.parse(date);
 				parseDate = formatterTH.format(conDate);
 			} catch (Exception e) {
@@ -230,6 +224,17 @@ public class EmployeeService extends AbstractService{
 			try {
 				Date conDate = new Date();
 				parseDate = formatterEN.format(conDate);
+			} catch (Exception e) {
+				throw e;
+			}
+		}
+		//สำหรับค้นหา
+		else if(func == 7){
+			if(date.equals(null) || date.equals("")) return null;
+			try {
+				DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+				Date conDate = df.parse(date);
+				parseDate = formatterEN3.format(conDate);
 			} catch (Exception e) {
 				throw e;
 			}

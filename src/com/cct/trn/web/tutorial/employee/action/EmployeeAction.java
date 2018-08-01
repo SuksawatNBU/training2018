@@ -311,6 +311,11 @@ public class EmployeeAction extends CommonAction  implements ModelDriven<Employe
 		return null;
 	}
 
+	/**
+	 * return searchDo เพื่อกลับไปค้นหาและแสดงผลการค้นหาใหม่ที่หน้าค้นหา
+	 * ถ้ามี error จะ return searchDo เพื่อแสดง error ที่ด้วยผลการค้นหาเดิม
+	 * ยกเว้นตรวจสอบสิทธิ์ไม่ผ่าน ให้กลับไปที่หน้า login
+	 */
 	@Override
 	public String delete() throws Exception {
 		String result = null;
@@ -319,20 +324,18 @@ public class EmployeeAction extends CommonAction  implements ModelDriven<Employe
 			//1.สร้าง connection โดยจะต้องระบุ lookup ที่ใช้ด้วย
 	        conn = new CCTConnectionProvider().getConnection(conn, DBLookup.MYSQL_TRAINING.getLookup());
 	        
-	        //2.ตรวจสอบสิทธิ์ หน้าแสดง
-	        result = "init";
+	        //2.ตรวจสอบสิทธิ์
+	        result = manageDelete(conn, model);
 	        
-	        //3.
+	        //3.Delete process
 	        EmployeeManager manager = new EmployeeManager(conn, getUser(), getLocale());
 	        manager.delete(model.getEmployee().getId());
 	        
 		} catch (Exception e) {
-			// TODO: handle exception
+			//4.จัดการ exception กรณีที่มี exception เกิดขึ้นในระบบ
+	        manageException(conn, PF_CODE.getDeleteFunction(), this, e, model);
 		}finally {
-	        //6.Load combo ทั้งหมดที่ใช้ในหน้าแสดง
-	        getComboForAddEdit(conn);
-	         
-	        //7.Close connection หลังเลิกใช้งาน
+			//5.Close connection หลังเลิกใช้งาน
 	        CCTConnectionUtil.close(conn);
 	    }
 		return result;
