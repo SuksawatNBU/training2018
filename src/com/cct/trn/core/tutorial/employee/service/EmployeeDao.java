@@ -76,7 +76,7 @@ public class EmployeeDao extends AbstractDAO<EmployeeSearchCriteria, EmployeeSea
 		int paramIndex = 0;
 		List<EmployeeSearch> listResult = new ArrayList<EmployeeSearch>();
 		
-        Object[] params = new Object[9];
+        Object[] params = new Object[11];
         params[paramIndex++] = StringUtil.replaceSpecialString(criteria.getPrefixId(), conn.getDbType(), ResultType.NULL);
         params[paramIndex++] = StringUtil.replaceSpecialString(criteria.getFullname(), conn.getDbType(), ResultType.NULL);
         params[paramIndex++] = StringUtil.replaceSpecialString(criteria.getNickname(), conn.getDbType(), ResultType.NULL);
@@ -86,6 +86,8 @@ public class EmployeeDao extends AbstractDAO<EmployeeSearchCriteria, EmployeeSea
         params[paramIndex++] = StringUtil.replaceSpecialString(criteria.getStartWorkDate(), conn.getDbType(), ResultType.NULL);
         params[paramIndex++] = StringUtil.replaceSpecialString(criteria.getEndWorkDate(), conn.getDbType(), ResultType.NULL);
         params[paramIndex++] = StringUtil.replaceSpecialString(criteria.getWorkStatus(), conn.getDbType(), ResultType.NULL);
+        params[paramIndex++] = criteria.getStart();
+        params[paramIndex++] = criteria.getLinePerPage();
 		
         String sql = SQLUtil.getSQLString(conn.getSchemas()
                 , getSqlPath().getClassName()
@@ -321,23 +323,6 @@ public class EmployeeDao extends AbstractDAO<EmployeeSearchCriteria, EmployeeSea
         	CCTConnectionUtil.closeAll(null, stmt);
         }
         return id ;
-	}
-	
-	/**
-	* @Description ลบสิทธิ์เดิมของผู้ใช้ที่เลือก
-	* @throws Exception
-	*/
-	protected int deleteOperator(CCTConnection conn, String ids, String languageId) throws Exception {
-		Statement stmt = null;
-	     
-	    try {
-	        
-	    } catch (Exception e) {
-	        throw e;
-	    }finally{
-	        CCTConnectionUtil.closeStatement(stmt);
-	    }
-	    return 0;
 	}
 
 	/**

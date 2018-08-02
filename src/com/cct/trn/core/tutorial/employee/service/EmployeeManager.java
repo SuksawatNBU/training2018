@@ -38,7 +38,6 @@ public class EmployeeManager extends AbstractManager<EmployeeSearchCriteria, Emp
 			
 			if (criteria.getTotalResult() == 0) {
 				// Nothing
-				System.out.println("--> Nothing");
 			} else if ((criteria.isCheckMaxExceed()) && (criteria.getTotalResult() > ParameterConfig.getParameter().getApplication().getMaxExceed())) {
 				// เกินจำนวนที่กำหนด
 	            throw new MaxExceedException();
@@ -155,7 +154,7 @@ public class EmployeeManager extends AbstractManager<EmployeeSearchCriteria, Emp
 		Employee emp = new Employee();
 		try {
 	        emp.setSex("M");
-	        emp.setStartWorkDate(service.convertDate(null, 6));
+	        emp.setStartWorkDate(service.convertDate(null, "defaultValue"));
 	        emp.setWorkStatus("T");
 		} catch (Exception e) {
 			e.printStackTrace();

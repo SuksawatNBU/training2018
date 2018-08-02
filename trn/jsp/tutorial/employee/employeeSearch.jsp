@@ -123,7 +123,7 @@
 	    		<thead>
 	    			<tr>
 	    				<th><s:text name="emp.no" /></th>
-	    				<th></th>
+	    				<th><input type="checkbox" name="chkall" onClick="checkboxToggle('criteria.selectedIds',this.checked)" /></th>
 	    				<th></th>
 	    				<th></th>
 	    				<th><s:text name="emp.fullname" /></th>
@@ -140,19 +140,32 @@
 	    				<th><s:text name="emp.createRemark" /></th>
 	    			</tr>
 	    		</thead>
+<!-- 	    		<tfoot>
+					<tr align="left">
+						<th colspan="16">
+							<button id="btnDelete" style="margin-left: 20px; margin-top: 10px;" class="jbutton ui-icon-close" onclick="deleteValue();">Dalete</button>
+						</th>
+					</tr>
+				</tfoot> -->
 	    		<tbody>
 					<tr>
 						<!-- Loading Progress -->
 						<td colspan="16" class="dataTables_empty">Loading data from server</td>
 					</tr>
 				</tbody>
+				
 	        </table>
 	   	</div>
 	   	</div>
 	   	
-	   	<button type="button" onclick="">Dalete</button>
-	   	
 	   	<!------------------------------------- BUTTON ------------------------------------->
+		
+		<div id="tempIconEditDisable" style="display: none;">
+		   <a href="javascript:void(0)">
+		       <img src="<s:url value='/images/icon/i_edit_dis.png' />" border="0">
+		   </a>
+		</div>
+		
 	   	<div style="display: none;"><s:include value="/jsp/template/hiddenSearchForDatatable.jsp" /></div>
 	    <s:hidden name="employee.id" />
 	    <s:token/>

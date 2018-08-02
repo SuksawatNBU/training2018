@@ -62,6 +62,7 @@
             },
 			pk: "employee.id",
 			fixedCoumnsLeft : 6,	//Fixed column ทางซ้ายเริ่มตั้งแต่ 0-5
+			footerHtml: '<button id="btnDelete" style="margin-left: 20px; margin-top: 10px;" onclick="deleteValue();">Dalete</button>',
 			createdRowFunc: "manageRow"
 		};
 		
@@ -89,11 +90,15 @@
     }
 	
 	function manageRow(row, data) {
-         jQuery(".thaiName", row).html("<span title='"+data.fullThaiName+"'>"+data.thaiName+"</span>");
-         jQuery(".documentType", row).html("<span title='"+data.fullDocumentType+"'>"+data.documentType+"</span>");
-         jQuery(".engName", row).html("<span title='"+data.fullEngName+"'>"+data.engName+"</span>");
+		var htmlIconEdit = "";
+		if(data.workStatus == "เลิกจ้าง"){
+			htmlIconEdit = jQuery("#tempIconEditDisable").html();
+		}else {
+			htmlIconEdit = jQuery("#tempIconEditEnable").html();
+		}
+		jQuery(row).find("td").eq(2).html(htmlIconEdit);
     }
-	
+
     function clearPage() {
     	submitPage("<s:url value='/jsp/tutorial/initEmployee.action' />");
     }
@@ -105,15 +110,31 @@
     /**
      * ใช้สำหรับ submit กรณีเพิ่ม, แก้ไข, แสดง
      * ต้องใช้ร่วมกับไฟล์ inputmethod.js
-     * @param action
-     * @param emName (hidden name ของ id ใน model)
-     * @param valId
      */
     function submitAction(action, elName, valId){
         if(valId != null && valId != ""){
             document.getElementsByName(elName)[0].value = valId;
         }
         submitPage(action);
+    }
+    
+    /* function deleteValue(){
+    	//1.ขั้นตอนการตรวจสอบ validate
+    	if(!validateAll()){
+	        return false;
+	    }
+    	//2.Confirm dialog
+//	    if(confirm('<s:text name="50005" />') == false){  
+//	        return false;
+//	    }
+        submitPage("<s:url value='/jsp/tutorial/deleteEmployee.action' />");
+    } */
+    
+    function deleteValue(){
+    	if(confirm('<s:text name="50005" />') == false){  
+	        return false;
+	    }
+    	var action = "<s:url value='/jsp/tutorial/deleteEmployee.action' />";
     }
     
 </script>

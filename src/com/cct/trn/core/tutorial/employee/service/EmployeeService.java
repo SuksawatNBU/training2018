@@ -68,9 +68,10 @@ public class EmployeeService extends AbstractService{
 	protected int edit(CCTConnection conn, Employee obj, CommonUser user, Locale locale) throws Exception {
 		try {
 			//แปลงวันที่
-			obj.setStartWorkDate(convertDate(obj.getStartWorkDate(), 5));
 			if(obj.getWorkStatus().equals("W")){
-				obj.setEndWorkDate(convertDate(obj.getEndWorkDate(), 5));
+				obj.setEndWorkDate(convertDate(obj.getEndWorkDate(), "inEdit"));
+		    }else{
+		    	obj.setEndWorkDate("");
 		    }
 			//เพิ่มข้อมูลผู้ใช้งานและสิทธิ์การใช้งาน
 	        return dao.edit(conn, obj, user, locale);
@@ -94,10 +95,16 @@ public class EmployeeService extends AbstractService{
 	protected List<EmployeeSearch> search(CCTConnection conn, EmployeeSearchCriteria criteria, CommonUser user, Locale locale) throws Exception {
 		List<EmployeeSearch> listResult = new ArrayList<EmployeeSearch>();
 	    try {
-	    	//แปลงวันที่
-	    	criteria.setStartWorkDate(convertDate(criteria.getStartWorkDate(), 7));
+	    	//1.แปลงวันที่
+	    	if(!criteria.getStartWorkDate().equals("")){
+	    		criteria.setStartWorkDate(convertDate(criteria.getStartWorkDate(), "inSearch"));
+	    	}
+	    	if(!criteria.getEndWorkDate().equals("")){
+	    		criteria.setEndWorkDate(convertDate(criteria.getEndWorkDate(), "inSearch"));
+	    	}
+	    	//2.ค้นหาข้อมูล
 	        listResult = dao.search(conn, criteria, user, locale);
-	        // แปลงข้อมูล
+	        //3.แปลงข้อมูล
 	        listResult = convertValue(listResult);
 	    } catch (Exception e) {
 	        LogUtil.SEC.error("", e);
@@ -110,12 +117,12 @@ public class EmployeeService extends AbstractService{
 	protected Employee searchById(CCTConnection conn, String id, CommonUser user, Locale locale) throws Exception {
 		Employee result = new Employee();
 		try {
-		    result = dao.searchById(conn, id, user, locale);
-		    	
-		    // แปลงรูปแบบวันที่
-		    result.setStartWorkDate(convertDate(result.getStartWorkDate(), 3));
+			//1.ค้นหาข้อมูล
+		    result = dao.searchById(conn, id, user, locale);	
+		    //2.แปลงรูปแบบวันที่
+		    result.setStartWorkDate(convertDate(result.getStartWorkDate(), "outSearchById"));
 		    if(result.getWorkStatus().equals("W")){
-		    	result.setEndWorkDate(convertDate(result.getEndWorkDate(), 3));
+		    	result.setEndWorkDate(convertDate(result.getEndWorkDate(), "outSearchById"));
 		    }
 		} catch (Exception e) {
 			LogUtil.SEC.error("", e);
@@ -123,16 +130,16 @@ public class EmployeeService extends AbstractService{
 		}
 		return result;
 	}
-		
+	
 	protected List<CommonSelectItem> searchPrefixSelectItem(CCTConnection conn, Locale locale){
-			List<CommonSelectItem> listResult = new ArrayList<CommonSelectItem>();
-			try {
-				listResult = dao.searchPrefixSelectItem(conn,locale);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			return listResult;
-		}	
+		List<CommonSelectItem> listResult = new ArrayList<CommonSelectItem>();
+		try {
+			listResult = dao.searchPrefixSelectItem(conn,locale);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return listResult;
+	}	
 	
 	public List<EmployeeSearch> convertValue(List<EmployeeSearch> list) throws Exception{
 		List<EmployeeSearch> listResult = new ArrayList<EmployeeSearch>();
@@ -145,13 +152,13 @@ public class EmployeeService extends AbstractService{
 	        	emp.setSex(convertSex(employee.getSex()));	//แปลง
 	        	emp.setDepartmentDesc(convertDepartment(employee.getDepartmentDesc()));	//แปลง
 	        	emp.setPositionDesc(convertPosition(employee.getPositionDesc()));	//แปลง
-	        	emp.setStartWorkDate(convertDate(employee.getStartWorkDate(), 1));	//แปลง
-	        	emp.setEndWorkDate(convertDate(employee.getEndWorkDate(), 1));	//แปลง
+	        	emp.setStartWorkDate(convertDate(employee.getStartWorkDate(), "outSearch"));	//แปลง
+	        	emp.setEndWorkDate(convertDate(employee.getEndWorkDate(), "outSearch"));	//แปลง
 	        	emp.setWorkStatus(convertWorkStatus(employee.getWorkStatus()));		//แปลง
 	        	transaction.setCreateUser(employee.getTransaction().getCreateUser());
-	        	transaction.setCreateDate(convertDate(employee.getTransaction().getCreateDate(), 1));	//แปลง
+	        	transaction.setCreateDate(convertDate(employee.getTransaction().getCreateDate(), "outSearch"));	//แปลง
 	        	transaction.setUpdateUser(employee.getTransaction().getUpdateUser());
-	        	transaction.setUpdateDate(convertDate(employee.getTransaction().getUpdateDate(), 1));	//แปลง
+	        	transaction.setUpdateDate(convertDate(employee.getTransaction().getUpdateDate(), "outSearch"));	//แปลง
 	        	transaction.setCreateRemark(employee.getTransaction().getCreateRemark());
 	        	emp.setTransaction(transaction);
 	        	listResult.add(emp);
@@ -169,72 +176,61 @@ public class EmployeeService extends AbstractService{
 		else return null;
 	}
 	
-	public String convertDate(String date, int func) throws ParseException{
+	public String convertDate(String date, String func) throws ParseException{
 		String parseDate = "";
-		Format formatterTH = new SimpleDateFormat("dd/MM/yyyy", new Locale("th", "TH"));
-		Format formatterEN = new SimpleDateFormat("dd/MM/yyyy", new Locale("en", "EN"));
-		Format formatterEN2 = new SimpleDateFormat("yyyy/MM/dd", new Locale("en", "EN"));
-		Format formatterEN3 = new SimpleDateFormat("yyyy/MM/dd HH:MM:SS", new Locale("en", "EN"));
+		Format outputTH = new SimpleDateFormat("dd/MM/yyyy", new Locale("th", "TH"));
+		Format outputEN = new SimpleDateFormat("dd/MM/yyyy", new Locale("en", "EN"));
+		Format inputEN = new SimpleDateFormat("yyyy/MM/dd", new Locale("en", "EN"));
+		Format inputEN2 = new SimpleDateFormat("yyyy/MM/dd HH:MM:SS", new Locale("en", "EN"));
 		
-		// ฟังก์ชันค้นหา Sql --> JSP
-		if(func == 1){
-			if(date.equals(null) || date.equals("")) return null;
-			try {
-				DateFormat df = new SimpleDateFormat("dd/MM/yy");
-				Date conDate = df.parse(date);
-				parseDate = formatterTH.format(conDate);
-			} catch (Exception e) {
-				throw e;
-			}
-		}
-		else if(func == 3){
-			if(date.equals(null) || date.equals("")) return null;
-			try {
-				DateFormat df = new SimpleDateFormat("dd/MM/yy");
-				Date conDate = df.parse(date);
-				parseDate = formatterEN.format(conDate);
-			} catch (Exception e) {
-				throw e;
-			}
-		}
-		// แปลงสำหรับหน้า input
-		else if(func == 4){
-			if(date.equals(null) || date.equals("")) return null;
-			try {
-				DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:MM:SS");
-				Date conDate = df.parse(date);
-				parseDate = formatterEN.format(conDate);
-			} catch (Exception e) {
-				throw e;
-			}
-		}
-		// รับจากหน้าจอ
-		else if(func == 5){
+		// ฟังก์ชันค้นหา
+		if(func == "inSearch"){
 			if(date.equals(null) || date.equals("")) return null;
 			try {
 				DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
 				Date conDate = df.parse(date);
-				parseDate = formatterEN2.format(conDate);
+				parseDate = inputEN2.format(conDate);
+			} catch (Exception e) {
+				throw e;
+			}
+		}
+		else if(func == "outSearch"){
+			if(date.equals(null) || date.equals("")) return null;
+			try {
+				DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+				Date conDate = df.parse(date);
+				parseDate = outputTH.format(conDate);
+			} catch (Exception e) {
+				throw e;
+			}
+		}
+		//ฟังชันค้นหาข้อมูลตาม ไอดีผู้ใช้
+		else if(func == "outSearchById"){
+			if(date.equals(null) || date.equals("")) return null;
+			try {
+				DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+				Date conDate = df.parse(date);
+				parseDate = outputEN.format(conDate);
+			} catch (Exception e) {
+				throw e;
+			}
+		}
+		// ฟังก์ชันแก้ไขข้อมูล
+		else if(func == "inEdit"){
+			if(date.equals(null) || date.equals("")) return null;
+			try {
+				DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+				Date conDate = df.parse(date);
+				parseDate = inputEN.format(conDate);
 			} catch (Exception e) {
 				throw e;
 			}
 		}
 		//วันที่ปัจจุบัน
-		else if(func == 6){
+		else if(func == "defaultValue"){
 			try {
 				Date conDate = new Date();
-				parseDate = formatterEN.format(conDate);
-			} catch (Exception e) {
-				throw e;
-			}
-		}
-		//สำหรับค้นหา
-		else if(func == 7){
-			if(date.equals(null) || date.equals("")) return null;
-			try {
-				DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-				Date conDate = df.parse(date);
-				parseDate = formatterEN3.format(conDate);
+				parseDate = outputEN.format(conDate);
 			} catch (Exception e) {
 				throw e;
 			}

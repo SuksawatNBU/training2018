@@ -26,12 +26,32 @@
 		jQuery("#employee_startWorkDate").input_dateformat({
 			dateformat : "dd_sl_mm_sl_yyyy"
 	    });
+		
+		if($("#employee_workStatus").val() == "W") {
+			jQuery("#employee_endWorkDate").input_dateformat({
+				dateformat : "dd_sl_mm_sl_yyyy"
+		    });
+		}
 	});
+	
+	$(document).ready(function(){
+		$("#employee_workStatus").click(function(){
+			if($("#employee_workStatus").val() == "W") {
+				$("#employee_endWorkDate").hide();
+			}
+			else {
+				
+			}
+	    });
+	});
+	
+	function changEndWorkDate(){
+		$("#pp").hide();
+	}
 	
 	function saveAdd(){
 	    //1.ขั้นตอนการตรวจสอบ validate
 	    if(!validateAll()){
-	    	
 	        return false;
 	    }
 	    //2.Confirm dialog
@@ -87,3 +107,9 @@
     }
 	
 </script>
+
+<style>
+	.changeEndDate {
+		display: none;
+	}
+</style>

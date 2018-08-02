@@ -331,6 +331,8 @@ public class EmployeeAction extends CommonAction  implements ModelDriven<Employe
 	        EmployeeManager manager = new EmployeeManager(conn, getUser(), getLocale());
 	        manager.delete(model.getEmployee().getId());
 	        
+	        //4.ค้นหาข้อมูล
+	        
 		} catch (Exception e) {
 			//4.จัดการ exception กรณีที่มี exception เกิดขึ้นในระบบ
 	        manageException(conn, PF_CODE.getDeleteFunction(), this, e, model);

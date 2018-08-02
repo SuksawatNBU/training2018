@@ -26,6 +26,9 @@
 			<s:set var="editDisable" value="" />
 		</s:else>
 		
+		<!-- Test Code -->
+		<p id="pp">Click me too!</p>
+		
 		<div>
 			<table class="FORM" style="float:left; margin:13px;">
 				<tbody>
@@ -57,7 +60,6 @@
 							<s:else>
 								<s:radio id="employee_sex" name="employee.sex" list="listSex" listKey="key" listValue="value" cssClass ="requireInput " disabled="%{viewDisable}" />
 							</s:else>
-							
 						</td>					
 						<td class="BORDER"></td>
 					</tr>
@@ -121,10 +123,17 @@
 							</s:else>
 						</td>
 						<td class="LABEL">
-							<s:text name="emp.endDate"/><em>*</em>
+							<s:if test="page.getPage() == 'edit'"> 
+								<s:text name="emp.endDate"/><em>*</em>
+							</s:if>
 						</td>
 						<td class="VALUE">
-							<s:textfield id="employee_endWorkDate" name="employee.endWorkDate" cssClass="requireInput" disabled="%{viewDisable}"/>
+							<s:if test="page.getPage() == 'edit'"> 
+							 	<s:textfield id="employee_endWorkDate" name="employee.endWorkDate" cssClass="requireInput" disabled=""/>
+							</s:if>
+							<s:else>
+								<s:textfield id="employee_endWorkDate" name="employee.endWorkDate" cssClass="requireInput" disabled="true" cssStyle="display: none;"/>
+							</s:else>
 						</td>
 						<td class="BORDER"></td>
 					</tr>
@@ -134,7 +143,12 @@
 							<s:text name="emp.status"/><em>*</em>
 						</td>
 						<td class="VALUE" colspan="3">
-							<s:radio id="employee_workStatus" name="employee.workStatus" list="listWorkStatus" listKey="key" listValue="value" cssClass="requireInput" disabled="%{viewDisable}"/>
+							<s:iterator value="listWorkStatus">
+								<label class="checkbox-inline">
+									<input type="radio" id="employee_workStatus" name="employee.workStatus" value='<s:property value="key"/>'/>
+									<s:property value="value"/>
+								</label>
+							</s:iterator>
 						</td>
 						<td class="BORDER"></td>
 					</tr>
