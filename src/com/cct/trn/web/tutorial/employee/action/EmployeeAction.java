@@ -72,6 +72,7 @@ public class EmployeeAction extends CommonAction  implements ModelDriven<Employe
 		try {
 			EmployeeManager manager = new EmployeeManager(conn, getUser(), getLocale());
 			model.setListPrefix(manager.searchPrefixSelectItem(conn, getLocale()));
+			
 			model.setListSex(SelectItemManager.getMapGlobalData().get(getLocale()).get(GlobalType.SEX.getValue()));
 			model.setListWorkStatus(SelectItemManager.getMapGlobalData().get(getLocale()).get(GlobalType.WORK_STATUS.getValue()));
 		} catch (Exception e) {

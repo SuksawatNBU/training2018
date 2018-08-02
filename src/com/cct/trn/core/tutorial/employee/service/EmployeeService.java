@@ -95,13 +95,6 @@ public class EmployeeService extends AbstractService{
 	protected List<EmployeeSearch> search(CCTConnection conn, EmployeeSearchCriteria criteria, CommonUser user, Locale locale) throws Exception {
 		List<EmployeeSearch> listResult = new ArrayList<EmployeeSearch>();
 	    try {
-	    	//1.แปลงวันที่
-	    	if(!criteria.getStartWorkDate().equals("")){
-	    		criteria.setStartWorkDate(convertDate(criteria.getStartWorkDate(), "inSearch"));
-	    	}
-	    	if(!criteria.getEndWorkDate().equals("")){
-	    		criteria.setEndWorkDate(convertDate(criteria.getEndWorkDate(), "inSearch"));
-	    	}
 	    	//2.ค้นหาข้อมูล
 	        listResult = dao.search(conn, criteria, user, locale);
 	        //3.แปลงข้อมูล
@@ -181,20 +174,9 @@ public class EmployeeService extends AbstractService{
 		Format outputTH = new SimpleDateFormat("dd/MM/yyyy", new Locale("th", "TH"));
 		Format outputEN = new SimpleDateFormat("dd/MM/yyyy", new Locale("en", "EN"));
 		Format inputEN = new SimpleDateFormat("yyyy/MM/dd", new Locale("en", "EN"));
-		Format inputEN2 = new SimpleDateFormat("yyyy/MM/dd HH:MM:SS", new Locale("en", "EN"));
 		
 		// ฟังก์ชันค้นหา
-		if(func == "inSearch"){
-			if(date.equals(null) || date.equals("")) return null;
-			try {
-				DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-				Date conDate = df.parse(date);
-				parseDate = inputEN2.format(conDate);
-			} catch (Exception e) {
-				throw e;
-			}
-		}
-		else if(func == "outSearch"){
+		if(func == "outSearch"){
 			if(date.equals(null) || date.equals("")) return null;
 			try {
 				DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
@@ -205,7 +187,7 @@ public class EmployeeService extends AbstractService{
 			}
 		}
 		//ฟังชันค้นหาข้อมูลตาม ไอดีผู้ใช้
-		else if(func == "outSearchById"){
+		if(func == "outSearchById"){
 			if(date.equals(null) || date.equals("")) return null;
 			try {
 				DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
@@ -216,7 +198,7 @@ public class EmployeeService extends AbstractService{
 			}
 		}
 		// ฟังก์ชันแก้ไขข้อมูล
-		else if(func == "inEdit"){
+		if(func == "inEdit"){
 			if(date.equals(null) || date.equals("")) return null;
 			try {
 				DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
@@ -227,7 +209,7 @@ public class EmployeeService extends AbstractService{
 			}
 		}
 		//วันที่ปัจจุบัน
-		else if(func == "defaultValue"){
+		if(func == "defaultValue"){
 			try {
 				Date conDate = new Date();
 				parseDate = outputEN.format(conDate);

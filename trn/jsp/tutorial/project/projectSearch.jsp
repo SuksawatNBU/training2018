@@ -112,7 +112,7 @@
 </head>
 
 <body>
-	<s:form id="searchForm" name="searchForm" method="post" namespace="/jsp/tutorial" action="initProject" cssClass="margin-zero" onsubmit="return false;">
+	<s:form id="searchForm" name="searchForm" method="post" cssClass="margin-zero" onsubmit="return false;">
 		<div id="divSearchForm" class="CRITERIA">
 			<div id="divCriteria" class="RESULT_BOX BORDER_COLOR">
 				<div class="RESULT_BOX_TITAL ">

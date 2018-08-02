@@ -11,7 +11,6 @@
 
 	/* Auto Complete */
 	jQuery(document).ready(function(){
-		// เรียกใช้งาน Autocomplete widget สำหรับสร้าง Autocomplete
 	    jQuery("#criteria_departmentId").autocompletezAjax([{  // UI มาตรฐาน   
 	        url: "<s:url value='/departmentAutoSelectItemServlet'/>",  // url สำหรับ request ข้อมูล
 	        defaultKey: "",     // กำหนดค่า key ตัวแรกของ Autocomplete
@@ -37,10 +36,13 @@
 			dateformat : "dd_sl_mm_sl_yyyy" ,
 			selectDateRange: {
 				dateFrom: "criteria_startWorkDate" 	// ????????????????	
-			} 
+			}
 		});
 	});
 
+	/*
+     * ใช้สำหรับ ค้นหาข้อมูล
+     */
 	function searchPage() {
         document.getElementsByName('criteria.criteriaKey')[0].value = '';
         searchAjax()
@@ -99,17 +101,22 @@
 		jQuery(row).find("td").eq(2).html(htmlIconEdit);
     }
 
+	/*
+     * ใช้สำหรับ ล้างข้อมูลหน้าค้นหา
+     */
     function clearPage() {
     	submitPage("<s:url value='/jsp/tutorial/initEmployee.action' />");
     }
     
+    /*
+     * ใช้สำหรับ ไปหน้าเพิ่มข้อมูล
+     */
     function addPage(){
         submitPage("<s:url value='/jsp/tutorial/gotoAddEmployee.action' />");
     }
     
-    /**
-     * ใช้สำหรับ submit กรณีเพิ่ม, แก้ไข, แสดง
-     * ต้องใช้ร่วมกับไฟล์ inputmethod.js
+    /*
+     * ใช้สำหรับ submit กรณีเพิ่ม, แก้ไข, แสดง ต้องใช้ร่วมกับไฟล์ inputmethod.js
      */
     function submitAction(action, elName, valId){
         if(valId != null && valId != ""){
@@ -131,9 +138,6 @@
     } */
     
     function deleteValue(){
-    	if(confirm('<s:text name="50005" />') == false){  
-	        return false;
-	    }
     	var action = "<s:url value='/jsp/tutorial/deleteEmployee.action' />";
     }
     

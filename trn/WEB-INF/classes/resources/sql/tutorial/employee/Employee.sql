@@ -198,8 +198,8 @@ searchEmployee {
 	AND EMP.SEX = %s
 	AND DEP.DEPARTMENT_ID = %s
 	AND POS.POSITION_ID = %s
-	AND EMP.START_WORK_DATE >= CONCAT(DATE_FORMAT(%s, '%Y-%m-%d'), ' ', '00:00:00')		          	/* START_DATE '2017-01-20 00:00:00' */
-	AND EMP.START_WORK_DATE <= CONCAT(DATE_FORMAT(%s, '%Y-%m-%d'), ' ', '00:00:00')			        /* END_DATE '2017-02-25 00:00:00' */
+	AND EMP.START_WORK_DATE >= STR_TO_DATE(%s, '%Y-%m-%d %H:%i')	          	/* START_DATE '2017-01-20 00:00:00' */
+	AND EMP.START_WORK_DATE <= STR_TO_DATE(%s, '%Y-%m-%d %H:%i')				/* END_DATE '2017-02-25 00:00:00' */
 	AND EMP.WORK_STATUS = %s
 	
 	LIMIT %s

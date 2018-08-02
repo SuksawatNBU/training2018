@@ -76,6 +76,17 @@ public class EmployeeDao extends AbstractDAO<EmployeeSearchCriteria, EmployeeSea
 		int paramIndex = 0;
 		List<EmployeeSearch> listResult = new ArrayList<EmployeeSearch>();
 		
+		String startDate = StringUtil.replaceSpecialString(criteria.getStartWorkDate(), conn.getDbType(), ResultType.NULL);
+		if (startDate != null) {
+			Calendar startCalendar = CalendarUtil.getCalendarFromDateString(startDate, ParameterConfig.getParameter().getDateFormat().getForDisplay(), ParameterConfig.getParameter().getApplication().getDatabaseLocale());
+			startDate = CalendarUtil.getDateStringFromCalendar(startCalendar, "YYYY-MM-DD HH:mm");
+		}	
+		String endDate = StringUtil.replaceSpecialString(criteria.getEndWorkDate(), conn.getDbType(), ResultType.NULL);
+		if (endDate != null) {
+			Calendar endCalendar = CalendarUtil.getCalendarFromDateString(endDate, ParameterConfig.getParameter().getDateFormat().getForDisplay(), ParameterConfig.getParameter().getApplication().getDatabaseLocale());
+			endDate = CalendarUtil.getDateStringFromCalendar(endCalendar, "YYYY-MM-DD HH:mm");
+		}
+		
         Object[] params = new Object[11];
         params[paramIndex++] = StringUtil.replaceSpecialString(criteria.getPrefixId(), conn.getDbType(), ResultType.NULL);
         params[paramIndex++] = StringUtil.replaceSpecialString(criteria.getFullname(), conn.getDbType(), ResultType.NULL);
@@ -83,10 +94,10 @@ public class EmployeeDao extends AbstractDAO<EmployeeSearchCriteria, EmployeeSea
         params[paramIndex++] = StringUtil.replaceSpecialString(criteria.getSex(), conn.getDbType(), ResultType.NULL);
         params[paramIndex++] = StringUtil.replaceSpecialString(criteria.getDepartmentId(), conn.getDbType(), ResultType.NULL);
         params[paramIndex++] = StringUtil.replaceSpecialString(criteria.getPositionId(), conn.getDbType(), ResultType.NULL);
-        params[paramIndex++] = StringUtil.replaceSpecialString(criteria.getStartWorkDate(), conn.getDbType(), ResultType.NULL);
-        params[paramIndex++] = StringUtil.replaceSpecialString(criteria.getEndWorkDate(), conn.getDbType(), ResultType.NULL);
+        params[paramIndex++] = startDate;
+        params[paramIndex++] = endDate;
         params[paramIndex++] = StringUtil.replaceSpecialString(criteria.getWorkStatus(), conn.getDbType(), ResultType.NULL);
-        params[paramIndex++] = criteria.getStart();
+        params[paramIndex++] = criteria.getStart() - 1;
         params[paramIndex++] = criteria.getLinePerPage();
 		
         String sql = SQLUtil.getSQLString(conn.getSchemas()
