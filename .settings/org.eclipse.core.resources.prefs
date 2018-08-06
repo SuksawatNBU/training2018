@@ -1,4 +1,5 @@
 eclipse.preferences.version=1
+encoding//src/com/cct/common/CommonAction.java=UTF-8
 encoding//src/com/cct/common/CommonSelectItemServlet.java=UTF-8
 encoding//src/com/cct/trn/core/selectitem/service/SelectItemDAO.java=UTF-8
 encoding//src/com/cct/trn/core/selectitem/service/SelectItemManager.java=UTF-8

@@ -1,10 +1,9 @@
 package com.cct.trn.core.tutorial.employee.service;
 
-import java.text.DateFormat;
 import java.text.Format;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -13,11 +12,13 @@ import com.cct.abstracts.AbstractService;
 import com.cct.common.CommonSelectItem;
 import com.cct.common.CommonUser;
 import com.cct.domain.Transaction;
+import com.cct.trn.core.config.parameter.domain.ParameterConfig;
 import com.cct.trn.core.config.parameter.domain.SQLPath;
 import com.cct.trn.core.tutorial.employee.domain.Employee;
 import com.cct.trn.core.tutorial.employee.domain.EmployeeSearch;
 import com.cct.trn.core.tutorial.employee.domain.EmployeeSearchCriteria;
 
+import util.calendar.CalendarUtil;
 import util.database.CCTConnection;
 import util.log.LogUtil;
 
@@ -67,13 +68,6 @@ public class EmployeeService extends AbstractService{
 	
 	protected int edit(CCTConnection conn, Employee obj, CommonUser user, Locale locale) throws Exception {
 		try {
-			//แปลงวันที่
-			if(obj.getWorkStatus().equals("W")){
-				obj.setEndWorkDate(convertDate(obj.getEndWorkDate(), "inEdit"));
-		    }else{
-		    	obj.setEndWorkDate("");
-		    }
-			//เพิ่มข้อมูลผู้ใช้งานและสิทธิ์การใช้งาน
 	        return dao.edit(conn, obj, user, locale);
 		}catch (Exception e) {
 			LogUtil.SEC.error("", e);
@@ -87,6 +81,7 @@ public class EmployeeService extends AbstractService{
 			id = dao.delete(conn, ids, user, locale);
 		}catch (Exception e) {
 			LogUtil.SEC.error("", e);
+			throw e;
 		}
 		return id;
 	}
@@ -169,19 +164,15 @@ public class EmployeeService extends AbstractService{
 		else return null;
 	}
 	
-	public String convertDate(String date, String func) throws ParseException{
+	public String convertDate(String date, String func) throws Exception{
 		String parseDate = "";
-		Format outputTH = new SimpleDateFormat("dd/MM/yyyy", new Locale("th", "TH"));
-		Format outputEN = new SimpleDateFormat("dd/MM/yyyy", new Locale("en", "EN"));
-		Format inputEN = new SimpleDateFormat("yyyy/MM/dd", new Locale("en", "EN"));
-		
+
 		// ฟังก์ชันค้นหา
 		if(func == "outSearch"){
 			if(date.equals(null) || date.equals("")) return null;
 			try {
-				DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-				Date conDate = df.parse(date);
-				parseDate = outputTH.format(conDate);
+				Calendar calendar = CalendarUtil.getCalendarFromDateString(date, ParameterConfig.getParameter().getDateFormat().getForDisplay(), ParameterConfig.getParameter().getApplication().getDatabaseLocale());
+				parseDate = CalendarUtil.getDateStringFromCalendar(calendar, "DD/MM/YYYY");
 			} catch (Exception e) {
 				throw e;
 			}
@@ -190,9 +181,8 @@ public class EmployeeService extends AbstractService{
 		if(func == "outSearchById"){
 			if(date.equals(null) || date.equals("")) return null;
 			try {
-				DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-				Date conDate = df.parse(date);
-				parseDate = outputEN.format(conDate);
+				Calendar calendar = CalendarUtil.getCalendarFromDateString(date, ParameterConfig.getParameter().getDateFormat().getForDisplay(), ParameterConfig.getParameter().getApplication().getDatabaseLocale());
+				parseDate = CalendarUtil.getDateStringFromCalendar(calendar, "DD/MM/YYYY");
 			} catch (Exception e) {
 				throw e;
 			}
@@ -201,9 +191,8 @@ public class EmployeeService extends AbstractService{
 		if(func == "inEdit"){
 			if(date.equals(null) || date.equals("")) return null;
 			try {
-				DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-				Date conDate = df.parse(date);
-				parseDate = inputEN.format(conDate);
+				Calendar calendar = CalendarUtil.getCalendarFromDateString(date, ParameterConfig.getParameter().getDateFormat().getForDisplay(), ParameterConfig.getParameter().getApplication().getDatabaseLocale());
+				parseDate = CalendarUtil.getDateStringFromCalendar(calendar, "DD/MM/YYYY");
 			} catch (Exception e) {
 				throw e;
 			}
@@ -211,6 +200,7 @@ public class EmployeeService extends AbstractService{
 		//วันที่ปัจจุบัน
 		if(func == "defaultValue"){
 			try {
+				Format outputEN = new SimpleDateFormat("dd/MM/yyyy", new Locale("en", "EN"));
 				Date conDate = new Date();
 				parseDate = outputEN.format(conDate);
 			} catch (Exception e) {

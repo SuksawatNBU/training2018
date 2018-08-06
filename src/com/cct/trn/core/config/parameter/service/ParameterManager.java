@@ -12,7 +12,7 @@ import com.cct.trn.core.config.parameter.domain.ParameterConfig;
 
 public class ParameterManager {
 
-	public static final String XML_PATH = System.getProperty("user.dir") + "/ucp/WEB-INF/parameter.xml";
+	public static final String XML_PATH = System.getProperty("user.dir") + "/trn/WEB-INF/parameter.xml";
 
 	private ParameterService service = null;
 

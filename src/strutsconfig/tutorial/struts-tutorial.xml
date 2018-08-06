@@ -24,7 +24,6 @@
 		<action name="*Employee" class="com.cct.trn.web.tutorial.employee.action.EmployeeAction" method="{1}">
 			<result name="init">/jsp/tutorial/employee/employeeSearch.jsp</result>
 			<result name="search">/jsp/tutorial/employee/employeeSearch.jsp</result>
-			<result name="searchDo" type="chain">searchEmployee</result>
 			<result name="addEdit">/jsp/tutorial/employee/employeeAddEditView.jsp</result>
 		</action>
 	</package>

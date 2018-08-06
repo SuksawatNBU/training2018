@@ -105,8 +105,8 @@ public class GenerateMessageAlert {
 	}
 
 	public Connection getConnection() throws Exception {
-		Class.forName("oracle.jdbc.OracleDriver");
-		return DriverManager.getConnection("jdbc:oracle:thin:@10.100.70.59:1521:ORCL", "cp_cambodia", "cp_Cambodia2016");
+		Class.forName("com.mysql.jdbc.Driver");
+		return DriverManager.getConnection("jdbc:mysql://localhost:3306/training?useUnicode=true&amp;characterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull", "root", "password");
 	}
 
 	public void close(Connection conn) {

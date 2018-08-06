@@ -626,7 +626,7 @@ function validateSelectOne(elName) {
 
 
 	if (arrayChecked.length == 0){
-		alert(validateMessage.CODE_10006);
+		alert(validateMessage.CODE_10001);
 		return false;
 	}
 

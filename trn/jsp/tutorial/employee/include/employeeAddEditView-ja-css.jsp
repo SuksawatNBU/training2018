@@ -26,27 +26,37 @@
 		jQuery("#employee_startWorkDate").input_dateformat({
 			dateformat : "dd_sl_mm_sl_yyyy"
 	    });
-		
-		if($("#employee_workStatus").val() == "W") {
-			jQuery("#employee_endWorkDate").input_dateformat({
-				dateformat : "dd_sl_mm_sl_yyyy"
-		    });
-		}
-	});
-	
-	$(document).ready(function(){
-		$("#employee_workStatus").click(function(){
-			if($("#employee_workStatus").val() == "W") {
-				$("#employee_endWorkDate").hide();
-			}
-			else {
-				
-			}
+		jQuery("#employee_endWorkDate").input_dateformat({
+			dateformat : "dd_sl_mm_sl_yyyy",
+			inputdatepickerDisabled: false
 	    });
 	});
 	
-	function changEndWorkDate(){
-		$("#pp").hide();
+	/* $( function() {
+		$("#workStatus").on("click", function() {
+			var a = $("#employee_workStatus").text();
+			var b = jQuery("[name='employee.workStatus']").val();
+			var c = document.getElementById("employee_workStatus").value;
+			
+			console.log("data is: ", a);
+			console.log("data is: ", b);
+			console.log("data is: ", c);
+			
+			// ตรวจสอบข้อมูล
+			if(a == "W" || b == "W" || c == "W"){
+				document.getElementById("employee_endWorkDate").disabled = true;
+			}else{
+				document.getElementById("employee_endWorkDate").disabled = false;
+			}
+		 });
+	}); */
+	
+	function changEndWorkDate(value) {
+		if(value == "W"){
+			$("employee_endWorkDate_dd_sl_mm_sl_yyyy").attr({"disabled" : true});
+		}else{
+			$("employee_endWorkDate_dd_sl_mm_sl_yyyy").attr({"disabled" : false});
+		}
 	}
 	
 	function saveAdd(){

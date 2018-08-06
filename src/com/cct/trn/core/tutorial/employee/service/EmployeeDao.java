@@ -33,6 +33,17 @@ public class EmployeeDao extends AbstractDAO<EmployeeSearchCriteria, EmployeeSea
 	protected long countData(CCTConnection conn, EmployeeSearchCriteria criteria, CommonUser user, Locale locale) throws Exception {
 		int count = 0;
 		
+		String startDate = StringUtil.replaceSpecialString(criteria.getStartWorkDate(), conn.getDbType(), ResultType.NULL);
+		if (startDate != null) {
+			Calendar startCalendar = CalendarUtil.getCalendarFromDateString(startDate, ParameterConfig.getParameter().getDateFormat().getForDisplay(), ParameterConfig.getParameter().getApplication().getDatabaseLocale());
+			startDate = CalendarUtil.getDateStringFromCalendar(startCalendar, "YYYY-MM-DD HH:mm:ss");
+		}	
+		String endDate = StringUtil.replaceSpecialString(criteria.getEndWorkDate(), conn.getDbType(), ResultType.NULL);
+		if (endDate != null) {
+			Calendar endCalendar = CalendarUtil.getCalendarFromDateString(endDate, ParameterConfig.getParameter().getDateFormat().getForDisplay(), ParameterConfig.getParameter().getApplication().getDatabaseLocale());
+			endDate = CalendarUtil.getDateStringFromCalendar(endCalendar, "YYYY-MM-DD HH:mm:ss");
+		}
+		
 	    int paramIndex = 0;
 	    Object[] params = new Object[9];
 	    params[paramIndex++] = StringUtil.replaceSpecialString(criteria.getPrefixId(), conn.getDbType(), ResultType.NULL);
@@ -41,17 +52,17 @@ public class EmployeeDao extends AbstractDAO<EmployeeSearchCriteria, EmployeeSea
         params[paramIndex++] = StringUtil.replaceSpecialString(criteria.getSex(), conn.getDbType(), ResultType.NULL);
         params[paramIndex++] = StringUtil.replaceSpecialString(criteria.getDepartmentId(), conn.getDbType(), ResultType.NULL);
         params[paramIndex++] = StringUtil.replaceSpecialString(criteria.getPositionId(), conn.getDbType(), ResultType.NULL);
-        params[paramIndex++] = StringUtil.replaceSpecialString(criteria.getStartWorkDate(), conn.getDbType(), ResultType.NULL);
-        params[paramIndex++] = StringUtil.replaceSpecialString(criteria.getEndWorkDate(), conn.getDbType(), ResultType.NULL);
+        params[paramIndex++] = startDate;
+        params[paramIndex++] = endDate;
         params[paramIndex++] = StringUtil.replaceSpecialString(criteria.getWorkStatus(), conn.getDbType(), ResultType.NULL);
-	 
+        
 	    String sql = SQLUtil.getSQLString(conn.getSchemas()
 	            , getSqlPath().getClassName()
 	            , getSqlPath().getPath()
 	            , "searchCountEmployee"
 	            , params);
 	    LogUtil.SEC.debug("SQL : " + sql);
-	 
+	    
 	    Statement stmt = null;
 	    ResultSet rst = null;
 	    try {
@@ -79,12 +90,12 @@ public class EmployeeDao extends AbstractDAO<EmployeeSearchCriteria, EmployeeSea
 		String startDate = StringUtil.replaceSpecialString(criteria.getStartWorkDate(), conn.getDbType(), ResultType.NULL);
 		if (startDate != null) {
 			Calendar startCalendar = CalendarUtil.getCalendarFromDateString(startDate, ParameterConfig.getParameter().getDateFormat().getForDisplay(), ParameterConfig.getParameter().getApplication().getDatabaseLocale());
-			startDate = CalendarUtil.getDateStringFromCalendar(startCalendar, "YYYY-MM-DD HH:mm");
+			startDate = CalendarUtil.getDateStringFromCalendar(startCalendar, "YYYY-MM-DD HH:mm:ss");
 		}	
 		String endDate = StringUtil.replaceSpecialString(criteria.getEndWorkDate(), conn.getDbType(), ResultType.NULL);
 		if (endDate != null) {
 			Calendar endCalendar = CalendarUtil.getCalendarFromDateString(endDate, ParameterConfig.getParameter().getDateFormat().getForDisplay(), ParameterConfig.getParameter().getApplication().getDatabaseLocale());
-			endDate = CalendarUtil.getDateStringFromCalendar(endCalendar, "YYYY-MM-DD HH:mm");
+			endDate = CalendarUtil.getDateStringFromCalendar(endCalendar, "YYYY-MM-DD HH:mm:ss");
 		}
 		
         Object[] params = new Object[11];
@@ -249,6 +260,12 @@ public class EmployeeDao extends AbstractDAO<EmployeeSearchCriteria, EmployeeSea
 	protected int add(CCTConnection conn, Employee obj, CommonUser user, Locale locale) throws Exception {
 		int paramIndex = 0;
 	    int id = 0;
+	    
+	    String startDate = StringUtil.replaceSpecialString(obj.getStartWorkDate(), conn.getDbType(), ResultType.NULL);
+		if (startDate != null) {
+			Calendar startCalendar = CalendarUtil.getCalendarFromDateString(startDate, ParameterConfig.getParameter().getDateFormat().getForDisplay(), ParameterConfig.getParameter().getApplication().getDatabaseLocale());
+			startDate = CalendarUtil.getDateStringFromCalendar(startCalendar, ParameterConfig.getParameter().getDateFormat().getForDatabaseInsert());
+		}
 
 	    Object[] params = new Object[10];
 	    params[paramIndex++] = StringUtil.replaceSpecialString(obj.getName(), conn.getDbType(), ResultType.NULL);
@@ -257,9 +274,7 @@ public class EmployeeDao extends AbstractDAO<EmployeeSearchCriteria, EmployeeSea
         params[paramIndex++] = StringUtil.replaceSpecialString(obj.getPrefixId(), conn.getDbType(), ResultType.NULL);
         params[paramIndex++] = StringUtil.replaceSpecialString(obj.getSex(), conn.getDbType(), ResultType.NULL);
         params[paramIndex++] = StringUtil.replaceSpecialString(obj.getPositionId(), conn.getDbType(), ResultType.NULL);
-        Calendar cWorkDate = CalendarUtil.getCalendarFromDateString(obj.getStartWorkDate(), ParameterConfig.getParameter().getDateFormat().getForDisplay(), ParameterConfig.getParameter().getApplication().getDatetimeLocale());
-        String sWorkDate = CalendarUtil.getDateStringFromCalendar(cWorkDate, ParameterConfig.getParameter().getDateFormat().getForDatabaseInsert());
-        params[paramIndex++] = StringUtil.replaceSpecialString(sWorkDate, conn.getDbType(), ResultType.NULL);
+        params[paramIndex++] = startDate;
         params[paramIndex++] = StringUtil.replaceSpecialString(obj.getWorkStatus(), conn.getDbType(), ResultType.NULL);
         params[paramIndex++] = StringUtil.replaceSpecialString(obj.getTransaction().getCreateRemark(), conn.getDbType(), ResultType.NULL);
         params[paramIndex++] = StringUtil.replaceSpecialString(user.getUserId(), conn.getDbType(), ResultType.NULL);
@@ -303,6 +318,17 @@ public class EmployeeDao extends AbstractDAO<EmployeeSearchCriteria, EmployeeSea
 	protected int edit(CCTConnection conn, Employee obj, CommonUser user, Locale locale) throws Exception {
 		int paramIndex = 0;
 	    int id = 0;
+	    
+	    String startDate = StringUtil.replaceSpecialString(obj.getStartWorkDate(), conn.getDbType(), ResultType.NULL);
+		if (startDate != null) {
+			Calendar startCalendar = CalendarUtil.getCalendarFromDateString(startDate, ParameterConfig.getParameter().getDateFormat().getForDisplay(), ParameterConfig.getParameter().getApplication().getDatabaseLocale());
+			startDate = CalendarUtil.getDateStringFromCalendar(startCalendar, ParameterConfig.getParameter().getDateFormat().getForDatabaseInsert());
+		}	
+		String endDate = StringUtil.replaceSpecialString(obj.getEndWorkDate(), conn.getDbType(), ResultType.NULL);
+		if (endDate != null) {
+			Calendar endCalendar = CalendarUtil.getCalendarFromDateString(endDate, ParameterConfig.getParameter().getDateFormat().getForDisplay(), ParameterConfig.getParameter().getApplication().getDatabaseLocale());
+			endDate = CalendarUtil.getDateStringFromCalendar(endCalendar, ParameterConfig.getParameter().getDateFormat().getForDatabaseInsert());
+		}
 
 	    Object[] params = new Object[11];
 	    params[paramIndex++] = StringUtil.replaceSpecialString(obj.getName(), conn.getDbType(), ResultType.NULL);
@@ -310,8 +336,8 @@ public class EmployeeDao extends AbstractDAO<EmployeeSearchCriteria, EmployeeSea
         params[paramIndex++] = StringUtil.replaceSpecialString(obj.getNickName(), conn.getDbType(), ResultType.NULL);
         params[paramIndex++] = StringUtil.replaceSpecialString(obj.getPrefixId(), conn.getDbType(), ResultType.NULL);
         params[paramIndex++] = StringUtil.replaceSpecialString(obj.getPositionId(), conn.getDbType(), ResultType.NULL);
-        params[paramIndex++] = StringUtil.replaceSpecialString(obj.getStartWorkDate(), conn.getDbType(), ResultType.NULL);
-        params[paramIndex++] = StringUtil.replaceSpecialString(obj.getEndWorkDate(), conn.getDbType(), ResultType.NULL);
+        params[paramIndex++] = startDate;
+        params[paramIndex++] = endDate;
         params[paramIndex++] = StringUtil.replaceSpecialString(obj.getWorkStatus(), conn.getDbType(), ResultType.NULL);
         params[paramIndex++] = StringUtil.replaceSpecialString(obj.getTransaction().getCreateRemark(), conn.getDbType(), ResultType.NULL);
         params[paramIndex++] = StringUtil.replaceSpecialString(obj.getTransaction().getUpdateUser(), conn.getDbType(), ResultType.NULL);

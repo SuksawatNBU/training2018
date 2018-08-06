@@ -26,8 +26,8 @@ public class ParameterService {
 			LogUtil.INITIAL.debug("Support Locale :- " + parameter.getApplication().getSupportLocaleString());
 			LogUtil.INITIAL.debug("Application Locale :- " + parameter.getApplication().getApplicationLocale());
 
-			FileManagerUtil.crateDirectoryWithoutOverwrite(parameter.getAttachFile().getTmpPath());
-			FileManagerUtil.crateDirectoryWithoutOverwrite(parameter.getAttachFile().getServerPath());
+			/*FileManagerUtil.crateDirectoryWithoutOverwrite(parameter.getAttachFile().getTmpPath());
+			FileManagerUtil.crateDirectoryWithoutOverwrite(parameter.getAttachFile().getServerPath());*/
 
 		} catch (Exception e) {
 			throw e;

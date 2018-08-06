@@ -11,6 +11,22 @@ searchPrefixSelectItem {
 }
 
 /*-----------------------------------------------------------------------------------------------------------------------------------------------------------
+SQL : ตรวจสอบข้อมูลพนักงานซ้ำ_SQL
+Description : 
+------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+checkDupEmployee {
+	SELECT COUNT(1) AS TOT
+	FROM TRN_EMPLOYEE
+	WHERE ACTIVE = 'Y'
+	AND NAME = %s
+	AND SURNAME = %s
+	AND NICK_NAME = %s
+	AND SEX = %s
+	AND POSITION_ID = %s
+	AND EMPLOYEE_ID <> %s
+}
+
+/*-----------------------------------------------------------------------------------------------------------------------------------------------------------
 SQL : เพิ่มข้อมูลพนักงาน_SQL
 Description : 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -56,8 +72,8 @@ editEmployee {
 	  ,NICK_NAME = %s
 	  ,PREFIX_ID = %s
 	  ,POSITION_ID = %s
-	  ,START_WORK_DATE = CONCAT(DATE_FORMAT(%s, '%Y-%m-%d'), ' ', '00:00:00')
-	  ,END_WORK_DATE = CONCAT(DATE_FORMAT(%s, '%Y-%m-%d'), ' ', '00:00:00')
+	  ,START_WORK_DATE = CONCAT(%s, ' 00:00:00')
+	  ,END_WORK_DATE = CONCAT(%s, ' 00:00:00')
 	  ,WORK_STATUS = %s
 	  ,REMARK = %s
 	  ,UPDATE_DATE = CURRENT_TIMESTAMP
@@ -71,26 +87,10 @@ Description :
 ------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 deleteEmployee {
 	UPDATE TRN_EMPLOYEE SET
-		 ACTIVE = 'Y'
+		 ACTIVE = 'N'
 		,UPDATE_DATE = CURRENT_TIMESTAMP
 		,UPDATE_USER = %s
 	WHERE EMPLOYEE_ID IN (%s)
-}
-
-/*-----------------------------------------------------------------------------------------------------------------------------------------------------------
-SQL : ตรวจสอบข้อมูลพนักงานซ้ำ_SQL
-Description : 
-------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-checkDupEmployee {
-	SELECT COUNT(1) AS TOT
-	FROM TRN_EMPLOYEE
-	WHERE ACTIVE = 'Y'
-	AND NAME = %s
-	AND SURNAME = %s
-	AND NICK_NAME = %s
-	AND SEX = %s
-	AND POSITION_ID = %s
-	AND EMPLOYEE_ID <> %s
 }
 
 /*-----------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -126,8 +126,8 @@ searchCountEmployee {
 	AND EMP.SEX = %s
 	AND DEP.DEPARTMENT_ID =%s
 	AND POS.POSITION_ID = %s
-	AND EMP.START_WORK_DATE >= %s		          	/* START_DATE '2017-01-20 00:00:00' */
-	AND EMP.START_WORK_DATE <= %s				    /* END_DATE '2017-02-25 00:00:00' */
+	AND EMP.START_WORK_DATE >= %s		/* START_DATE '2017-01-20 00:00:00' */
+	AND EMP.START_WORK_DATE <= %s		/* END_DATE '2017-02-25 00:00:00' */
 	AND EMP.WORK_STATUS = %s
 }
 
@@ -198,8 +198,8 @@ searchEmployee {
 	AND EMP.SEX = %s
 	AND DEP.DEPARTMENT_ID = %s
 	AND POS.POSITION_ID = %s
-	AND EMP.START_WORK_DATE >= STR_TO_DATE(%s, '%Y-%m-%d %H:%i')	          	/* START_DATE '2017-01-20 00:00:00' */
-	AND EMP.START_WORK_DATE <= STR_TO_DATE(%s, '%Y-%m-%d %H:%i')				/* END_DATE '2017-02-25 00:00:00' */
+	AND EMP.START_WORK_DATE >= %s	          	/* START_DATE '2017-01-20 00:00:00' */
+	AND EMP.START_WORK_DATE <= %s				/* END_DATE '2017-02-25 00:00:00' */
 	AND EMP.WORK_STATUS = %s
 	
 	LIMIT %s

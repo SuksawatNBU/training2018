@@ -29,13 +29,13 @@
 		jQuery("#criteria_startWorkDate").input_dateformat({
 			dateformat : "dd_sl_mm_sl_yyyy" ,
 			selectDateRange: { 
-	            dateTo: "criteria_endWorkDate" // ??????????????????
+	            dateTo: "criteria_endWorkDate"
 	        }
 	    });
 		jQuery("#criteria_endWorkDate").input_dateformat({
 			dateformat : "dd_sl_mm_sl_yyyy" ,
 			selectDateRange: {
-				dateFrom: "criteria_startWorkDate" 	// ????????????????	
+				dateFrom: "criteria_startWorkDate"
 			}
 		});
 	});
@@ -64,7 +64,7 @@
             },
 			pk: "employee.id",
 			fixedCoumnsLeft : 6,	//Fixed column ทางซ้ายเริ่มตั้งแต่ 0-5
-			footerHtml: '<button id="btnDelete" style="margin-left: 20px; margin-top: 10px;" onclick="deleteValue();">Dalete</button>',
+			footerHtml: '<button type="button" style="margin-left: 20px; margin-top: 10px;" onclick="deleteValue()">Dalete</button>',
 			createdRowFunc: "manageRow"
 		};
 		
@@ -84,7 +84,7 @@
 			{ data: "transaction.createDate",   class: "center", orderable: false, "width":"80px"},
 			{ data: "transaction.updateUser",   class: "left",   orderable: false, "width":"80px"},
 			{ data: "transaction.updateDate",   class: "center", orderable: false, "width":"80px"},
-			{ data: "transaction.updateRemark", class: "left",   orderable: false, "width":"80px"},
+			{ data: "transaction.createRemark", class: "left",   orderable: false, "width":"80px"},
 		];
 		
 		fixedColumns("<%=request.getContextPath()%>", colData , aOption);
@@ -125,20 +125,26 @@
         submitPage(action);
     }
     
-    /* function deleteValue(){
+    /*
+     * ใช้สำหรับลบข้อมูล
+     */
+    function deleteValue(){
+    	
+ //   	tableDeleteRow('criteria.selectedIds', 'tableResult', ids);
+    	
+    	
     	//1.ขั้นตอนการตรวจสอบ validate
-    	if(!validateAll()){
+    	if(validateSelectOne('criteria.selectedIds') == false){
 	        return false;
 	    }
+    	
     	//2.Confirm dialog
-//	    if(confirm('<s:text name="50005" />') == false){  
-//	        return false;
-//	    }
-        submitPage("<s:url value='/jsp/tutorial/deleteEmployee.action' />");
-    } */
-    
-    function deleteValue(){
-    	var action = "<s:url value='/jsp/tutorial/deleteEmployee.action' />";
+    	/* var ids = document.getElementsByName("criteria.selectedIds"); */
+    	if(confirm('<s:text name="50005" />') == false){ 
+	        return false;
+	    }
+    	
+    	submitPage("<s:url value='/jsp/tutorial/deleteEmployee.action' />");
     }
     
 </script>

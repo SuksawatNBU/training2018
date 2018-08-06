@@ -26,9 +26,9 @@
 			<s:set var="editDisable" value="" />
 		</s:else>
 		
-		<!-- Test Code -->
-		<p id="pp">Click me too!</p>
-		
+		<span>viewDisable : <s:text name="%{viewDisable}"/></span><br/>
+		<span>editDisable : <s:text name="%{editDisable}"/></span>
+
 		<div>
 			<table class="FORM" style="float:left; margin:13px;">
 				<tbody>
@@ -55,10 +55,20 @@
 						</td>
 						<td class="VALUE">
 							<s:if test="page.getPage() == 'edit'">
-								<s:radio id="employee_sex" name="employee.sex" list="listSex" listKey="key" listValue="value" cssClass ="requireInput " disabled="%{editDisable}" />
+								<s:iterator value="listSex" >
+									<label class="checkbox-inline">
+										<input type="radio" id="employee_sex" name="employee.sex" value='<s:text name="key"/>'/>
+										<s:property value="value"/>
+									</label>
+								</s:iterator>
 							</s:if>
 							<s:else>
-								<s:radio id="employee_sex" name="employee.sex" list="listSex" listKey="key" listValue="value" cssClass ="requireInput " disabled="%{viewDisable}" />
+								<s:iterator value="listSex" >
+									<label class="checkbox-inline">
+										<input type="radio" id="employee_sex" name="employee.sex" value='<s:text name="key"/>'/>
+										<s:property value="value"/>
+									</label>
+								</s:iterator>
 							</s:else>
 						</td>					
 						<td class="BORDER"></td>
@@ -129,11 +139,8 @@
 						</td>
 						<td class="VALUE">
 							<s:if test="page.getPage() == 'edit'"> 
-							 	<s:textfield id="employee_endWorkDate" name="employee.endWorkDate" cssClass="requireInput" disabled=""/>
+								<s:textfield id="employee_endWorkDate" name="employee.endWorkDate" cssClass="requireInput inputdatepickerDisabled"/>
 							</s:if>
-							<s:else>
-								<s:textfield id="employee_endWorkDate" name="employee.endWorkDate" cssClass="requireInput" disabled="true" cssStyle="display: none;"/>
-							</s:else>
 						</td>
 						<td class="BORDER"></td>
 					</tr>
@@ -144,8 +151,8 @@
 						</td>
 						<td class="VALUE" colspan="3">
 							<s:iterator value="listWorkStatus">
-								<label class="checkbox-inline">
-									<input type="radio" id="employee_workStatus" name="employee.workStatus" value='<s:property value="key"/>'/>
+								<label class="checkbox-inline"  onclick='changEndWorkDate(<s:property value="key"/>)'>
+									<input type="radio" id="employee_workStatus" name="employee.workStatus" value='<s:property value="key"/>' />
 									<s:property value="value"/>
 								</label>
 							</s:iterator>

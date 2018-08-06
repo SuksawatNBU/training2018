@@ -109,6 +109,7 @@
 					</tr>
 				</table>
 				
+				<!-- BUTTON SEARCH -->
 				<s:include value="/jsp/template/button.jsp">
 			        <s:param name="buttonType" value="%{'search,enable'}"/>
 			    </s:include>
@@ -123,7 +124,7 @@
 	    		<thead>
 	    			<tr>
 	    				<th><s:text name="emp.no" /></th>
-	    				<th><input type="checkbox" name="chkall" onClick="checkboxToggle('criteria.selectedIds',this.checked)" /></th>
+	    				<th><input id="criteria_selectedIds" type="checkbox" name="criteria.selectedIds" onClick="checkboxToggle('criteria.selectedIds',this.checked)" /></th>
 	    				<th></th>
 	    				<th></th>
 	    				<th><s:text name="emp.fullname" /></th>
@@ -140,13 +141,6 @@
 	    				<th><s:text name="emp.createRemark" /></th>
 	    			</tr>
 	    		</thead>
-<!-- 	    		<tfoot>
-					<tr align="left">
-						<th colspan="16">
-							<button id="btnDelete" style="margin-left: 20px; margin-top: 10px;" class="jbutton ui-icon-close" onclick="deleteValue();">Dalete</button>
-						</th>
-					</tr>
-				</tfoot> -->
 	    		<tbody>
 					<tr>
 						<!-- Loading Progress -->

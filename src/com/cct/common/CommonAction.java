@@ -146,15 +146,15 @@ public class CommonAction extends ActionSupport implements Serializable {
 	}
 
 	/*
-	 * Arunya.k เพื่อให้งาน getLocal ใช้ จะได้ไม่ไปรวมกับงาน
-	 * Connectionและงานอื่นๆ
+	 * Arunya.k à¹€à¸žà¸·à¹ˆà¸­à¹ƒà¸«à¹‰à¸‡à¸²à¸™ getLocal à¹ƒà¸Šà¹‰ à¸ˆà¸°à¹„à¸”à¹‰à¹„à¸¡à¹ˆà¹„à¸›à¸£à¸§à¸¡à¸�à¸±à¸šà¸‡à¸²à¸™
+	 * Connectionà¹�à¸¥à¸°à¸‡à¸²à¸™à¸­à¸·à¹ˆà¸™à¹†
 	 */
 	public CommonAction(boolean b) {
 
 	}
 
 	/**
-	 * ดึง user จาก session
+	 * à¸”à¸¶à¸‡ user à¸ˆà¸²à¸� session
 	 *
 	 * @return
 	 */
@@ -202,7 +202,7 @@ public class CommonAction extends ActionSupport implements Serializable {
 		, SUCCESS("S")
 		, WARING("W")
 		, CONFIRM("C")
-		, DUP("D");// ใช้สำหรับ Data table กรณี update Active, Inactive, ResetPassword, delete (เพื่อให้แสดง Table result)
+		, DUP("D");// à¹ƒà¸Šà¹‰à¸ªà¸³à¸«à¸£à¸±à¸š Data table à¸�à¸£à¸“à¸µ update Active, Inactive, ResetPassword, delete (à¹€à¸žà¸·à¹ˆà¸­à¹ƒà¸«à¹‰à¹�à¸ªà¸”à¸‡ Table result)
 
 		private String type;
 
@@ -469,7 +469,7 @@ public class CommonAction extends ActionSupport implements Serializable {
 	}
 
 	/**
-	 * initial ระบบกรณีที่ Initial ที่มีเงื่อนไข return ไปที่ init
+	 * initial à¸£à¸°à¸šà¸šà¸�à¸£à¸“à¸µà¸—à¸µà¹ˆ Initial à¸—à¸µà¹ˆà¸¡à¸µà¹€à¸‡à¸·à¹ˆà¸­à¸™à¹„à¸‚ return à¹„à¸›à¸—à¸µà¹ˆ init
 	 *
 	 * @param conn
 	 * @param model
@@ -499,7 +499,7 @@ public class CommonAction extends ActionSupport implements Serializable {
 		model.getCriteria().setCheckMaxExceed(true);
 
 		/**
-		 * Anusorn.l 2015-06-19 เพิ่มการเก็บตัวแปร orderSortsSelect ใช้สำหรับ
+		 * Anusorn.l 2015-06-19 à¹€à¸žà¸´à¹ˆà¸¡à¸�à¸²à¸£à¹€à¸�à¹‡à¸šà¸•à¸±à¸§à¹�à¸›à¸£ orderSortsSelect à¹ƒà¸Šà¹‰à¸ªà¸³à¸«à¸£à¸±à¸š
 		 * datatable
 		 **/
 		model.getCriteria().setDefaultHeaderSorts();
@@ -521,7 +521,7 @@ public class CommonAction extends ActionSupport implements Serializable {
 	}
 
 	/**
-	 * initial ระบบกรณีที่ต้องการหน้าแรกไม่มี criteria เงื่อนไข return ไปที่
+	 * initial à¸£à¸°à¸šà¸šà¸�à¸£à¸“à¸µà¸—à¸µà¹ˆà¸•à¹‰à¸­à¸‡à¸�à¸²à¸£à¸«à¸™à¹‰à¸²à¹�à¸£à¸�à¹„à¸¡à¹ˆà¸¡à¸µ criteria à¹€à¸‡à¸·à¹ˆà¸­à¸™à¹„à¸‚ return à¹„à¸›à¸—à¸µà¹ˆ
 	 * init
 	 *
 	 * @param conn
@@ -547,8 +547,8 @@ public class CommonAction extends ActionSupport implements Serializable {
 	}
 
 	/**
-	 * Arunya.k ยุบ Code มาไว้ที่เดียว Action ที่ Extend ไปได้มี Code ไม่ยาว
-	 * สำหรับตรวจสอบสิทธิ์หน้าแก้ไข, จัดการเงือนไขการค้นหา และ return ไปที่
+	 * Arunya.k à¸¢à¸¸à¸š Code à¸¡à¸²à¹„à¸§à¹‰à¸—à¸µà¹ˆà¹€à¸”à¸µà¸¢à¸§ Action à¸—à¸µà¹ˆ Extend à¹„à¸›à¹„à¸”à¹‰à¸¡à¸µ Code à¹„à¸¡à¹ˆà¸¢à¸²à¸§
+	 * à¸ªà¸³à¸«à¸£à¸±à¸šà¸•à¸£à¸§à¸ˆà¸ªà¸­à¸šà¸ªà¸´à¸—à¸˜à¸´à¹Œà¸«à¸™à¹‰à¸²à¹�à¸�à¹‰à¹„à¸‚, à¸ˆà¸±à¸”à¸�à¸²à¸£à¹€à¸‡à¸·à¸­à¸™à¹„à¸‚à¸�à¸²à¸£à¸„à¹‰à¸™à¸«à¸² à¹�à¸¥à¸° return à¹„à¸›à¸—à¸µà¹ˆ
 	 * search
 	 *
 	 * @param conn
@@ -564,7 +564,7 @@ public class CommonAction extends ActionSupport implements Serializable {
 
 		if ((model.getCriteria().getCriteriaKey() == null) || (model.getCriteria().getCriteriaKey().equals(""))) {
 			model.getCriteria().setDefaultHeaderSorts();
-			// เพิ่มเก็บ url ของ search action เพื่อ ให้ตัวกลางวาด table ใช้ตอน page navigate
+			// à¹€à¸žà¸´à¹ˆà¸¡à¹€à¸�à¹‡à¸š url à¸‚à¸­à¸‡ search action à¹€à¸žà¸·à¹ˆà¸­ à¹ƒà¸«à¹‰à¸•à¸±à¸§à¸�à¸¥à¸²à¸‡à¸§à¸²à¸” table à¹ƒà¸Šà¹‰à¸•à¸­à¸™ page navigate
 			ActionMapping actionMapping = (ActionMapping) ActionContext.getContext().get("struts.actionMapping");
 			model.getCriteria().setUrlSearchAction(actionMapping.getNamespace() + "/" + actionMapping.getName() + "." + actionMapping.getExtension());
 		}
@@ -572,7 +572,7 @@ public class CommonAction extends ActionSupport implements Serializable {
 		model.setPage(CommonModel.PageType.SEARCH);
 		if ((criteriaModel.getCriteriaKey() == null) || (criteriaModel.getCriteriaKey().equals(""))) {
 			log.debug("3. Check criteria...[GENERATE]");
-			// clearSearchCriteria(criteriaModel.getClass().getName()); แก้ไข error ตอนเปิด tab ใหม่
+			// clearSearchCriteria(criteriaModel.getClass().getName()); à¹�à¸�à¹‰à¹„à¸‚ error à¸•à¸­à¸™à¹€à¸›à¸´à¸” tab à¹ƒà¸«à¸¡à¹ˆ
 			String criteriaKey = String.valueOf(Calendar.getInstance().getTimeInMillis());
 			log.debug("3.1 Check criteria...[GENERATE] , criteriaKey : " + criteriaKey + " , userId: " + getUser().getUserId());
 			criteriaModel.setCriteriaKey(criteriaKey);
@@ -630,8 +630,8 @@ public class CommonAction extends ActionSupport implements Serializable {
 			model.getCriteria().setDefaultHeaderSorts();
 
 			/**
-			 * Anusorn.l 2015-06-19 เพิ่มการเก็บตัวแปร orderSortsSelect
-			 * ใช้สำหรับ datatable
+			 * Anusorn.l 2015-06-19 à¹€à¸žà¸´à¹ˆà¸¡à¸�à¸²à¸£à¹€à¸�à¹‡à¸šà¸•à¸±à¸§à¹�à¸›à¸£ orderSortsSelect
+			 * à¹ƒà¸Šà¹‰à¸ªà¸³à¸«à¸£à¸±à¸š datatable
 			 **/
 			model.getCriteria().setDefaultHeaderSorts();
 
@@ -645,7 +645,7 @@ public class CommonAction extends ActionSupport implements Serializable {
 			}
 			/** Anusorn.l 2015-06-19 **/
 
-			// เพิ่มเก็บ url ของ search action เพื่อ ให้ตัวกลางวาด table ใช้ตอน page navigate
+			// à¹€à¸žà¸´à¹ˆà¸¡à¹€à¸�à¹‡à¸š url à¸‚à¸­à¸‡ search action à¹€à¸žà¸·à¹ˆà¸­ à¹ƒà¸«à¹‰à¸•à¸±à¸§à¸�à¸¥à¸²à¸‡à¸§à¸²à¸” table à¹ƒà¸Šà¹‰à¸•à¸­à¸™ page navigate
 			ActionMapping actionMapping = (ActionMapping) ActionContext.getContext().get("struts.actionMapping");
 			model.getCriteria().setUrlSearchAction(actionMapping.getNamespace() + "/" + actionMapping.getName() + "." + actionMapping.getExtension());
 		}
@@ -653,7 +653,7 @@ public class CommonAction extends ActionSupport implements Serializable {
 		model.setPage(CommonModel.PageType.SEARCH);
 		if ((criteriaModel.getCriteriaKey() == null) || (criteriaModel.getCriteriaKey().equals(""))) {
 			log.info("3. Check criteria...[GENERATE]");
-			// clearSearchCriteria(criteriaModel.getClass().getName()); comment เพื่อทดสอบ BlacklistAlert Criteria ใน Session หาย
+			// clearSearchCriteria(criteriaModel.getClass().getName()); comment à¹€à¸žà¸·à¹ˆà¸­à¸—à¸”à¸ªà¸­à¸š BlacklistAlert Criteria à¹ƒà¸™ Session à¸«à¸²à¸¢
 			String criteriaKey = String.valueOf(Calendar.getInstance().getTimeInMillis());
 			log.info("3.1 Check criteria...[GENERATE] , criteriaKey : " + criteriaKey + " , userId: " + getUser().getUserId());
 
@@ -675,7 +675,7 @@ public class CommonAction extends ActionSupport implements Serializable {
 			SearchCriteria criteriaSession = (SearchCriteria) SessionUtil.get(criteriaModel.getCriteriaKey());
 			log.info("4. criteriaSession: " + criteriaSession);
 
-			// แก้ไขกรณี criteriaKey มี แต่ criteriaSession ไม่มี
+			// à¹�à¸�à¹‰à¹„à¸‚à¸�à¸£à¸“à¸µ criteriaKey à¸¡à¸µ à¹�à¸•à¹ˆ criteriaSession à¹„à¸¡à¹ˆà¸¡à¸µ
 			if (criteriaSession == null) {
 				criteriaSession = criteriaModel;
 				SessionUtil.put(criteriaModel.getCriteriaKey(), criteriaModel);
@@ -686,7 +686,7 @@ public class CommonAction extends ActionSupport implements Serializable {
 
 			String startStr = (String) SessionUtil.requestParameter("start");
 			int start = startStr == null ? 0 : Integer.parseInt(startStr);
-			if (criteriaModel.getStart() > 0) { // มาจากหน้าแก้ไขจะไม่เข้า if
+			if (criteriaModel.getStart() > 0) { // à¸¡à¸²à¸ˆà¸²à¸�à¸«à¸™à¹‰à¸²à¹�à¸�à¹‰à¹„à¸‚à¸ˆà¸°à¹„à¸¡à¹ˆà¹€à¸‚à¹‰à¸² if
 				criteriaSession.setStart(start + 1);
 				criteriaSession.setCheckMaxExceed(criteriaModel.isCheckMaxExceed());
 			}
@@ -697,7 +697,7 @@ public class CommonAction extends ActionSupport implements Serializable {
 			if (model.getCriteria().getHeaderSortsSelect() != null) {
 				orderableCount = model.getCriteria().getHeaderSortsSelect().split(",").length;
 
-				// จำนวน column sorting
+				// à¸ˆà¸³à¸™à¸§à¸™ column sorting
 				orderCol = new String[orderableCount];
 				orderDir = new String[orderableCount];
 				for (int i = 0; i < orderableCount; i++) {
@@ -744,8 +744,8 @@ public class CommonAction extends ActionSupport implements Serializable {
 	}
 
 	/**
-	 * สำหรับจัดการผลลัพธ์การค้นหา กรณีไม่พบข้อมูลให้แสดง message
-	 * ไม่พบข้อมูลที่ต้องการ
+	 * à¸ªà¸³à¸«à¸£à¸±à¸šà¸ˆà¸±à¸”à¸�à¸²à¸£à¸œà¸¥à¸¥à¸±à¸žà¸˜à¹Œà¸�à¸²à¸£à¸„à¹‰à¸™à¸«à¸² à¸�à¸£à¸“à¸µà¹„à¸¡à¹ˆà¸žà¸šà¸‚à¹‰à¸­à¸¡à¸¹à¸¥à¹ƒà¸«à¹‰à¹�à¸ªà¸”à¸‡ message
+	 * à¹„à¸¡à¹ˆà¸žà¸šà¸‚à¹‰à¸­à¸¡à¸¹à¸¥à¸—à¸µà¹ˆà¸•à¹‰à¸­à¸‡à¸�à¸²à¸£
 	 *
 	 * @param model
 	 * @param lstResult
@@ -756,8 +756,8 @@ public class CommonAction extends ActionSupport implements Serializable {
 	}
 
 	/**
-	 * สำหรับจัดการผลลัพธ์การค้นหา กรณีไม่พบข้อมูลให้แสดง message
-	 * ไม่พบข้อมูลที่ต้องการ
+	 * à¸ªà¸³à¸«à¸£à¸±à¸šà¸ˆà¸±à¸”à¸�à¸²à¸£à¸œà¸¥à¸¥à¸±à¸žà¸˜à¹Œà¸�à¸²à¸£à¸„à¹‰à¸™à¸«à¸² à¸�à¸£à¸“à¸µà¹„à¸¡à¹ˆà¸žà¸šà¸‚à¹‰à¸­à¸¡à¸¹à¸¥à¹ƒà¸«à¹‰à¹�à¸ªà¸”à¸‡ message
+	 * à¹„à¸¡à¹ˆà¸žà¸šà¸‚à¹‰à¸­à¸¡à¸¹à¸¥à¸—à¸µà¹ˆà¸•à¹‰à¸­à¸‡à¸�à¸²à¸£
 	 *
 	 * @param model
 	 * @param lstResult
@@ -767,8 +767,8 @@ public class CommonAction extends ActionSupport implements Serializable {
 	public void manageSearchResult(CommonModel model, List<?> lstResult, ResultType resultType) throws Exception {
 		try {
 			if (lstResult == null || lstResult.size() == 0) {
-				setMessage(model, CommonAction.MessageType.WARING, getText("30004"), "");
-				setMessage(CommonAction.MessageType.WARING, getText("30004"), resultType);
+				setMessage(model, CommonAction.MessageType.WARING, getText("30011"), "");
+				setMessage(CommonAction.MessageType.WARING, getText("30011"), resultType);
 			} else {
 				model.setLstResult(lstResult);
 				model.setRecordsTotal(model.getCriteria().getTotalResult());
@@ -781,7 +781,7 @@ public class CommonAction extends ActionSupport implements Serializable {
 	}
 
 	/**
-	 * สำหรับจัดการก่อนเข้าหน้าเพิ่ม return ไปที่ addEdit
+	 * à¸ªà¸³à¸«à¸£à¸±à¸šà¸ˆà¸±à¸”à¸�à¸²à¸£à¸�à¹ˆà¸­à¸™à¹€à¸‚à¹‰à¸²à¸«à¸™à¹‰à¸²à¹€à¸žà¸´à¹ˆà¸¡ return à¹„à¸›à¸—à¸µà¹ˆ addEdit
 	 *
 	 * @param conn
 	 * @param model
@@ -803,7 +803,7 @@ public class CommonAction extends ActionSupport implements Serializable {
 	}
 
 	/**
-	 * สำหรับจัดการหลังบันทึกเพิ่มเสร็จ return ไปที่ addEdit
+	 * à¸ªà¸³à¸«à¸£à¸±à¸šà¸ˆà¸±à¸”à¸�à¸²à¸£à¸«à¸¥à¸±à¸‡à¸šà¸±à¸™à¸—à¸¶à¸�à¹€à¸žà¸´à¹ˆà¸¡à¹€à¸ªà¸£à¹‡à¸ˆ return à¹„à¸›à¸—à¸µà¹ˆ addEdit
 	 *
 	 * @param conn
 	 * @param model
@@ -815,7 +815,7 @@ public class CommonAction extends ActionSupport implements Serializable {
 	}
 
 	/**
-	 * สำหรับจัดการหลังบันทึกเพิ่มเสร็จ return ไปที่ addEdit
+	 * à¸ªà¸³à¸«à¸£à¸±à¸šà¸ˆà¸±à¸”à¸�à¸²à¸£à¸«à¸¥à¸±à¸‡à¸šà¸±à¸™à¸—à¸¶à¸�à¹€à¸žà¸´à¹ˆà¸¡à¹€à¸ªà¸£à¹‡à¸ˆ return à¹„à¸›à¸—à¸µà¹ˆ addEdit
 	 *
 	 * @param conn
 	 * @param model
@@ -840,7 +840,7 @@ public class CommonAction extends ActionSupport implements Serializable {
 	}
 
 	/**
-	 * สำหรับจัดการก่อนเข้าหน้าแก้ไข return ไปที่ addEdit
+	 * à¸ªà¸³à¸«à¸£à¸±à¸šà¸ˆà¸±à¸”à¸�à¸²à¸£à¸�à¹ˆà¸­à¸™à¹€à¸‚à¹‰à¸²à¸«à¸™à¹‰à¸²à¹�à¸�à¹‰à¹„à¸‚ return à¹„à¸›à¸—à¸µà¹ˆ addEdit
 	 *
 	 * @param conn
 	 * @param model
@@ -873,7 +873,7 @@ public class CommonAction extends ActionSupport implements Serializable {
 	}
 
 	/**
-	 * สำหรับจัดการหลังบันทึกแ้ก้ไขเสร็จ return ไปที่ searchDo
+	 * à¸ªà¸³à¸«à¸£à¸±à¸šà¸ˆà¸±à¸”à¸�à¸²à¸£à¸«à¸¥à¸±à¸‡à¸šà¸±à¸™à¸—à¸¶à¸�à¹�à¹‰à¸�à¹‰à¹„à¸‚à¹€à¸ªà¸£à¹‡à¸ˆ return à¹„à¸›à¸—à¸µà¹ˆ searchDo
 	 *
 	 * @param conn
 	 * @param model
@@ -885,7 +885,7 @@ public class CommonAction extends ActionSupport implements Serializable {
 	}
 
 	/**
-	 * สำหรับจัดการหลังบันทึกแ้ก้ไขเสร็จ return ไปที่ searchDo
+	 * à¸ªà¸³à¸«à¸£à¸±à¸šà¸ˆà¸±à¸”à¸�à¸²à¸£à¸«à¸¥à¸±à¸‡à¸šà¸±à¸™à¸—à¸¶à¸�à¹�à¹‰à¸�à¹‰à¹„à¸‚à¹€à¸ªà¸£à¹‡à¸ˆ return à¹„à¸›à¸—à¸µà¹ˆ searchDo
 	 *
 	 * @param conn
 	 * @param model
@@ -910,7 +910,7 @@ public class CommonAction extends ActionSupport implements Serializable {
 	}
 
 	/**
-	 * สำหรับจัดการก่อนเข้าหน้าแสดง return ไปที่ addEdit
+	 * à¸ªà¸³à¸«à¸£à¸±à¸šà¸ˆà¸±à¸”à¸�à¸²à¸£à¸�à¹ˆà¸­à¸™à¹€à¸‚à¹‰à¸²à¸«à¸™à¹‰à¸²à¹�à¸ªà¸”à¸‡ return à¹„à¸›à¸—à¸µà¹ˆ addEdit
 	 *
 	 * @param conn
 	 * @param model
@@ -939,7 +939,7 @@ public class CommonAction extends ActionSupport implements Serializable {
 	}
 
 	/**
-	 * สำหรับจัดการหลังบันทึกสถานะเสร็จ return ไปที่ searchDo
+	 * à¸ªà¸³à¸«à¸£à¸±à¸šà¸ˆà¸±à¸”à¸�à¸²à¸£à¸«à¸¥à¸±à¸‡à¸šà¸±à¸™à¸—à¸¶à¸�à¸ªà¸–à¸²à¸™à¸°à¹€à¸ªà¸£à¹‡à¸ˆ return à¹„à¸›à¸—à¸µà¹ˆ searchDo
 	 *
 	 * @param conn
 	 * @param model
@@ -951,7 +951,7 @@ public class CommonAction extends ActionSupport implements Serializable {
 	}
 
 	/**
-	 * สำหรับจัดการหลังบันทึกสถานะเสร็จ return ไปที่ searchDo
+	 * à¸ªà¸³à¸«à¸£à¸±à¸šà¸ˆà¸±à¸”à¸�à¸²à¸£à¸«à¸¥à¸±à¸‡à¸šà¸±à¸™à¸—à¸¶à¸�à¸ªà¸–à¸²à¸™à¸°à¹€à¸ªà¸£à¹‡à¸ˆ return à¹„à¸›à¸—à¸µà¹ˆ searchDo
 	 *
 	 * @param conn
 	 * @param model
@@ -974,8 +974,8 @@ public class CommonAction extends ActionSupport implements Serializable {
 			setMessage(CommonAction.MessageType.SUCCESS, getText("30002"), resultType);
 
 		} else if (model.getCriteria().getStatusForUpdate().equals("P")) {
-			// กรณีที่ เป็นการระงับการใช้งาน ACTIVE = P Msg = 30019 :
-			// เปลี่ยนเป็นสถานะระงับใช้งานเรียบร้อยแล้ว
+			// à¸�à¸£à¸“à¸µà¸—à¸µà¹ˆ à¹€à¸›à¹‡à¸™à¸�à¸²à¸£à¸£à¸°à¸‡à¸±à¸šà¸�à¸²à¸£à¹ƒà¸Šà¹‰à¸‡à¸²à¸™ ACTIVE = P Msg = 30019 :
+			// à¹€à¸›à¸¥à¸µà¹ˆà¸¢à¸™à¹€à¸›à¹‡à¸™à¸ªà¸–à¸²à¸™à¸°à¸£à¸°à¸‡à¸±à¸šà¹ƒà¸Šà¹‰à¸‡à¸²à¸™à¹€à¸£à¸µà¸¢à¸šà¸£à¹‰à¸­à¸¢à¹�à¸¥à¹‰à¸§
 			setMessage(model, CommonAction.MessageType.SUCCESS, getText("30019"), "");
 			setMessage(CommonAction.MessageType.SUCCESS, getText("30019"), resultType);
 		}
@@ -987,7 +987,7 @@ public class CommonAction extends ActionSupport implements Serializable {
 	}
 
 	/**
-	 * สำหรับจัดการหลังบันทึกสถานะเสร็จ return ไปที่ searchDo
+	 * à¸ªà¸³à¸«à¸£à¸±à¸šà¸ˆà¸±à¸”à¸�à¸²à¸£à¸«à¸¥à¸±à¸‡à¸šà¸±à¸™à¸—à¸¶à¸�à¸ªà¸–à¸²à¸™à¸°à¹€à¸ªà¸£à¹‡à¸ˆ return à¹„à¸›à¸—à¸µà¹ˆ searchDo
 	 *
 	 * @param conn
 	 * @param model
@@ -999,7 +999,7 @@ public class CommonAction extends ActionSupport implements Serializable {
 	}
 
 	/**
-	 * สำหรับจัดการหลังบันทึกสถานะเสร็จ return ไปที่ searchDo
+	 * à¸ªà¸³à¸«à¸£à¸±à¸šà¸ˆà¸±à¸”à¸�à¸²à¸£à¸«à¸¥à¸±à¸‡à¸šà¸±à¸™à¸—à¸¶à¸�à¸ªà¸–à¸²à¸™à¸°à¹€à¸ªà¸£à¹‡à¸ˆ return à¹„à¸›à¸—à¸µà¹ˆ searchDo
 	 *
 	 * @param conn
 	 * @param model
@@ -1022,7 +1022,7 @@ public class CommonAction extends ActionSupport implements Serializable {
 	}
 
 	/**
-	 * สำหรับจัดการหลังส่งออกข้อมูลเสร็จ return ไปที่ download
+	 * à¸ªà¸³à¸«à¸£à¸±à¸šà¸ˆà¸±à¸”à¸�à¸²à¸£à¸«à¸¥à¸±à¸‡à¸ªà¹ˆà¸‡à¸­à¸­à¸�à¸‚à¹‰à¸­à¸¡à¸¹à¸¥à¹€à¸ªà¸£à¹‡à¸ˆ return à¹„à¸›à¸—à¸µà¹ˆ download
 	 *
 	 * @param conn
 	 * @param model
@@ -1043,7 +1043,7 @@ public class CommonAction extends ActionSupport implements Serializable {
 	}
 
 	/**
-	 * สำหรับจัดการหลังนำเข้าข้อมูลเสร็จ return ไปที่ upload
+	 * à¸ªà¸³à¸«à¸£à¸±à¸šà¸ˆà¸±à¸”à¸�à¸²à¸£à¸«à¸¥à¸±à¸‡à¸™à¸³à¹€à¸‚à¹‰à¸²à¸‚à¹‰à¸­à¸¡à¸¹à¸¥à¹€à¸ªà¸£à¹‡à¸ˆ return à¹„à¸›à¸—à¸µà¹ˆ upload
 	 *
 	 * @param conn
 	 * @param model
@@ -1055,7 +1055,7 @@ public class CommonAction extends ActionSupport implements Serializable {
 	}
 
 	/**
-	 * สำหรับจัดการหลังนำเข้าข้อมูลเสร็จ return ไปที่ upload
+	 * à¸ªà¸³à¸«à¸£à¸±à¸šà¸ˆà¸±à¸”à¸�à¸²à¸£à¸«à¸¥à¸±à¸‡à¸™à¸³à¹€à¸‚à¹‰à¸²à¸‚à¹‰à¸­à¸¡à¸¹à¸¥à¹€à¸ªà¸£à¹‡à¸ˆ return à¹„à¸›à¸—à¸µà¹ˆ upload
 	 *
 	 * @param conn
 	 * @param model
@@ -1080,7 +1080,7 @@ public class CommonAction extends ActionSupport implements Serializable {
 	}
 
 	/**
-	 * สำหรับจัดการหลังนำเข้าข้อมูลเสร็จ return ไปที่ upload
+	 * à¸ªà¸³à¸«à¸£à¸±à¸šà¸ˆà¸±à¸”à¸�à¸²à¸£à¸«à¸¥à¸±à¸‡à¸™à¸³à¹€à¸‚à¹‰à¸²à¸‚à¹‰à¸­à¸¡à¸¹à¸¥à¹€à¸ªà¸£à¹‡à¸ˆ return à¹„à¸›à¸—à¸µà¹ˆ upload
 	 *
 	 * @param conn
 	 * @param model
@@ -1107,15 +1107,15 @@ public class CommonAction extends ActionSupport implements Serializable {
 	}
 
 	/**
-	 * จัดการ Error ต่างๆ
+	 * à¸ˆà¸±à¸”à¸�à¸²à¸£ Error à¸•à¹ˆà¸²à¸‡à¹†
 	 *
 	 * @param conn
 	 * @param operatorId
-	 *            คือ function code
+	 *            à¸„à¸·à¸­ function code
 	 * @param className
-	 *            คือ class ของ error นั้นๆ
+	 *            à¸„à¸·à¸­ class à¸‚à¸­à¸‡ error à¸™à¸±à¹‰à¸™à¹†
 	 * @param e
-	 *            คือ exception error
+	 *            à¸„à¸·à¸­ exception error
 	 * @param model
 	 * @throws AuthorizationException
 	 */
@@ -1156,7 +1156,7 @@ public class CommonAction extends ActionSupport implements Serializable {
 	}
 
 	/**
-	 * จัดการ Error ต่างๆ โดยสามารถกำหนด ResultType และ MessageCode เพิ่มเติมได้
+	 * à¸ˆà¸±à¸”à¸�à¸²à¸£ Error à¸•à¹ˆà¸²à¸‡à¹† à¹‚à¸”à¸¢à¸ªà¸²à¸¡à¸²à¸£à¸–à¸�à¸³à¸«à¸™à¸” ResultType à¹�à¸¥à¸° MessageCode à¹€à¸žà¸´à¹ˆà¸¡à¹€à¸•à¸´à¸¡à¹„à¸”à¹‰
 	 *
 	 * @param conn
 	 * @param operatorId
@@ -1164,8 +1164,8 @@ public class CommonAction extends ActionSupport implements Serializable {
 	 * @param e
 	 * @param model
 	 * @param resultType
-	 *            (ถ้าเป็นการกลับไปที่หน้า jsp ให้ใช้ Basic, ถ้าเป็นการข้าม
-	 *            action ให้ใช้ Chain)
+	 *            (à¸–à¹‰à¸²à¹€à¸›à¹‡à¸™à¸�à¸²à¸£à¸�à¸¥à¸±à¸šà¹„à¸›à¸—à¸µà¹ˆà¸«à¸™à¹‰à¸² jsp à¹ƒà¸«à¹‰à¹ƒà¸Šà¹‰ Basic, à¸–à¹‰à¸²à¹€à¸›à¹‡à¸™à¸�à¸²à¸£à¸‚à¹‰à¸²à¸¡
+	 *            action à¹ƒà¸«à¹‰à¹ƒà¸Šà¹‰ Chain)
 	 * @param messageDesc
 	 *            (getText("30014").replace("xxx",
 	 *            String.valueOf(model.getCriteria().getTotalResult())))
@@ -1276,7 +1276,7 @@ public class CommonAction extends ActionSupport implements Serializable {
 	}
 
 	/**
-	 * สำหรับ upload เอกสาร โดยไม่แสดง thumbnail
+	 * à¸ªà¸³à¸«à¸£à¸±à¸š upload à¹€à¸­à¸�à¸ªà¸²à¸£ à¹‚à¸”à¸¢à¹„à¸¡à¹ˆà¹�à¸ªà¸”à¸‡ thumbnail
 	 *
 	 * @return String
 	 */
@@ -1300,7 +1300,7 @@ public class CommonAction extends ActionSupport implements Serializable {
 	}
 
 	/**
-	 * สำหรับ upload เอกสาร
+	 * à¸ªà¸³à¸«à¸£à¸±à¸š upload à¹€à¸­à¸�à¸ªà¸²à¸£
 	 *
 	 * @return String
 	 */
@@ -1368,25 +1368,25 @@ public class CommonAction extends ActionSupport implements Serializable {
 	public void setMessagePopup(CommonModel model, MessageCode msgCode, String msgDecs) {
 
 		if (msgCode != null) {
-			// กรณีมีค่า MSG_CODE
+			// à¸�à¸£à¸“à¸µà¸¡à¸µà¸„à¹ˆà¸² MSG_CODE
 			switch (msgCode) {
 			case MSG_30011:
-				// ไม่พบข้อมูลที่ต้องกาาร
+				// à¹„à¸¡à¹ˆà¸žà¸šà¸‚à¹‰à¸­à¸¡à¸¹à¸¥à¸—à¸µà¹ˆà¸•à¹‰à¸­à¸‡à¸�à¸²à¸²à¸£
 				model.setMessagePopup(MessageType.WARING + "::" + getText("30011"));
 				break;
 			case MSG_30014:
-				// จำนวนข้อมูลที่ค้นพบ = xxx รายการ ต้องการแสดงข้อมูลหรือไม่ ?
+				// à¸ˆà¸³à¸™à¸§à¸™à¸‚à¹‰à¸­à¸¡à¸¹à¸¥à¸—à¸µà¹ˆà¸„à¹‰à¸™à¸žà¸š = xxx à¸£à¸²à¸¢à¸�à¸²à¸£ à¸•à¹‰à¸­à¸‡à¸�à¸²à¸£à¹�à¸ªà¸”à¸‡à¸‚à¹‰à¸­à¸¡à¸¹à¸¥à¸«à¸£à¸·à¸­à¹„à¸¡à¹ˆ ?
 				model.setMessagePopup(getText("30014").replace("xxx", msgDecs));
 				break;
 			case MSG_30018:
-				// จำนวนข้อมูลที่ค้นพบมีจำนวนมาก กรุณาระบุเงื่อนไขในการค้นหา
+				// à¸ˆà¸³à¸™à¸§à¸™à¸‚à¹‰à¸­à¸¡à¸¹à¸¥à¸—à¸µà¹ˆà¸„à¹‰à¸™à¸žà¸šà¸¡à¸µà¸ˆà¸³à¸™à¸§à¸™à¸¡à¸²à¸� à¸�à¸£à¸¸à¸“à¸²à¸£à¸°à¸šà¸¸à¹€à¸‡à¸·à¹ˆà¸­à¸™à¹„à¸‚à¹ƒà¸™à¸�à¸²à¸£à¸„à¹‰à¸™à¸«à¸²
 				model.setMessagePopup(MessageType.WARING + "::" + getText("30018"));
 				break;
 			default:
 				break;
 			}
 		} else {
-			// กรณี Exception
+			// à¸�à¸£à¸“à¸µ Exception
 			model.setMessagePopup(MessageType.ERROR + "::" + getText("30010") + "::" + msgDecs);
 		}
 
