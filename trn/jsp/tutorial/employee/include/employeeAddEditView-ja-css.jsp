@@ -21,7 +21,7 @@
 	    }]);
 	});
 	
-	/* Input Date */
+	/* Input Date Format */
 	$(function(){
 		jQuery("#employee_startWorkDate").input_dateformat({
 			dateformat : "dd_sl_mm_sl_yyyy"
@@ -32,27 +32,8 @@
 	    });
 	});
 	
-	/* $( function() {
-		$("#workStatus").on("click", function() {
-			var a = $("#employee_workStatus").text();
-			var b = jQuery("[name='employee.workStatus']").val();
-			var c = document.getElementById("employee_workStatus").value;
-			
-			console.log("data is: ", a);
-			console.log("data is: ", b);
-			console.log("data is: ", c);
-			
-			// ตรวจสอบข้อมูล
-			if(a == "W" || b == "W" || c == "W"){
-				document.getElementById("employee_endWorkDate").disabled = true;
-			}else{
-				document.getElementById("employee_endWorkDate").disabled = false;
-			}
-		 });
-	}); */
-	
 	function changEndWorkDate(value) {
-		if(value == "W"){
+		if(value != "W"){
 			$("employee_endWorkDate_dd_sl_mm_sl_yyyy").attr({"disabled" : true});
 		}else{
 			$("employee_endWorkDate_dd_sl_mm_sl_yyyy").attr({"disabled" : false});

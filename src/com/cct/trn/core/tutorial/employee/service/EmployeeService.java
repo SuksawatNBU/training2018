@@ -187,16 +187,6 @@ public class EmployeeService extends AbstractService{
 				throw e;
 			}
 		}
-		// ฟังก์ชันแก้ไขข้อมูล
-		if(func == "inEdit"){
-			if(date.equals(null) || date.equals("")) return null;
-			try {
-				Calendar calendar = CalendarUtil.getCalendarFromDateString(date, ParameterConfig.getParameter().getDateFormat().getForDisplay(), ParameterConfig.getParameter().getApplication().getDatabaseLocale());
-				parseDate = CalendarUtil.getDateStringFromCalendar(calendar, "DD/MM/YYYY");
-			} catch (Exception e) {
-				throw e;
-			}
-		}
 		//วันที่ปัจจุบัน
 		if(func == "defaultValue"){
 			try {
@@ -231,7 +221,6 @@ public class EmployeeService extends AbstractService{
 		if(status.equals("T")) return "พนักงานทดลองงาน";
 		else if(status.equals("C")) return "พนักงานปัจจุบัน";
 		else if(status.equals("R")) return "อดีตพนักงาน";
-		else if(status.equals("W")) return "เลิกจ้าง";
 		else return null;
 	}
 }

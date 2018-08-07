@@ -28,7 +28,7 @@
 	      driverClassName="com.mysql.jdbc.Driver"
 	      url="jdbc:mysql://localhost:3306/training?useUnicode=true&amp;characterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull"
 	      username="root"
-	      password="password"
+	      password="86202"
 	      maxWait="-1"
 	      maxActive="3"
 	      maxIdle="1"/>
