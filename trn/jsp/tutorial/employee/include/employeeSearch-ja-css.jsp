@@ -64,7 +64,7 @@
             },
 			pk: "employee.id",
 			fixedCoumnsLeft : 6,	//Fixed column ทางซ้ายเริ่มตั้งแต่ 0-5
-			footerHtml: '<button type="button" style="margin-left: 20px; margin-top: 10px;" onclick="deleteValue()">Dalete</button>',
+			footerHtml: '<button type="button" style="margin-left: 20px; margin-top: 10px;" onclick="deleteValue()">Dalete</button> <button class="exportExcel" type="button" onclick="print()">Export</button>',
 			createdRowFunc: "manageRow"
 		};
 		
@@ -129,10 +129,6 @@
      * ใช้สำหรับลบข้อมูล
      */
     function deleteValue(){
-    	
- //   	tableDeleteRow('criteria.selectedIds', 'tableResult', ids);
-    	
-    	
     	//1.ขั้นตอนการตรวจสอบ validate
     	if(validateSelectOne('criteria.selectedIds') == false){
 	        return false;
@@ -147,4 +143,16 @@
     	submitPage("<s:url value='/jsp/tutorial/deleteEmployee.action' />");
     }
     
+    function print(){
+    	frm = document.searchForm;
+        frm.action = "<s:url value='/jsp/tutorial/exportReportEmployee.action' />"; 
+        frm.submit();
+    }
+    
 </script>
+
+<style>
+	.exportExcel {
+		margin-left: 20px;
+	}
+</style>

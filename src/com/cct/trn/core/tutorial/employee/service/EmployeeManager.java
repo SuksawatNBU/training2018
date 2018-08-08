@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
 import com.cct.common.CommonSelectItem;
 import com.cct.common.CommonUser;
 import com.cct.exception.DuplicateException;
@@ -26,7 +28,7 @@ public class EmployeeManager extends AbstractManager<EmployeeSearchCriteria, Emp
 		super(conn, user, locale);
 		service = new EmployeeService(conn, user, locale);
 	}
-
+	
 	@Override
 	public List<EmployeeSearch> search(EmployeeSearchCriteria criteria) throws Exception {
 		
@@ -160,5 +162,23 @@ public class EmployeeManager extends AbstractManager<EmployeeSearchCriteria, Emp
 			e.printStackTrace();
 		}
 		return emp;
+	}
+	
+	public XSSFWorkbook exportExcelEmployee(CCTConnection conn, EmployeeSearchCriteria criteria, Locale locale) throws Exception{
+		List<EmployeeSearch> listResult = new ArrayList<EmployeeSearch>();
+		try{
+			//1. ค้นหาข้อมูลมาออกรายงาน
+	        listResult = service.searchExportEmployee(conn, criteria, locale);
+	        System.out.println("manager >> listResult = " + listResult.size());
+		}catch (Exception e) {
+			throw e;
+		}
+		
+		//2. ถ้ามี list สร้างรายงาน
+		if (listResult.size() > 0) {
+			XSSFWorkbook workbook = service.exportExcelEmployee(listResult, criteria);
+			return workbook;
+		}
+		return null;
 	}
 }

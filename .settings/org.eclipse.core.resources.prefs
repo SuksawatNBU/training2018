@@ -1,5 +1,7 @@
 eclipse.preferences.version=1
+encoding//src/com/cct/abstracts/AbstractDAO.java=UTF-8
 encoding//src/com/cct/common/CommonAction.java=UTF-8
+encoding//src/com/cct/common/CommonDomain.java=UTF-8
 encoding//src/com/cct/common/CommonSelectItemServlet.java=UTF-8
 encoding//src/com/cct/trn/core/selectitem/service/SelectItemDAO.java=UTF-8
 encoding//src/com/cct/trn/core/selectitem/service/SelectItemManager.java=UTF-8
@@ -11,3 +13,5 @@ encoding//src/com/cct/trn/core/tutorial/employee/service/EmployeeService.java=UT
 encoding//src/com/cct/trn/web/tutorial/employee/action/EmployeeAction.java=UTF-8
 encoding//src/resources/sql/selectitem/SelectItem.sql=UTF-8
 encoding//src/resources/sql/tutorial/employee/Employee.sql=UTF-8
+encoding//src/util/database/CCTConnectionProvider.java=UTF-8
+encoding/<project>=UTF-8

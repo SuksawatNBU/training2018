@@ -2,6 +2,8 @@ package com.cct.trn.web.tutorial.employee.action;
 
 import java.util.List;
 
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
 import com.cct.common.CommonAction;
 import com.cct.common.CommonModel.PageType;
 import com.cct.domain.GlobalType;
@@ -391,5 +393,41 @@ public class EmployeeAction extends CommonAction  implements ModelDriven<Employe
 		}
 
 		return result;
+	}
+	
+	public String exportReport() throws Exception{
+		
+		String result = null;
+		CCTConnection conn = null;
+		try {
+			//1.สร้าง connection โดยจะต้องระบุ lookup ที่ใช้ด้วย
+			conn = new CCTConnectionProvider().getConnection(conn, DBLookup.MYSQL_TRAINING.getLookup());
+			
+			//2.ตรวจสอบสิทธิ์การ export
+	        result = manageExport(conn, model);
+	        
+	        //3. ค้นหาข้อมูล
+	        EmployeeManager manager = new EmployeeManager(conn, getUser(), getLocale());
+			XSSFWorkbook workbook = manager.exportExcelEmployee(conn, model.getCriteria(), getLocale());
+			
+			//4. ถ้าไม่เป็นค่าว่าง ออกรายงาน
+			if(workbook != null){
+				try {
+					exportExcelFile(workbook, "RLREP.xlsx");
+				} catch (Exception e) {
+					LogUtil.TRAINING.error(e);
+				}
+			}else{
+				result = ReturnType.SEARCH.getResult();
+			}
+		}catch (Exception e) {
+			//5. จัดการ exception กรณีที่มี exception เกิดขึ้นในระบบ
+	        manageException(conn, PF_CODE.getChangeFunction(), this, e, model);
+		}finally{
+			//6. Close connection หลังเลิกใช้งาน
+	        CCTConnectionUtil.close(conn);
+		}
+		return result;
+		
 	}
 }

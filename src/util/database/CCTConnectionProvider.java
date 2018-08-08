@@ -46,7 +46,7 @@ public class CCTConnectionProvider {
 	}
 
 	/**
-	 * ไม่ใช้ Lookup แล้ว ******<br>
+	 * à¹„à¸¡à¹ˆà¹ƒà¸Šà¹‰ Lookup à¹�à¸¥à¹‰à¸§ ******<br>
 	 * 
 	 * @param conn
 	 * @param lookup
@@ -66,7 +66,7 @@ public class CCTConnectionProvider {
 				
 				conn.getSchemas().clear();
 				conn.getSchemas().putAll(ParameterConfig.getParameter().getDatabase()[Integer.parseInt(lookup)].getSchemasMap());
-
+				
 				LogUtil.INITIAL.debug(ParameterConfig.getParameter().getDatabase()[Integer.parseInt(lookup)].getDatabaseTypeEnum());
 				conn.setDbType(ParameterConfig.getParameter().getDatabase()[Integer.parseInt(lookup)].getDatabaseTypeEnum());
 			}

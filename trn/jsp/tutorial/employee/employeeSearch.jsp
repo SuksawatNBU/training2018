@@ -119,37 +119,36 @@
 	    
 	    <!------------------------------------- Result ------------------------------------->
 	    <div class="RESULT">
-	    <div id="div_datatable" class="ex_highlight_row" style="display: none;">
-	    	<table class="display" id="tableResult">
-	    		<thead>
-	    			<tr>
-	    				<th><s:text name="emp.no" /></th>
-	    				<th><input id="criteria_selectedIds" type="checkbox" name="criteria.selectedIds" onClick="checkboxToggle('criteria.selectedIds',this.checked)" /></th>
-	    				<th></th>
-	    				<th></th>
-	    				<th><s:text name="emp.fullname" /></th>
-	    				<th><s:text name="emp.sex" /></th>
-	    				<th><s:text name="emp.department" /></th>
-	    				<th><s:text name="emp.position" /></th>
-	    				<th><s:text name="emp.startDate" /></th>
-	    				<th><s:text name="emp.endDate" /></th>
-	    				<th><s:text name="emp.workStatus" /></th>
-	    				<th><s:text name="emp.createUser" /></th>
-	    				<th><s:text name="emp.createDate" /></th>
-	    				<th><s:text name="emp.updateUser" /></th>
-	    				<th><s:text name="emp.updateDate" /></th>
-	    				<th><s:text name="emp.createRemark" /></th>
-	    			</tr>
-	    		</thead>
-	    		<tbody>
-					<tr>
-						<!-- Loading Progress -->
-						<td colspan="16" class="dataTables_empty">Loading data from server</td>
-					</tr>
-				</tbody>
-				
-	        </table>
-	   	</div>
+		    <div id="div_datatable" class="ex_highlight_row" style="display: none;">
+		    	<table class="display" id="tableResult">
+		    		<thead>
+		    			<tr>
+		    				<th><s:text name="emp.no" /></th>
+		    				<th><input id="criteria_selectedIds" type="checkbox" name="criteria.selectedIds" onClick="checkboxToggle('criteria.selectedIds',this.checked)" /></th>
+		    				<th></th>
+		    				<th></th>
+		    				<th><s:text name="emp.fullname" /></th>
+		    				<th><s:text name="emp.sex" /></th>
+		    				<th><s:text name="emp.department" /></th>
+		    				<th><s:text name="emp.position" /></th>
+		    				<th><s:text name="emp.startDate" /></th>
+		    				<th><s:text name="emp.endDate" /></th>
+		    				<th><s:text name="emp.workStatus" /></th>
+		    				<th><s:text name="emp.createUser" /></th>
+		    				<th><s:text name="emp.createDate" /></th>
+		    				<th><s:text name="emp.updateUser" /></th>
+		    				<th><s:text name="emp.updateDate" /></th>
+		    				<th><s:text name="emp.createRemark" /></th>
+		    			</tr>
+		    		</thead>
+		    		<tbody>
+						<tr>
+							<!-- Loading Progress -->
+							<td colspan="16" class="dataTables_empty">Loading data from server</td>
+						</tr>
+					</tbody>
+		        </table>
+		   	</div>
 	   	</div>
 	   	
 	   	<!------------------------------------- BUTTON ------------------------------------->
