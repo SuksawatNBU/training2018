@@ -156,7 +156,7 @@ public class EmployeeManager extends AbstractManager<EmployeeSearchCriteria, Emp
 		Employee emp = new Employee();
 		try {
 	        emp.setSex("M");
-	        emp.setStartWorkDate(service.convertDate(null, "defaultValue"));
+	        emp.setStartWorkDate(service.convertDate(null, "defaultDate"));
 	        emp.setWorkStatus("T");
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -169,7 +169,7 @@ public class EmployeeManager extends AbstractManager<EmployeeSearchCriteria, Emp
 		try{
 			//1. ค้นหาข้อมูลมาออกรายงาน
 	        listResult = service.searchExportEmployee(conn, criteria, locale);
-	        System.out.println("manager >> listResult = " + listResult.size());
+	        LogUtil.TRAINING.debug("listEmployee [" + listResult.size() + "] record.");
 		}catch (Exception e) {
 			throw e;
 		}

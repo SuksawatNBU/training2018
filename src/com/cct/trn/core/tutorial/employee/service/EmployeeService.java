@@ -8,8 +8,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import org.apache.poi.ss.usermodel.Header;
 import org.apache.poi.ss.usermodel.Footer;
+import org.apache.poi.ss.usermodel.Header;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFCell;
@@ -161,7 +161,7 @@ public class EmployeeService extends AbstractService{
 		return listResult;
 	}
 	
-	protected XSSFWorkbook exportExcelEmployee(List<EmployeeSearch> listResult, EmployeeSearchCriteria criteria){
+	protected XSSFWorkbook exportExcelEmployee(List<EmployeeSearch> listResult, EmployeeSearchCriteria criteria) throws Exception{
 		//1. Create Excel
 		XSSFWorkbook workbook = new XSSFWorkbook();
 		XSSFSheet spreadsheet = workbook.createSheet("รายงานการใช้งานห้องประชุม");
@@ -208,8 +208,11 @@ public class EmployeeService extends AbstractService{
 		// Style วันที่พิมพ์
 		XSSFCellStyle stylePrintDate = createStyleTitle(workbook, XSSFCellStyle.ALIGN_LEFT, font_S14);
 		// Style หัวตาราง
-		XSSFCellStyle styleHead = createStyleBorder(workbook, XSSFCellStyle.BORDER_THIN, XSSFCellStyle.BORDER_DOUBLE, XSSFCellStyle.BORDER_THIN, XSSFCellStyle.BORDER_THIN, font_S14_B);
+		XSSFCellStyle styleHead = createStyleBorder(workbook, XSSFCellStyle.BORDER_THIN, XSSFCellStyle.BORDER_THIN, XSSFCellStyle.BORDER_THIN, XSSFCellStyle.BORDER_THIN, font_S14_B);
 		styleHead.setAlignment(XSSFCellStyle.ALIGN_CENTER);
+		// Style ผลรวมสังกัด
+		XSSFCellStyle styleSumPosition = createStyleBorder(workbook, XSSFCellStyle.BORDER_THIN, XSSFCellStyle.BORDER_THIN, XSSFCellStyle.BORDER_THIN, XSSFCellStyle.BORDER_THIN, font_S14);
+		XSSFCellStyle styleSumPosition_B = createStyleBorder(workbook, XSSFCellStyle.BORDER_THIN, XSSFCellStyle.BORDER_THIN, XSSFCellStyle.BORDER_THIN, XSSFCellStyle.BORDER_THIN, font_S14_B);
 		
 		//6. กำหนดข้อมูลใน Header and Footer
 		Header header = (Header) spreadsheet.getHeader();
@@ -220,50 +223,151 @@ public class EmployeeService extends AbstractService{
 		//7.กำหนด index ของข้อมูล **หากข้อมูลถูกเปลี่ยนตำแหน่ง จะเปลี่ยนที่นี่แทน
 		int index = 0;
 		
-		// 8. แสดงข้อมูลในเซล
+		// 8. แสดงข้อมูลในเซล ------------------------------------------------------------------------------
 		// 8.1 หัวเรื่อง
 		row = spreadsheet.createRow(index);
-		mergeCell(spreadsheet, index, 0, 0, 11);
+		mergeCell(spreadsheet, index, index, 0, 10);
 		createCell(row, styleTitle, 0, "รายงานการใช้งานห้องประชุม");
 		
 		// 8.2 Criteria
 		row = spreadsheet.createRow(++index);
-		mergeCell(spreadsheet, index, 0, 2, 4);
-		mergeCell(spreadsheet, index, 0, 6, 8);
+		mergeCell(spreadsheet, index, index, 2, 4);
+		mergeCell(spreadsheet, index, index, 6, 8);
 		createCell(row, styleCriteria_B, 1, "คำนำหน้าชื่อ :");
-		createCell(row, styleCriteria, 2, criteria.getPrefixId());
+		createCell(row, styleCriteria, 2, convertPrefix(criteria.getPrefixId()));
 		createCell(row, styleCriteria_B, 5, "ชื่อ-สกุล :");
 		createCell(row, styleCriteria, 6, criteria.getFullname());
 		
 		row = spreadsheet.createRow(++index);
-		mergeCell(spreadsheet, index, 0, 2, 4);
-		mergeCell(spreadsheet, index, 0, 6, 8);
+		mergeCell(spreadsheet, index, index, 2, 4);
+		mergeCell(spreadsheet, index, index, 6, 8);
 		createCell(row, styleCriteria_B, 1, "ชื่อเล่น :");
 		createCell(row, styleCriteria, 2, criteria.getNickname());
 		createCell(row, styleCriteria_B, 5, "เพศ :");
 		createCell(row, styleCriteria, 6, criteria.getSex());
 		
 		row = spreadsheet.createRow(++index);
-		mergeCell(spreadsheet, index, 0, 2, 4);
-		mergeCell(spreadsheet, index, 0, 6, 8);
+		mergeCell(spreadsheet, index, index, 2, 4);
+		mergeCell(spreadsheet, index, index, 6, 8);
 		createCell(row, styleCriteria_B, 1, "สังกัด :");
-		createCell(row, styleCriteria, 2, criteria.getDepartmentDesc());
+		createCell(row, styleCriteria, 2, convertDepartment(criteria.getDepartmentDesc()));
 		createCell(row, styleCriteria_B, 5, "แผนก :");
-		createCell(row, styleCriteria, 6, criteria.getPositionDesc());
+		createCell(row, styleCriteria, 6, convertPosition(criteria.getPositionDesc()));
 		
 		row = spreadsheet.createRow(++index);
-		mergeCell(spreadsheet, index, 0, 2, 4);
-		mergeCell(spreadsheet, index, 0, 6, 8);
+		mergeCell(spreadsheet, index, index, 2, 4);
+		mergeCell(spreadsheet, index, index, 6, 8);
 		createCell(row, styleCriteria_B, 1, "ช่วงวันที่เริ่มงาน ตั้งแต่ :");
 		createCell(row, styleCriteria, 2, criteria.getStartWorkDate());
 		createCell(row, styleCriteria_B, 5, "ถึง :");
 		createCell(row, styleCriteria, 6, criteria.getEndWorkDate());
 		
 		row = spreadsheet.createRow(++index);
-		mergeCell(spreadsheet, index, 0, 2, 4);
-		mergeCell(spreadsheet, index, 0, 6, 8);
+		mergeCell(spreadsheet, index, index, 2, 4);
+		mergeCell(spreadsheet, index, index, 6, 8);
 		createCell(row, styleCriteria_B, 1, "สถานะการทำงาน :");
-		createCell(row, styleCriteria, 2, criteria.getWorkStatus());
+		createCell(row, styleCriteria, 2, convertWorkStatus(criteria.getWorkStatus()));
+		
+		//8.3 วันที่พิมพ์
+		row = spreadsheet.createRow(++index);
+		mergeCell(spreadsheet, index, index, 0, 1);
+		createCell(row, stylePrintDate, 0, "วันที่พิมพ์ " + convertDate(null, "defaultDate") + " เวลา " + convertDate(null, "defaultTime") + " น.");
+		
+		// 8.4  หัวตาราง
+		row = spreadsheet.createRow(++index);
+		int indexHead = 0; // ตำแหน่ง column
+		int lastRow = index +1; // ผสานกับ row ถัดไป
+		mergeCell(spreadsheet, index, lastRow, indexHead, indexHead);
+		createCell(row, styleHead, indexHead++, "ลำดับ");
+		mergeCell(spreadsheet, index, lastRow, indexHead, indexHead);
+		createCell(row, styleHead, indexHead++, "ชื่อ-สกุล");
+		mergeCell(spreadsheet, index, lastRow, indexHead, indexHead);
+		createCell(row, styleHead, indexHead++, "เพศ");
+		mergeCell(spreadsheet, index, lastRow, indexHead, indexHead);
+		createCell(row, styleHead, indexHead++, "วันที่บันทึกข้อมูล");
+		mergeCell(spreadsheet, index, lastRow, indexHead, indexHead);
+		createCell(row, styleHead, indexHead++, "ผู้บันทึก");
+		mergeCell(spreadsheet, index, lastRow, indexHead, indexHead);
+		createCell(row, styleHead, indexHead++, "วันที่แก้ไขข้อมูล");
+		mergeCell(spreadsheet, index, lastRow, indexHead, indexHead);
+		createCell(row, styleHead, indexHead++, "ผู้แก้ไข");
+		mergeCell(spreadsheet, index, index, indexHead, 10);
+		createCell(row, styleHead, indexHead++, "สถานะพนักงาน");
+		// ทำเพื่อใส่เส้นขอบให้กับ cell ที่ถูก merge
+		for(int i=indexHead ; i <= 10 ; i++){
+			createCell(row, styleHead, indexHead++, null);
+		}
+		
+		row = spreadsheet.createRow(++index);
+		indexHead = 0;
+		// ทำเพื่อใส่เส้นขอบให้กับ cell ที่ถูก merge
+		for(int i=indexHead ; i < 7 ; i++){
+			createCell(row, styleHead, indexHead++, null);
+		}
+		createCell(row, styleHead, indexHead++, "สถานะ");
+		createCell(row, styleHead, indexHead++, "วันที่เริ่มงาน");
+		createCell(row, styleHead, indexHead++, "วันสุดท้ายที่ทำงาน");
+		createCell(row, styleHead, indexHead++, "หมายเหตุ");
+		
+		//9. ส่งของการแสดงข้อมูล
+		int sequenceRoom = 1; // ลำดับรายชื่อ
+		boolean startDepartment = true; // กำหนดไว้สำหรับให้ฟังก์ชันทำงานแค่ครั้งเดียว
+		boolean startPosition = true; // กำหนดไว้สำหรับให้ฟังก์ชันทำงานแค่ครั้งเดียว
+		boolean showDepartment = true; // แสดงสังกัด
+		boolean showPosition = true; // แสดงตำแหน่ง
+		String beforeDepartment = null; // สังกัด
+		String afterDepartment  = null;
+		String beforePosition = null; // ตำแหน่ง
+		String afterPosition  = null;
+		
+		for (EmployeeSearch emp : listResult) {
+			// ทำงานเฉพาะครั้งแรก
+			if(startDepartment){
+				beforeDepartment = emp.getDepartmentDesc();
+				startDepartment  = false;
+			}
+			afterDepartment = emp.getDepartmentDesc();
+			
+			// ถ้าไม่เท่ากับค่าเดิมเริ่มขึ้นสังกัดใหม่
+			if(!beforeDepartment.equals(afterDepartment)){
+				// ทำงานเฉพาะครั้งแรก
+				if(startPosition){
+					beforePosition = emp.getPositionDesc();
+					startPosition  = false;
+				}
+				afterPosition = emp.getPositionDesc();
+				
+				// ถ้าไม่เท่ากับค่าเดิมเริ่มขึ้นแผนกใหม่
+				if(!beforePosition.equals(afterPosition)){
+					
+					row = spreadsheet.createRow(++index);
+					mergeCell(spreadsheet, index, index, 0, 8);
+					createCell(row, styleSumPosition_B, 0, "รวมแผนก :  " +emp.getPositionDesc() + " จำนวน");
+					createCell(row, styleSumPosition, 9, String.valueOf(sequenceRoom));
+					createCell(row, styleSumPosition_B, 10, "(คน)");
+					//Set Value
+					showPosition = true;
+				}
+				//Set Value
+				showDepartment = true;
+			}
+			
+			if (showDepartment) {
+				row = spreadsheet.createRow(++index);
+				mergeCell(spreadsheet, index, index, 0, 10);
+				createCell(row, styleHead, 0, emp.getDepartmentDesc());
+				showDepartment = false;
+			}
+			
+			if (showPosition) {
+				row = spreadsheet.createRow(++index);
+				mergeCell(spreadsheet, index, index, 0, 10);
+				createCell(row, styleHead, 0, emp.getPositionDesc());
+				showPosition = false;
+			}
+			
+			
+		}
 		
 		
 		
@@ -304,6 +408,14 @@ public class EmployeeService extends AbstractService{
 		return listResult;
 	}
 	
+	
+	public String convertPrefix(String prefix){
+		if(prefix.equals("1")) return "นาย"; 
+		else if(prefix.equals("2")) return "นางสาว";
+		else if(prefix.equals("3")) return "นาง";
+		else return null;
+	}
+	
 	public String convertSex(String sex){
 		if(sex.equals("M")) return "ชาย"; 
 		else if(sex.equals("F")) return "หญิง";
@@ -334,11 +446,20 @@ public class EmployeeService extends AbstractService{
 			}
 		}
 		//วันที่ปัจจุบัน
-		if(func == "defaultValue"){
+		if(func == "defaultDate"){
 			try {
 				Format outputEN = new SimpleDateFormat("dd/MM/yyyy", new Locale("en", "EN"));
 				Date conDate = new Date();
 				parseDate = outputEN.format(conDate);
+			} catch (Exception e) {
+				throw e;
+			}
+		}
+		//วันที่และเวลาปัจจุบัน
+		if(func == "defaultTime"){
+			try {
+				Calendar conDate = Calendar.getInstance();
+				parseDate = CalendarUtil.getDateStringFromCalendar(conDate, "HH:mm");
 			} catch (Exception e) {
 				throw e;
 			}
@@ -365,22 +486,25 @@ public class EmployeeService extends AbstractService{
 	
 	public String convertWorkStatus(String status){
 		if(status.equals("T")) return "พนักงานทดลองงาน";
-		else if(status.equals("C")) return "พนักงานปัจจุบัน";
+		else if(status.equals("W")) return "พนักงานปัจจุบัน";
 		else if(status.equals("R")) return "อดีตพนักงาน";
 		else return null;
 	}
 	
 	private void createCell(XSSFRow row, XSSFCellStyle cellStyle, int columnIndex, String cellValue) {
 		XSSFCell cell = row.createCell(columnIndex);
+		if("".equals(cellValue)){
+			cellValue = "-";
+		}
 		cell.setCellValue(cellValue);
 		cell.setCellStyle(cellStyle);
 	}
 	
-	private void createCellRichText(XSSFRow row, XSSFCellStyle cellStyle, int columnIndex, XSSFRichTextString cellValue) {
+	/*private void createCellRichText(XSSFRow row, XSSFCellStyle cellStyle, int columnIndex, XSSFRichTextString cellValue) {
 		XSSFCell cell = row.createCell(columnIndex);
 		cell.setCellValue(cellValue);
 		cell.setCellStyle(cellStyle);
-	}
+	}*/
 	
 	private XSSFFont createFont(XSSFWorkbook workbook, int fontSize, boolean bold, boolean italic,int underline ) {
 		XSSFFont font = workbook.createFont(); 

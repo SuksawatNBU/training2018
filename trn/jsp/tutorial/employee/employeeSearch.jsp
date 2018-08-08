@@ -64,7 +64,7 @@
 						</td>
 						<td class="VALUE">
 							<s:textfield id="criteria_departmentId" name="criteria.departmentId" code-of="autocomplet_department" cssClass="autocomplete" />
-							<s:textfield id="criteria_departmentName" name="criteria.departmentName" text-of="autocomplet_department" cssClass="autocomplete" />
+							<s:textfield id="criteria_departmentDesc" name="criteria.departmentDesc" text-of="autocomplet_department" cssClass="autocomplete" />
 						</td>
 						<td class="LABEL">
 							<s:label for="criteria_positionDesc" value="แผนก" />
