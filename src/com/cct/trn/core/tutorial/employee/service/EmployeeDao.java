@@ -290,7 +290,6 @@ public class EmployeeDao extends AbstractDAO<EmployeeSearchCriteria, EmployeeSea
             id = conn.executeInsertStatement(sql);
         } catch (Exception e) {
             throw e;
-        } finally {
         }
         return id ;
 	}

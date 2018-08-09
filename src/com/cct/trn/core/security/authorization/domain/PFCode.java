@@ -18,7 +18,6 @@ public enum PFCode {
 
 	, TUR_PROJECTS("10600100", "{'" + FunctionType.SEARCH + "':'10600101', '" + FunctionType.ADD + "':'10600102','" + FunctionType.EDIT + "':'10600103','" + FunctionType.VIEW + "':'10600104','" + FunctionType.CHANGE + "':'10600105'}")
 	, TRN_EMAPLOYEE("10700100", "{'" + FunctionType.SEARCH + "':'10700101', '" + FunctionType.ADD + "':'10700102','" + FunctionType.EDIT + "':'10700103','" + FunctionType.VIEW + "':'10700104','" + FunctionType.CHANGE + "':'10700105','" + FunctionType.EXPORT + "':'10700107','" + FunctionType.DELETE + "':'10700106'}")
-	
 	;
 	// ---------: Program code and Function code :-----------
 	// ---------: Fucntion code :-----------
@@ -173,15 +172,15 @@ public enum PFCode {
 	public String getResetPasswordFunction() {
 		return resetPasswordFunction;
 	}
-
+	
 	public String getResetPasswordFunction(String programCode) {
 		return getFunctionCode(programCode, FunctionType.RESETPASSWORD);
 	}
-
+	
 	public String getConfirmAddFunction() {
 		return confirmAddFunction;
 	}
-
+	
 	public String getConfirmAddFunction(String programCode) {
 		return getFunctionCode(programCode, FunctionType.CONFIRM_ADD);
 	}
@@ -189,7 +188,7 @@ public enum PFCode {
 	public String getConfirmEditFunction() {
 		return confirmEditFunction;
 	}
-
+	
 	public String getConfirmEditFunction(String programCode) {
 		return getFunctionCode(programCode, FunctionType.CONFIRM_EDIT);
 	}
