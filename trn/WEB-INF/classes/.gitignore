@@ -1,4 +1,7 @@
 /com/
+/log4j.properties
 /resources/
-/test/
+/struts.xml
+/strutsconfig/
 /util/
+/test/

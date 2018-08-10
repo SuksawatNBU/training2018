@@ -8,16 +8,13 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import org.apache.poi.ss.usermodel.Footer;
-import org.apache.poi.ss.usermodel.Header;
+import org.apache.poi.hssf.usermodel.HSSFHeader;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.xssf.usermodel.XSSFFont;
-import org.apache.poi.xssf.usermodel.XSSFOddHeader;
 import org.apache.poi.xssf.usermodel.XSSFPrintSetup;
-import org.apache.poi.xssf.usermodel.XSSFRichTextString;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -169,7 +166,7 @@ public class EmployeeService extends AbstractService{
 		XSSFSheet spreadsheet = workbook.createSheet("ฟิลด์_รายงาน");
 		XSSFRow row;
 		
-		//2. กำหนดรายละเอียดหน้ากระดาษ
+		//2. Set the Page margins
 		spreadsheet.getPrintSetup().setPaperSize(XSSFPrintSetup.LETTER_PAPERSIZE);
 		spreadsheet.getPrintSetup().setLandscape(true);
 		spreadsheet.setMargin(Sheet.TopMargin, 0.75);
@@ -178,6 +175,11 @@ public class EmployeeService extends AbstractService{
 		spreadsheet.setMargin(Sheet.LeftMargin, 0.7);
 		spreadsheet.setMargin(Sheet.HeaderMargin, 0.3);
 		spreadsheet.setMargin(Sheet.FooterMargin, 0.3);
+		
+		//Set Page Detail
+		spreadsheet.setAutobreaks(true);
+		spreadsheet.setFitToPage(false); // Fit Sheet on One Page
+		spreadsheet.setPrintGridlines(false);
 		
 		//3. กำหนดความกว้าง cell **วิธีคำนวณ = 276.065 *(หน่วยความยาวใน excel) เช่น 280.1*10 = 2801
 		int paramIndex = 0;
@@ -194,14 +196,11 @@ public class EmployeeService extends AbstractService{
 		spreadsheet.setColumnWidth(paramIndex++, 2500); // หมายเหตุ
 		
 		//4. กำหนด Font
-		/*XSSFFont font_S16_B  = createFont(workbook, 16, true, false, 0);*/
 		XSSFFont font_S14 = createFont(workbook, 14, false, false, 0);
 		XSSFFont font_S14_B = createFont(workbook, 14, true, false, 0);
 
 		//5. กำหนด Style
 		short none = 0;
-		// Style หัวข้อ
-		/*XSSFCellStyle styleTitle = createStyleTitle(workbook, XSSFCellStyle.ALIGN_CENTER, font_S16_B);*/
 		// Style criteria
 		XSSFCellStyle styleCriteria = createStyleTitle(workbook, XSSFCellStyle.ALIGN_LEFT, font_S14);
 		XSSFCellStyle styleCriteria_B = createStyleTitle(workbook, XSSFCellStyle.ALIGN_RIGHT, font_S14_B);
@@ -231,19 +230,14 @@ public class EmployeeService extends AbstractService{
 		stylePrintUser.setAlignment(XSSFCellStyle.ALIGN_RIGHT);
 		
 		//6. กำหนดข้อมูลใน Header and Footer;
-		//&B == bold
-		//&P == curent page 
-		//&N == total page
-		Header header = (Header) spreadsheet.getOddHeader();
-		header.setCenter("&B รายงานข้อมูลพนักงาน");
-		header.setRight("หน้า &P / &N");
-		XSSFHeaderFooter test = (XSSFHeaderFooter) spreadsheet.getOddHeader();
+		XSSFHeaderFooter header = (XSSFHeaderFooter) spreadsheet.getHeader();
+        header.setCenter(HSSFHeader.font("TH SarabunPSK", "Bold") + HSSFHeader.fontSize((short) 16) + "รายงานข้อมูลพนักงาน");
+        header.setRight(HSSFHeader.font("TH SarabunPSK", "") + HSSFHeader.fontSize((short) 16) + "หน้า &P / &N");
+        XSSFHeaderFooter footer = (XSSFHeaderFooter) spreadsheet.getFooter();
+        footer.setLeft(HSSFHeader.font("TH SarabunPSK", "") + HSSFHeader.fontSize((short) 14) + "REP08260001");
+        footer.setRight(HSSFHeader.font("TH SarabunPSK", "") + HSSFHeader.fontSize((short) 14) + "ชื่อผู้พิมพ์ " + user.getUserName());
 		
-		Footer footer = (Footer) spreadsheet.getFooter();
-		footer.setLeft("REP08260001");
-		footer.setRight("ชื่อผู้พิมพ์ " + user.getUserName());
-		
-		//7.กำหนด index ของข้อมูล **หากข้อมูลถูกเปลี่ยนตำแหน่ง จะเปลี่ยนที่นี่แทน
+		//7.กำหนด index row ของข้อมูล **หากข้อมูลถูกเปลี่ยนตำแหน่ง จะเปลี่ยนที่นี่แทน
 		int index = 0;
 		
 		// 8. แสดงข้อมูลในเซล ------------------------------------------------------------------------------
@@ -293,9 +287,8 @@ public class EmployeeService extends AbstractService{
 		
 		//8.3 วันที่พิมพ์
 		row = spreadsheet.createRow(++index);
-		mergeCell(spreadsheet, index, index, 0, 1);
+		mergeCell(spreadsheet, index, index, 0, 3);
 		createCell(row, stylePrintDate, 0, "วันที่พิมพ์ " + convertDate(null, "defaultDate") + " เวลา " + convertDate(null, "defaultTime") + " น.");
-		createCell(row, stylePrintDate, 10, "หน้า &P / &N");
 		
 		// 8.4  หัวตาราง
 		row = spreadsheet.createRow(++index);
@@ -567,12 +560,6 @@ public class EmployeeService extends AbstractService{
 		if(cellValue == null || cellValue == "0" || "".equals(cellValue)){
 			cellValue = "-";
 		}
-		cell.setCellValue(cellValue);
-		cell.setCellStyle(cellStyle);
-	}
-	
-	private void createCellRichText(XSSFRow row, XSSFCellStyle cellStyle, int columnIndex, XSSFRichTextString cellValue) {
-		XSSFCell cell = row.createCell(columnIndex);
 		cell.setCellValue(cellValue);
 		cell.setCellStyle(cellStyle);
 	}
