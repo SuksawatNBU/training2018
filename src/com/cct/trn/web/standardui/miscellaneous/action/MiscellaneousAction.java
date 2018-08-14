@@ -169,6 +169,7 @@ public class MiscellaneousAction extends CommonAction implements ModelDriven<Mis
 		this.jsonSuggestData = jsonSuggestData;
 	}
 	
+	@SuppressWarnings("unused")
 	public String runningProgress() throws Exception {
 		LogUtil.TRAINING.info("customFormatNumber");
 
@@ -189,6 +190,7 @@ public class MiscellaneousAction extends CommonAction implements ModelDriven<Mis
 		return "ajaxModel";
 	}
 
+	@SuppressWarnings("unused")
 	public String runningProcess() throws Exception {
 		LogUtil.TRAINING.info("customFormatNumber");
 

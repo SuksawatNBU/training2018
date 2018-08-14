@@ -16,6 +16,7 @@ public class MainpageAction extends CommonAction {
 
 	}
 
+	@SuppressWarnings("unused")
 	public String init() {
 
 		String result = ReturnType.INIT.getResult();

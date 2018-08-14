@@ -79,13 +79,13 @@ public class EmployeeManager extends AbstractManager<EmployeeSearchCriteria, Emp
 		try {
 	        //2.Begin transaction
 	        conn.setAutoCommit(false);
-	 
+	        
 	        //3.เพิ่มข้อมูลผู้ใช้งาน
 	        employeeId = service.add(conn, obj, user, locale);
-	 
+	        
 	        //4. Commit transaction
 	        conn.commit();
-	 
+	        
 	    } catch (Exception e) {
 	        //5. Rollback transaction เมื่อเกิด Error
 	        conn.rollback();
@@ -179,6 +179,11 @@ public class EmployeeManager extends AbstractManager<EmployeeSearchCriteria, Emp
 			XSSFWorkbook workbook = service.exportExcelEmployee(listResult, criteria);
 			return workbook;
 		}
+		return null;
+	}
+	
+	public String readReport() throws Exception{
+		
 		return null;
 	}
 }

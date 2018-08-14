@@ -33,6 +33,7 @@ public class LoginInterceptor implements Interceptor {
 		LogUtil.INTERCEPTOR.debug("");
 	}
 
+	@SuppressWarnings("unused")
 	@Override
 	public String intercept(ActionInvocation invocation) throws Exception {
 		String result = CommonAction.ReturnType.HOME.getResult();

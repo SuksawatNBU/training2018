@@ -1,15 +1,22 @@
 package com.cct.trn.core.tutorial.employee.service;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 
+import org.apache.poi.hssf.usermodel.HSSFDateUtil;
 import org.apache.poi.hssf.usermodel.HSSFHeader;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
@@ -198,7 +205,7 @@ public class EmployeeService extends AbstractService{
 		//4. กำหนด Font
 		XSSFFont font_S14 = createFont(workbook, 14, false, false, 0);
 		XSSFFont font_S14_B = createFont(workbook, 14, true, false, 0);
-
+		
 		//5. กำหนด Style
 		short none = 0;
 		// Style criteria
@@ -240,13 +247,8 @@ public class EmployeeService extends AbstractService{
 		//7.กำหนด index row ของข้อมูล **หากข้อมูลถูกเปลี่ยนตำแหน่ง จะเปลี่ยนที่นี่แทน
 		int index = 0;
 		
-		// 8. แสดงข้อมูลในเซล ------------------------------------------------------------------------------
-		// 8.1 หัวเรื่อง
-		/*row = spreadsheet.createRow(index);
-		mergeCell(spreadsheet, index, index, 0, 10);
-		createCell(row, styleTitle, 0, "รายงานข้อมูลพนักงาน");*/
-		
-		// 8.2 Criteria
+		//8. แสดงข้อมูลในเซล ------------------------------------------------------------------------------
+		//8.1 Criteria
 		row = spreadsheet.createRow(++index);
 		mergeCell(spreadsheet, index, index, 2, 4);
 		mergeCell(spreadsheet, index, index, 6, 8);
@@ -285,12 +287,12 @@ public class EmployeeService extends AbstractService{
 		createCell(row, styleCriteria_B, 1, "สถานะการทำงาน :");
 		createCell(row, styleCriteria, 2, convertWorkStatus(criteria.getWorkStatus()));
 		
-		//8.3 วันที่พิมพ์
+		//8.2 วันที่พิมพ์
 		row = spreadsheet.createRow(++index);
 		mergeCell(spreadsheet, index, index, 0, 3);
 		createCell(row, stylePrintDate, 0, "วันที่พิมพ์ " + convertDate(null, "defaultDate") + " เวลา " + convertDate(null, "defaultTime") + " น.");
 		
-		// 8.4  หัวตาราง
+		//8.3  หัวตาราง
 		row = spreadsheet.createRow(++index);
 		int indexHead = 0; // ตำแหน่ง column
 		int lastRow = index +1; // ผสานกับ row ถัดไป
@@ -329,8 +331,7 @@ public class EmployeeService extends AbstractService{
 		//9. ส่งของการแสดงข้อมูล
 		int sequenceRoom = 1; // ลำดับรายชื่อ
 		int sumEmp = 0; // ผลรวมแต่พนักงานในแต่ละแผนก
-		boolean startDepartment = true; // กำหนดไว้สำหรับให้ฟังก์ชันทำงานแค่ครั้งเดียว
-		boolean startPosition = true; // กำหนดไว้สำหรับให้ฟังก์ชันทำงานแค่ครั้งเดียว
+		boolean startFirst = true; // กำหนดไว้สำหรับให้ฟังก์ชันทำงานแค่ครั้งเดียว
 		boolean showDepartment = true; // แสดงสังกัด
 		boolean showPosition = true; // แสดงตำแหน่ง
 		String beforeDepartment = null; // สังกัด
@@ -340,13 +341,10 @@ public class EmployeeService extends AbstractService{
 		
 		for (EmployeeSearch emp : listResult) {
 			// ทำงานเฉพาะครั้งแรก
-			if(startDepartment){
+			if(startFirst){
 				beforeDepartment = emp.getDepartmentDesc();
-				startDepartment  = false;
-			}
-			if(startPosition){
 				beforePosition = emp.getPositionDesc();
-				startPosition  = false;
+				startFirst  = false;
 			}
 			
 			// ใส่ข้อมูลลำดับใหม่ ไว้ทำเงื่อนไข
@@ -355,9 +353,8 @@ public class EmployeeService extends AbstractService{
 			
 			// ถ้าไม่เท่ากับค่าเดิมเริ่มขึ้นสังกัดใหม่
 			if(beforeDepartment != afterDepartment){
-				//Set Value
-				showDepartment = true; //แสดงชื่อสังกัดใหม่
 				beforeDepartment = afterDepartment; // กำหนดลำดับสังกัด
+				showDepartment = true; //แสดงชื่อสังกัดใหม่
 			}
 			
 			// ถ้าไม่เท่ากับค่าเดิมเริ่มขึ้นแผนกใหม่
@@ -593,5 +590,61 @@ public class EmployeeService extends AbstractService{
 	
 	private void mergeCell(XSSFSheet spreadsheet,int fRow, int lRow, int fCol, int lCol){
 		spreadsheet.addMergedRegion(new CellRangeAddress(fRow,lRow,fCol,lCol));
+	}
+	
+	public String readReport(String fileName) throws Exception{
+		FileInputStream excelFile = new FileInputStream(new File(fileName));
+		
+		Workbook workbook = new XSSFWorkbook(excelFile);
+		Sheet spreadsheet = workbook.getSheetAt(0);
+		Iterator<Row> iterator = spreadsheet.iterator();
+		
+		// Row
+		while(iterator.hasNext()) {
+			
+			Row row = iterator.next();
+			Iterator<Cell> cellInterator = row.cellIterator();
+			
+			// Celll
+			while(cellInterator.hasNext()) {
+				Cell cell = cellInterator.next();
+				
+				if(cell.getCellType() == Cell.CELL_TYPE_STRING){
+					System.out.println("Cell [" + cell.getColumnIndex() + "] " +"STRING : " + cell.getStringCellValue());
+				}
+				else if(HSSFDateUtil.isCellDateFormatted(cell)){
+					System.out.println("Cell [" + cell.getColumnIndex() + "] " +"DATE : " + cell.getDateCellValue());
+				}
+				else if(cell.getCellType() == Cell.CELL_TYPE_NUMERIC){
+					System.out.println("Cell [" + cell.getColumnIndex() + "] " +"NUMERIC : " + cell.getNumericCellValue());
+				}
+				else if(cell.getCellType() == Cell.CELL_TYPE_FORMULA){
+					System.out.println("Cell [" + cell.getColumnIndex() + "] " +"FORMULA : " + cell.getCellFormula());
+				}
+				else if(cell.getCellType() == Cell.CELL_TYPE_ERROR){
+					System.out.println("Cell [" + cell.getColumnIndex() + "] " +"ERROR : " + cell.getErrorCellValue());
+				}
+				else if(cell.getCellType() == Cell.CELL_TYPE_BOOLEAN){
+					System.out.println("Cell [" + cell.getColumnIndex() + "] " +"BOOLEAN : " + cell.getBooleanCellValue());
+				}
+				
+				else if(cell.getCellType() == Cell.CELL_TYPE_BLANK){
+					System.out.println("Cell [" + cell.getColumnIndex() + "] " +"BLANK : ");
+				}
+				
+			}
+		}
+		
+		return null;
+	}
+	
+	public static void main(String[] args) {
+		EmployeeService es = new EmployeeService(null, null, null);
+		try {
+			es.readReport("D:/Book1.xlsx");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

@@ -7,10 +7,10 @@ import util.log.LogUtil;
 
 import com.cct.common.CommonUser;
 import com.cct.trn.core.log.domain.MailErrorLog;
-import com.cct.trn.core.log.domain.UserDetailLog;
 
 public class LogManager {
 	
+	@SuppressWarnings("unused")
 	private static LogService service;
 	
 	public static void addAuditLog(CCTConnection conn, String operatorId, String logDetail, CommonUser user) {

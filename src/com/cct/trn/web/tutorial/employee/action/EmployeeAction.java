@@ -430,4 +430,15 @@ public class EmployeeAction extends CommonAction  implements ModelDriven<Employe
 		return result;
 		
 	}
+	
+	public String readReport() throws Exception{
+		try {
+			
+		}catch (Exception e) {
+			
+		}
+		
+		return null;
+		
+	}
 }

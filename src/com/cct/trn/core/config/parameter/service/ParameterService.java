@@ -1,6 +1,5 @@
 package com.cct.trn.core.config.parameter.service;
 
-import util.file.FileManagerUtil;
 import util.log.LogUtil;
 import util.xml.XMLUtil;
 

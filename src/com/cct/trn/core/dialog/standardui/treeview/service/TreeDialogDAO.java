@@ -1,20 +1,16 @@
 package com.cct.trn.core.dialog.standardui.treeview.service;
 
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 import util.database.CCTConnection;
-import util.database.CCTConnectionUtil;
-import util.database.SQLUtil;
-import util.string.StringUtil;
 
 import com.cct.trn.core.config.parameter.domain.SQLPath;
 import com.cct.trn.core.dialog.standardui.treeview.domain.TutorialTree;
 
 public class TreeDialogDAO {
 
+	@SuppressWarnings("unused")
 	private SQLPath sqlPath = SQLPath.DIALOG_SQL;
 
 	protected Map<String, com.cct.domain.Tree> searchTree(CCTConnection conn) throws Exception {

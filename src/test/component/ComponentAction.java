@@ -3,7 +3,6 @@ package test.component;
 import java.util.List;
 
 import org.apache.struts2.ServletActionContext;
-import org.apache.struts2.json.JSONUtil;
 
 import util.database.CCTConnection;
 import util.database.CCTConnectionProvider;
@@ -126,6 +125,7 @@ public class ComponentAction extends CommonAction implements ModelDriven<Compone
 
 	}
 
+	@SuppressWarnings("unused")
 	public void getSuggestion(CCTConnection conn) throws Exception {
 
 		try {
