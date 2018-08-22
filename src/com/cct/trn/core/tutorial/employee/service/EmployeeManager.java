@@ -13,6 +13,7 @@ import com.cct.exception.MaxExceedException;
 import com.cct.abstracts.AbstractManager;
 import com.cct.trn.core.config.parameter.domain.ParameterConfig;
 import com.cct.trn.core.tutorial.employee.domain.Employee;
+import com.cct.trn.core.tutorial.employee.domain.EmployeeModel;
 import com.cct.trn.core.tutorial.employee.domain.EmployeeSearch;
 import com.cct.trn.core.tutorial.employee.domain.EmployeeSearchCriteria;
 
@@ -46,6 +47,52 @@ public class EmployeeManager extends AbstractManager<EmployeeSearchCriteria, Emp
 	        } else {
 	        	// ค้นหาข้อมูล
 	        	listResult = service.search(conn, criteria, user, locale);
+	        }
+		}catch (Exception e) {
+			throw e;
+		}
+		return listResult;
+	}
+	
+	public List<EmployeeSearch> search2(EmployeeSearchCriteria criteria) throws Exception {
+		
+		List<EmployeeSearch> listResult = new ArrayList<EmployeeSearch>();
+		try{
+			//1.นับจำนวนรายการที่ค้นพบ
+			criteria.setTotalResult(service.countData(criteria));
+			LogUtil.TRAINING.debug("COUNT DATA [" + criteria.getTotalResult() + "] record.");
+			
+			if (criteria.getTotalResult() == 0) {
+				// Nothing
+			} else if ((criteria.isCheckMaxExceed()) && (criteria.getTotalResult() > ParameterConfig.getParameter().getApplication().getMaxExceed())) {
+				// เกินจำนวนที่กำหนด
+	            throw new MaxExceedException();
+	        } else {
+	        	// ค้นหาข้อมูล
+	        	listResult = service.search2(conn, criteria, user, locale);
+	        }
+		}catch (Exception e) {
+			throw e;
+		}
+		return listResult;
+	}
+	
+public List<EmployeeSearch> searchPopup(EmployeeSearchCriteria criteria) throws Exception {
+		
+		List<EmployeeSearch> listResult = new ArrayList<EmployeeSearch>();
+		try{
+			//1.นับจำนวนรายการที่ค้นพบ
+			criteria.setTotalResult(service.countData(criteria));
+			LogUtil.TRAINING.debug("COUNT DATA [" + criteria.getTotalResult() + "] record.");
+			
+			if (criteria.getTotalResult() == 0) {
+				// Nothing
+			} else if ((criteria.isCheckMaxExceed()) && (criteria.getTotalResult() > ParameterConfig.getParameter().getApplication().getMaxExceed())) {
+				// เกินจำนวนที่กำหนด
+	            throw new MaxExceedException();
+	        } else {
+	        	// ค้นหาข้อมูล
+	        	listResult = service.searchPopup(conn, criteria);
 	        }
 		}catch (Exception e) {
 			throw e;
@@ -126,6 +173,32 @@ public class EmployeeManager extends AbstractManager<EmployeeSearchCriteria, Emp
 	        conn.setAutoCommit(true);
 	    }
 	    return employeeId;
+	}
+	
+	public int edit2(EmployeeModel obj) throws Exception {
+		try {
+	        conn.setAutoCommit(false);
+	         
+	        //loop บันทึก/ลบ ข้อมูล 
+	        for (EmployeeSearch tableAddDeleteRow : obj.getListResult()) {
+	            if (tableAddDeleteRow.getId().equals("") && !tableAddDeleteRow.getDeleteFlag().equals("Y")) { // เป็น pk ว่าง และ deleteFlag ไม่เป็น Y 
+	                //กรณีเพิ่ม
+	                /*dao.add(conn, tableAddDeleteRow, user, locale);*/
+	                 
+	            } else if(tableAddDeleteRow.getDeleteFlag().equals("Y") && !tableAddDeleteRow.getId().equals("")) { // เป็น deleteFlagเป็น Y และมี pk ไว้ลบ 
+	                //กรณีลบ
+	                /*dao.delete(conn, tableAddDeleteRow.getId(), user, locale);*/
+	            }
+	        }
+	         
+	        conn.commit();
+	    } catch (Exception e) {
+	        conn.rollback();
+	        throw e;
+	    } finally {
+	        conn.setAutoCommit(true);
+	    }
+	    return 0;
 	}
 
 	@Override

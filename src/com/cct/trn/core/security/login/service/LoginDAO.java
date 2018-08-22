@@ -97,7 +97,7 @@ public class LoginDAO extends AbstractDAO<Object, Object, Object, CommonUser, Lo
 			
 			/** Employee **/
 			mapOperator.put("10700000", operatorBuilder("10000000", "10700000", "Employee", "", "M", 1));
-			mapOperator.put("10700100", operatorBuilder("10700000", "10700100", "Search", "jsp/tutorial/initEmployee.action", "M", 2));
+			mapOperator.put("10700100", operatorBuilder("10700000", "10700100", "Search Ex1", "jsp/tutorial/initEmployee.action", "M", 2));
 			mapOperator.put("10700101", operatorBuilder("10700100", "10700101", "SEARCH", "", "F", 3));
 			mapOperator.put("10700102", operatorBuilder("10700100", "10700102", "ADD", "", "F", 3));
 			mapOperator.put("10700103", operatorBuilder("10700100", "10700103", "EDIT", "", "F", 3));
@@ -105,7 +105,7 @@ public class LoginDAO extends AbstractDAO<Object, Object, Object, CommonUser, Lo
 			mapOperator.put("10700105", operatorBuilder("10700100", "10700105", "CHANGE", "", "F", 3));
 			mapOperator.put("10700106", operatorBuilder("10700100", "10700106", "DELETE", "", "F", 3));
 			mapOperator.put("10700107", operatorBuilder("10700100", "10700107", "EXPORT", "", "F", 3));
-			
+			mapOperator.put("10700108", operatorBuilder("10700000", "10700108", "Search Ex2", "jsp/tutorial/searchEmployee2.action", "M", 2));
 			
 		} catch (Exception e) {
 			throw e;

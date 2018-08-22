@@ -15,6 +15,8 @@ public class EmployeeModel extends CommonModel {
 	private EmployeeSearchCriteria criteria = new  EmployeeSearchCriteria();
 	// Object สำหรับใช้ในการ add edit view
 	private Employee employee = new Employee();
+	
+	private List<EmployeeSearch> listResult = new ArrayList<EmployeeSearch>();
 	// Object สำหรับการเก็บข้อมูล combo ที่อยู่บนหน้าจอ
 	private List<CommonSelectItem> listPrefix = new ArrayList<CommonSelectItem>();
 	private List<CommonSelectItem> listSex = new ArrayList<CommonSelectItem>();
@@ -65,5 +67,14 @@ public class EmployeeModel extends CommonModel {
 	public void setCriteria(EmployeeSearchCriteria criteria) {
 		this.criteria = criteria;
 	}
+
+	public List<EmployeeSearch> getListResult() {
+		return listResult;
+	}
+
+	public void setListResult(List<EmployeeSearch> listResult) {
+		this.listResult = listResult;
+	}
+	
 	
 }

@@ -6,6 +6,7 @@ public class EmployeeSearch extends CommonDomain {
 
 //	Data Type  ----------------------------------------------------------------------------
 	private static final long serialVersionUID = 7897377041866081674L;
+	private String employeeId;
 	private String fullname;
 	private String sex;
 	private String departmentDesc;
@@ -17,6 +18,12 @@ public class EmployeeSearch extends CommonDomain {
 //	Getter and Setter ---------------------------------------------------------------------
 	public String getFullname() {
 		return fullname;
+	}
+	public String getEmployeeId() {
+		return employeeId;
+	}
+	public void setEmployeeId(String employeeId) {
+		this.employeeId = employeeId;
 	}
 	public void setFullname(String fullname) {
 		this.fullname = fullname;

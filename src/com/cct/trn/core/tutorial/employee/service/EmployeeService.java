@@ -120,6 +120,34 @@ public class EmployeeService extends AbstractService{
 		return listResult;
 	}
 	
+	protected List<EmployeeSearch> search2(CCTConnection conn, EmployeeSearchCriteria criteria, CommonUser user, Locale locale) throws Exception {
+		List<EmployeeSearch> listResult = new ArrayList<EmployeeSearch>();
+	    try {
+	    	//2.ค้นหาข้อมูล
+	        listResult = dao.search2(conn, criteria, user, locale);
+	        //3.แปลงข้อมูล
+	        listResult = convertValue(listResult);
+	    } catch (Exception e) {
+	        LogUtil.SEC.error("", e);
+	        throw e;
+	    }
+		return listResult;
+	}
+	
+	protected List<EmployeeSearch> searchPopup(CCTConnection conn, EmployeeSearchCriteria criteria) throws Exception {
+		List<EmployeeSearch> listResult = new ArrayList<EmployeeSearch>();
+	    try {
+	    	//2.ค้นหาข้อมูล
+	        listResult = dao.searchPopup(conn, criteria);
+	        //3.แปลงข้อมูล
+	        listResult = convertValue(listResult);
+	    } catch (Exception e) {
+	        LogUtil.SEC.error("", e);
+	        throw e;
+	    }
+		return listResult;
+	}
+	
 	//Service ค้นหาข้อมูลผู้ใช้ตาม id
 	protected Employee searchById(CCTConnection conn, String id, CommonUser user, Locale locale) throws Exception {
 		Employee result = new Employee();

@@ -149,6 +149,141 @@ public class EmployeeDao extends AbstractDAO<EmployeeSearchCriteria, EmployeeSea
         }
 		return listResult;
 	}
+	
+	protected List<EmployeeSearch> search2(CCTConnection conn, EmployeeSearchCriteria criteria, CommonUser user, Locale locale) throws Exception {
+		int paramIndex = 0;
+		List<EmployeeSearch> listResult = new ArrayList<EmployeeSearch>();
+		
+		String startDate = StringUtil.replaceSpecialString(criteria.getStartWorkDate(), conn.getDbType(), ResultType.NULL);
+		if (startDate != null) {
+			Calendar startCalendar = CalendarUtil.getCalendarFromDateString(startDate, ParameterConfig.getParameter().getDateFormat().getForDisplay(), ParameterConfig.getParameter().getApplication().getDatabaseLocale());
+			startDate = CalendarUtil.getDateStringFromCalendar(startCalendar, "YYYY-MM-DD HH:mm:ss");
+		}	
+		String endDate = StringUtil.replaceSpecialString(criteria.getEndWorkDate(), conn.getDbType(), ResultType.NULL);
+		if (endDate != null) {
+			Calendar endCalendar = CalendarUtil.getCalendarFromDateString(endDate, ParameterConfig.getParameter().getDateFormat().getForDisplay(), ParameterConfig.getParameter().getApplication().getDatabaseLocale());
+			endDate = CalendarUtil.getDateStringFromCalendar(endCalendar, "YYYY-MM-DD HH:mm:ss");
+		}
+		
+        Object[] params = new Object[9];
+        params[paramIndex++] = StringUtil.replaceSpecialString(criteria.getPrefixId(), conn.getDbType(), ResultType.NULL);
+        params[paramIndex++] = StringUtil.replaceSpecialString(criteria.getFullname(), conn.getDbType(), ResultType.NULL);
+        params[paramIndex++] = StringUtil.replaceSpecialString(criteria.getNickname(), conn.getDbType(), ResultType.NULL);
+        params[paramIndex++] = StringUtil.replaceSpecialString(criteria.getSex(), conn.getDbType(), ResultType.NULL);
+        params[paramIndex++] = StringUtil.replaceSpecialString(criteria.getDepartmentId(), conn.getDbType(), ResultType.NULL);
+        params[paramIndex++] = StringUtil.replaceSpecialString(criteria.getPositionId(), conn.getDbType(), ResultType.NULL);
+        params[paramIndex++] = startDate;
+        params[paramIndex++] = endDate;
+        params[paramIndex++] = StringUtil.replaceSpecialString(criteria.getWorkStatus(), conn.getDbType(), ResultType.NULL);
+		
+        String sql = SQLUtil.getSQLString(conn.getSchemas()
+                , getSqlPath().getClassName()
+                , getSqlPath().getPath()
+                , "searchEmployee2"
+                , params);
+        LogUtil.SEC.debug("SQL : " + sql);
+        
+        Statement stmt = null;
+        ResultSet rst = null;
+        try {
+            stmt = conn.createStatement();
+            rst = stmt.executeQuery(sql);
+            while (rst.next()) {
+            	EmployeeSearch result = new EmployeeSearch();
+            	Transaction transaction = new Transaction();
+            	result.setId(StringUtil.nullToString(rst.getString("EMPLOYEE_ID")));
+            	result.setEmployeeId(StringUtil.nullToString(rst.getString("EMPLOYEE_ID")));
+            	result.setFullname(StringUtil.nullToString(rst.getString("FULLNAME")));
+            	result.setSex(StringUtil.nullToString(rst.getString("SEX")));
+            	result.setDepartmentDesc(StringUtil.nullToString(rst.getString("DEPARTMENT_NAME")));
+            	result.setPositionDesc(StringUtil.nullToString(rst.getString("POSITION_NAME")));
+            	result.setStartWorkDate(StringUtil.nullToString(rst.getString("START_WORK_DATE")));
+            	result.setEndWorkDate(StringUtil.nullToString(rst.getString("END_WORK_DATE")));
+            	result.setWorkStatus(StringUtil.nullToString(rst.getString("WORK_STATUS")));
+            	transaction.setCreateUser(StringUtil.nullToString(rst.getString("CREATE_USER")));
+            	transaction.setCreateDate(StringUtil.nullToString(rst.getString("CREATE_DATE")));
+            	transaction.setUpdateUser(StringUtil.nullToString(rst.getString("UPDATE_USER")));
+            	transaction.setUpdateDate(StringUtil.nullToString(rst.getString("UPDATE_DATE")));
+            	transaction.setCreateRemark(StringUtil.nullToString(rst.getString("REMARK")));
+            	result.setTransaction(transaction);
+                listResult.add(result);
+            }
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            CCTConnectionUtil.closeAll(rst, stmt);
+        }
+		return listResult;
+	}
+	
+	protected List<EmployeeSearch> searchPopup(CCTConnection conn, EmployeeSearchCriteria criteria) throws Exception {
+		
+		
+		List<EmployeeSearch> listResult = new ArrayList<EmployeeSearch>();
+		
+		int paramIndex = 0;
+        Object[] params = new Object[9];
+        params[paramIndex++] = criteria.getOrderList();
+        
+        if (criteria.getNavigatePopup().equals("true")) {
+            // กรณีใช้งานแบบมี navigate
+            params[paramIndex++] = criteria.getStart() - 1;
+            params[paramIndex++] = criteria.getLinePerPage();
+        } else {
+            // กรณีใช้งานแบบไม่มี navigate
+            params[paramIndex++] = null;
+            params[paramIndex++] = null;
+        }
+        
+        String sql = SQLUtil.getSQLString(conn.getSchemas()
+                , getSqlPath().getClassName()
+                , getSqlPath().getPath()
+                , "searchEmployeePopup"
+                , params);
+        LogUtil.SEC.debug("SQL --> searchEmployeePopup : " + sql);
+         
+        int i = 1;
+        if (criteria.getNavigatePopup().equals("true")) {
+            i = criteria.getStart();
+        }
+        
+        Statement stmt = null;
+        ResultSet rst = null;
+        try {
+            stmt = conn.createStatement();
+            rst = stmt.executeQuery(sql);
+            EmployeeSearch result;
+            Transaction transaction;
+            while (rst.next()) {
+            	result = new EmployeeSearch();
+            	result.setRownum(i + "."); // สำหรับการ set ค่าลำดับ
+            	result.setIdPopup(rst.getString("EMPLOYEE_ID")); // สำหรับการ set ค่า Id ไว้ที่ attribute กลางของ popup
+            	result.setId(StringUtil.nullToString(rst.getString("EMPLOYEE_ID")));
+            	result.setEmployeeId(StringUtil.nullToString(rst.getString("EMPLOYEE_ID")));
+            	result.setFullname(StringUtil.nullToString(rst.getString("FULLNAME")));
+            	result.setSex(StringUtil.nullToString(rst.getString("SEX")));
+            	result.setDepartmentDesc(StringUtil.nullToString(rst.getString("DEPARTMENT_NAME")));
+            	result.setPositionDesc(StringUtil.nullToString(rst.getString("POSITION_NAME")));
+            	result.setStartWorkDate(StringUtil.nullToString(rst.getString("START_WORK_DATE")));
+            	result.setEndWorkDate(StringUtil.nullToString(rst.getString("END_WORK_DATE")));
+            	result.setWorkStatus(StringUtil.nullToString(rst.getString("WORK_STATUS")));
+            	transaction = new Transaction();
+            	transaction.setCreateUser(StringUtil.nullToString(rst.getString("CREATE_USER")));
+            	transaction.setCreateDate(StringUtil.nullToString(rst.getString("CREATE_DATE")));
+            	transaction.setUpdateUser(StringUtil.nullToString(rst.getString("UPDATE_USER")));
+            	transaction.setUpdateDate(StringUtil.nullToString(rst.getString("UPDATE_DATE")));
+            	transaction.setCreateRemark(StringUtil.nullToString(rst.getString("REMARK")));
+            	result.setTransaction(transaction);
+                listResult.add(result);
+                i++;
+            }
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            CCTConnectionUtil.closeAll(rst, stmt);
+        }
+		return listResult;
+	}
 
 	/**
 	* @Description ค้นหาข้อมูลผู้ใช้ตาม id ที่เลือก
