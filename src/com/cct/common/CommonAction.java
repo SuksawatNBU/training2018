@@ -169,6 +169,7 @@ public class CommonAction extends ActionSupport implements Serializable {
 		MAINPAGE("mainpage")
 		, INIT("init")
 		, SEARCH("search")
+		, SEARCHDIALOG("searchDialog")
 		, SEARCH_DO("searchDo")
 		, DOWNLOAD(null)
 		, UPLOAD("upload")

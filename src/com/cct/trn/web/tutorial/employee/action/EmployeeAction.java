@@ -128,6 +128,37 @@ public class EmployeeAction extends CommonAction  implements ModelDriven<Employe
 		}
 		return result;
 	}
+	
+	public String searchDialog() throws Exception {
+		String result = null;
+		CCTConnection conn = null;
+		try {
+			//1.สร้าง connection โดยจะต้องระบุ lookup ที่ใช้ด้วย
+			conn = new CCTConnectionProvider().getConnection(conn, DBLookup.MYSQL_TRAINING.getLookup());
+			
+			//2.
+			result = ReturnType.SEARCHDIALOG.getResult(); /*manageSearch(conn, model, model.getCriteria(), getPF_CODE().getSearchFunction());*/
+			
+			//3.การค้นหา(ของแต่ละระบบ) ตัวอย่าง.ค้นหาข้อมูลผู้ใช้
+			EmployeeManager manager = new EmployeeManager(conn, getUser(), getLocale());
+			List<EmployeeSearch> lstResult = manager.search2(getModel().getCriteria());
+			model.setListResult(lstResult);
+		    
+		} catch (Exception e) {
+			//5.จัดการ exception กรณีที่มี exception เกิดขึ้นในระบบ
+	        manageException(conn, getPF_CODE().getSearchFunction(), this, e, getModel());
+	        
+	        //6.Load combo ทั้งหมดที่ใช้ในหน้าแก้ไข
+	        getComboForAddEdit(conn);
+		} finally {
+			//7.Load combo ทั้งหมดที่ใช้ในหน้าค้นหา เพื่อเตรียม binding เข้ากับ criteria
+			getComboForSearch(conn);
+			
+			//8.Close connection หลังเลิกใช้งาน
+			CCTConnectionUtil.close(conn);
+		}
+		return result;
+	}
 
 	/**
 	 * click ปุ่มเพิ่ม return addEdit เพื่อเข้าหน้าเพิ่ม

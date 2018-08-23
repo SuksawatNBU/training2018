@@ -63,6 +63,17 @@ public class EmployeeService extends AbstractService{
 		return totalResult;
 	}
 	
+	protected long countDataPopup(EmployeeSearchCriteria criteria) throws Exception {
+		long totalResult = 0;
+	    try {
+	        totalResult = dao.countDataPopup(conn, criteria, user, locale);
+	    } catch (Exception e) {
+	        LogUtil.SEC.error(e);
+	        throw e;
+	    }
+		return totalResult;
+	}
+	
 	//Service ตรวจสอบบันทึกข้อมูลผู้ใช้ซ้ำ
 	protected boolean checkDup(CCTConnection conn, Employee obj, CommonUser user, Locale locale) throws Exception {
 		boolean isDup = false;

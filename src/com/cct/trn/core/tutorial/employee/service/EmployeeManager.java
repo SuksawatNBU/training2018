@@ -82,7 +82,7 @@ public List<EmployeeSearch> searchPopup(EmployeeSearchCriteria criteria) throws 
 		List<EmployeeSearch> listResult = new ArrayList<EmployeeSearch>();
 		try{
 			//1.นับจำนวนรายการที่ค้นพบ
-			criteria.setTotalResult(service.countData(criteria));
+			criteria.setTotalResult(service.countDataPopup(criteria));
 			LogUtil.TRAINING.debug("COUNT DATA [" + criteria.getTotalResult() + "] record.");
 			
 			if (criteria.getTotalResult() == 0) {
@@ -95,6 +95,7 @@ public List<EmployeeSearch> searchPopup(EmployeeSearchCriteria criteria) throws 
 	        	listResult = service.searchPopup(conn, criteria);
 	        }
 		}catch (Exception e) {
+			LogUtil.SEC.error("", e);
 			throw e;
 		}
 		return listResult;

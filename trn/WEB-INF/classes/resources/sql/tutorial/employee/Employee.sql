@@ -131,6 +131,15 @@ searchCountEmployee {
 	AND EMP.WORK_STATUS = %s
 }
 
+searchCountEmployeePopup {
+	SELECT COUNT(1) AS TOT
+	FROM TRN_EMPLOYEE EMP
+	LEFT JOIN TRN_POSITION POS ON POS.POSITION_ID = EMP.POSITION_ID
+	LEFT JOIN TRN_DEPARTMENT DEP ON DEP.DEPARTMENT_ID = POS.DEPARTMENT_ID
+	LEFT JOIN TRN_PREFIX PRE ON EMP.PREFIX_ID = PRE.PREFIX_ID
+	WHERE EMP.EMPLOYEE_ID NOT IN (%s)
+}
+
 /*-----------------------------------------------------------------------------------------------------------------------------------------------------------
 SQL : ค้นหาข้อมูลพนักงานตามรหัสพนักงาน_SQL
 Description : 

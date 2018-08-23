@@ -10,7 +10,6 @@ encoding//src/com/cct/trn/core/tutorial/employee/domain/EmployeeModel.java=UTF-8
 encoding//src/com/cct/trn/core/tutorial/employee/service/EmployeeDao.java=UTF-8
 encoding//src/com/cct/trn/core/tutorial/employee/service/EmployeeManager.java=UTF-8
 encoding//src/com/cct/trn/core/tutorial/employee/service/EmployeeService.java=UTF-8
-encoding//src/com/cct/trn/web/tutorial/employee/action/Employee2Action.java=UTF-8
 encoding//src/com/cct/trn/web/tutorial/employee/action/EmployeeAction.java=UTF-8
 encoding//src/resources/sql/selectitem/SelectItem.sql=UTF-8
 encoding//src/resources/sql/tutorial/employee/Employee.sql=UTF-8

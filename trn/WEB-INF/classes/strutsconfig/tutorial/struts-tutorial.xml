@@ -24,13 +24,22 @@
 		<action name="*Employee" class="com.cct.trn.web.tutorial.employee.action.EmployeeAction" method="{1}">
 			<result name="init">/jsp/tutorial/employee/employeeSearch.jsp</result>
 			<result name="search">/jsp/tutorial/employee/employeeSearch.jsp</result>
+			<result name="searchDialog">/jsp/tutorial/employee/employeeSearch2.jsp</result>
 			<result name="addEdit">/jsp/tutorial/employee/employeeAddEditView.jsp</result>
 		</action>
 		
-		<action name="*Employee2" class="com.cct.trn.web.tutorial.employee.action.Employee2Action" method="{1}">
-			<result name="init">/jsp/tutorial/employee/employeeSearch2.jsp</result>
-			<result name="search">/jsp/tutorial/employee/employeeSearch2.jsp</result>
-			<result name="addEdit">/jsp/tutorial/employee/employeeAddEditView2.jsp</result>
+		<action name="*EmployeeDialogAction" class="com.cct.trn.web.tutorial.employee.action.EmployeeDialogAction" method="{1}">
+			<result name="initialDialog" type="json">
+			    <param name="root">model</param>
+			</result>
+			<result name="search" type="json">
+		        <param name="root">model</param>
+		        <param name="ignoreHierarchy">false</param>
+		    </result>
+			<result name="searchListById" type="json">
+		        <param name="root">model</param>
+		        <param name="ignoreHierarchy">false</param>
+		    </result>
 		</action>
 	</package>
 </struts>

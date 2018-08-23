@@ -78,6 +78,36 @@ public class EmployeeDao extends AbstractDAO<EmployeeSearchCriteria, EmployeeSea
 	    }
 	    return count;
 	}
+	
+	protected long countDataPopup(CCTConnection conn, EmployeeSearchCriteria criteria, CommonUser user, Locale locale) throws Exception {
+		int count = 0;
+		
+		int paramIndex = 0;
+        Object[] params = new Object[1];
+        params[paramIndex++] = criteria.getOrderList();
+        
+	    String sql = SQLUtil.getSQLString(conn.getSchemas()
+	            , getSqlPath().getClassName()
+	            , getSqlPath().getPath()
+	            , "searchCountEmployeePopup"
+	            , params);
+	    LogUtil.SEC.debug("SQL : " + sql);
+	    
+	    Statement stmt = null;
+	    ResultSet rst = null;
+	    try {
+	        stmt = conn.createStatement();
+	        rst = stmt.executeQuery(sql);
+	        if (rst.next()) {
+	            count = rst.getInt("TOT");
+	        }
+	    } catch (Exception e) {
+	        throw e;
+	    } finally {
+	        CCTConnectionUtil.closeAll(rst, stmt);
+	    }
+	    return count;
+	}
 
 	/**
      * ใช้สำหรับค้นหาข้อมูล
@@ -222,7 +252,7 @@ public class EmployeeDao extends AbstractDAO<EmployeeSearchCriteria, EmployeeSea
 		List<EmployeeSearch> listResult = new ArrayList<EmployeeSearch>();
 		
 		int paramIndex = 0;
-        Object[] params = new Object[9];
+        Object[] params = new Object[3];
         params[paramIndex++] = criteria.getOrderList();
         
         if (criteria.getNavigatePopup().equals("true")) {
